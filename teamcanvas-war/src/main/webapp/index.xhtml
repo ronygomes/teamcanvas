@@ -7,15 +7,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-    <title>Simple JSF Facelets page</title>
-
-</h:head>
-
 <h:body>
     <ui:composition template="WEB-INF/template/layout.xhtml">
+        <ui:param name="pageTitle" value="JSF Rocks Again!" />
         <ui:define name="head-include">
             <h:outputStylesheet library="css" name="index.css"/>
+        </ui:define>
+        <ui:define name="content">
+            #{loginAction.test}
         </ui:define>
     </ui:composition>
 </h:body>

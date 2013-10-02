@@ -1,0 +1,15 @@
+#Maven
+target/
+
+#idea
+*.impl
+*.iml
+/.idea
+
+#eclipse
+.classpath
+.project
+
+#unix file
+*~
+*.swp

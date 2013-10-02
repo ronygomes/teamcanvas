@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.googlecode</groupId>
+        <artifactId>teamcanvas</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>teamcanvas-app</artifactId>
+    <packaging>ear</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <glassfish.home>/opt/glassfish3</glassfish.home>
+        <glassfish.user>admin</glassfish.user>
+        <glassfish.password>12345</glassfish.password>
+        <glassfish.domainname>simple</glassfish.domainname>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>teamcanvas-ejb</artifactId>
+            <type>ejb</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>teamcanvas-war</artifactId>
+            <type>war</type>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <version>5</version>
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+
+                    <modules>
+                        <ejbModule>
+                            <groupId>com.googlecode</groupId>
+                            <artifactId>teamcanvas-ejb</artifactId>
+                        </ejbModule>
+
+                        <webModule>
+                            <groupId>com.googlecode</groupId>
+                            <artifactId>teamcanvas-war</artifactId>
+                            <contextRoot>/teamcanvas</contextRoot>
+                        </webModule>
+                    </modules>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.glassfish.maven.plugin</groupId>
+                <artifactId>maven-glassfish-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>glassfish-redeploy</id>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <user>${glassfish.user}</user>
+                    <glassfishDirectory>${glassfish.home}</glassfishDirectory>
+                    <domainDirectory>${glassfish.home}/glassfish/domains/</domainDirectory>
+                    <adminPassword>${glassfish.password}</adminPassword>
+                    <domain>
+                        <name>${glassfish.domainname}</name>
+                        <adminPort>4848</adminPort>
+                        <httpPort>8080</httpPort>
+                        <httpsPort>8443</httpsPort>
+                    </domain>
+                    <components>
+                        <component>
+                            <name>${project.build.finalName}</name>
+                            <artifact>${project.build.directory}/${project.build.finalName}.ear</artifact>
+                        </component>
+                    </components>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
+</project>

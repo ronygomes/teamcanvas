@@ -9,7 +9,7 @@
 
 <h:body>
     <ui:composition template="WEB-INF/template/bare-layout.xhtml">
-        <ui:param name="pageTitle" value="Team Canvas | Login" />
+        <ui:param name="pageTitle" value="Team Canvas | Register" />
         <ui:define name="head-include">
             <h:outputStylesheet library="css" name="index.css"/>
         </ui:define>
@@ -18,30 +18,40 @@
                 <h:panelGrid columns="3">
                     <h:outputLabel for="email">Email:</h:outputLabel>
                     <h:panelGroup>
-                        <h:inputText id="email" value="#{loginAction.userEmail}"/>
+                        <h:inputText id="email" value="#{registerBean.userEmail}"/>
                         <span class="reruired">*</span>
                     </h:panelGroup>
                     <h:message for="email" />
 
+                    <h:outputLabel for="firstname">First Name:</h:outputLabel>
+
+                    <h:inputText id="firstname" value="#{registerBean.firstName}"/>
+                    <h:message for="firstname" />
+
+                    <h:outputLabel for="lastname">Last Name:</h:outputLabel>
+                    <h:inputText id="lastname" value="#{registerBean.lastName}"/>
+                    <h:message for="lastname" />
+
                     <h:outputLabel for="password">Password:</h:outputLabel>
                     <h:panelGroup>
-                        <h:inputSecret id="password" value="#{loginAction.userPassword}"/>
+                        <h:inputSecret id="password" value="#{registerBean.userPassword}"/>
                         <span class="reruired">*</span>
                     </h:panelGroup>
                     <h:message for="password" />
 
-                    <h:outputText />
+                    <h:outputLabel for="confirmPassword">Confirm password:</h:outputLabel>
                     <h:panelGroup>
-                        <h:selectBooleanCheckbox value="#{loginAction.rememberMe}" />
-                        <h:outputText value="Remember me"/>
+                        <h:inputSecret id="confirmPassword" value="#{registerBean.confirmPassword}"/>
+                        <span class="reruired">*</span>
                     </h:panelGroup>
-                    <h:outputText/>
+                    <h:message for="confirmPassword" />
+
 
                     <h:outputText />
                     <h:panelGroup>
-                        <h:commandButton id="submitButton" action="#{loginAction.login()}" value="Login"/>
+                        <h:commandButton id="submitButton" action="#{registerBean.register()}" value="Register"/>
                         <span class="ten-pixel-padding">
-                            <h:outputLink value="register.xhtml">Register</h:outputLink>
+                            <h:outputLink value="index.xhtml">Sign in</h:outputLink>
                         </span>
                     </h:panelGroup>
                 </h:panelGrid>

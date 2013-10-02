@@ -1,0 +1,8 @@
+Java HotSpot(TM) 64-Bit Server VM (build 23.25-b01, mixed mode)
+[   8082]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix icon path=/ideTalk/user.png class=class icons.IdetalkCoreIcons 
+[   8101]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix icon path=/ideTalk/user.png class=class icons.IdetalkCoreIcons 
+[   9453]   WARN - pl.ExternalResourceManagerImpl - Cannot find standard resource. filename:/META-INF/tapestry_5_0_0.xsd class=null 
+[ 899752]   WARN - api.vfs.impl.local.FileWatcher - Watcher terminated. 
+[ 899761]   WARN - ution.process.OSProcessHandler - Cannot kill process tree. Trying to destroy process using Java API. Cmdline:
+null 
+Exception in XML-RPC listener loop (java.net.SocketException: Socket closed).

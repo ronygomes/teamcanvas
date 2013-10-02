@@ -3,10 +3,8 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.UserService;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -28,7 +26,7 @@ public class LoginAction {
     }
 
     public String getTest(){
-        setUp();
+        //setUp();
         return "this is form LoginAction";
     }
 }

@@ -63,37 +63,37 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>-->
-                <!--<groupId>org.glassfish.maven.plugin</groupId>-->
-                <!--<artifactId>maven-glassfish-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>glassfish-redeploy</id>-->
-                        <!--<goals>-->
-                            <!--<goal>redeploy</goal>-->
-                        <!--</goals>-->
-                        <!--<phase>package</phase>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<user>${glassfish.user}</user>-->
-                    <!--<glassfishDirectory>${glassfish.home}</glassfishDirectory>-->
-                    <!--<domainDirectory>${glassfish.home}/glassfish/domains/</domainDirectory>-->
-                    <!--<adminPassword>${glassfish.password}</adminPassword>-->
-                    <!--<domain>-->
-                        <!--<name>${glassfish.domainname}</name>-->
-                        <!--<adminPort>4848</adminPort>-->
-                        <!--<httpPort>8080</httpPort>-->
-                        <!--<httpsPort>8443</httpsPort>-->
-                    <!--</domain>-->
-                    <!--<components>-->
-                        <!--<component>-->
-                            <!--<name>${project.build.finalName}</name>-->
-                            <!--<artifact>${project.build.directory}/${project.build.finalName}.ear</artifact>-->
-                        <!--</component>-->
-                    <!--</components>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.glassfish.maven.plugin</groupId>
+                <artifactId>maven-glassfish-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>glassfish-redeploy</id>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <user>${glassfish.user}</user>
+                    <glassfishDirectory>${glassfish.home}</glassfishDirectory>
+                    <domainDirectory>${glassfish.home}/glassfish/domains/</domainDirectory>
+                    <adminPassword>${glassfish.password}</adminPassword>
+                    <domain>
+                        <name>${glassfish.domainname}</name>
+                        <adminPort>4848</adminPort>
+                        <httpPort>8080</httpPort>
+                        <httpsPort>8443</httpsPort>
+                    </domain>
+                    <components>
+                        <component>
+                            <name>${project.build.finalName}</name>
+                            <artifact>${project.build.directory}/${project.build.finalName}.ear</artifact>
+                        </component>
+                    </components>
+                </configuration>
+            </plugin>
 
 
         </plugins>

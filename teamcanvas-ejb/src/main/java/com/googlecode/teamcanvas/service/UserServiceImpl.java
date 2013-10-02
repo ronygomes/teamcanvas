@@ -4,6 +4,7 @@ package com.googlecode.teamcanvas.service;
 import com.googlecode.teamcanvas.dao.UserDao;
 import com.googlecode.teamcanvas.domain.User;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,7 +12,7 @@ import javax.inject.Inject;
 @Stateless
 public class UserServiceImpl implements UserService{
 
-    @Inject
+    @EJB
     private UserDao userDao;
 
     public User saveUser(User userToSave){

@@ -2,9 +2,10 @@ package com.googlecode.teamcanvas.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class User {
+public class User implements Serializable{
     @Id
     private String email;
     private String firstName;

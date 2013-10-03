@@ -16,6 +16,10 @@
         <ui:define name="content">
             <h:form>
                 <h:panelGrid columns="3">
+                    <h:outputText />
+                    <h:message for="submitButton" styleClass="error-message"/>
+                    <h:outputText />
+
                     <h:outputLabel for="email">Email:</h:outputLabel>
                     <h:panelGroup>
                         <h:inputText id="email" value="#{loginAction.userEmail}"/>
@@ -39,7 +43,11 @@
 
                     <h:outputText />
                     <h:panelGroup>
-                        <h:commandButton id="submitButton" action="#{loginAction.login()}" value="Login"/>
+                        <h:commandButton id="submitButton"
+                                         action="#{loginAction.login()}"
+                                         value="Login"
+                                         binding="#{loginAction.submitButton}"
+                                />
                         <span class="ten-pixel-padding">
                             <h:outputLink value="register.xhtml">Register</h:outputLink>
                         </span>

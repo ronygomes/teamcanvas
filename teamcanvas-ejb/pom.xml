@@ -42,11 +42,6 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
         </dependency>

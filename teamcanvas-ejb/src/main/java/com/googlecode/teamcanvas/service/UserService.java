@@ -4,4 +4,6 @@ import com.googlecode.teamcanvas.domain.User;
 
 public interface UserService {
     public User saveUser(User userToSave);
+    public User findUserByEmail(String userEmail);
+    public User checkAuthenticity(String userEmail, String userPassword);
 }

@@ -20,4 +20,11 @@ public class UserDaoImpl implements UserDao{
         em.persist(userToSave);
         return null;
     }
+
+
+    public User findUserByEmail(String emailOfUser) {
+        return em.find(User.class, emailOfUser);
+    }
+
+
 }

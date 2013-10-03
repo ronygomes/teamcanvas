@@ -48,11 +48,6 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
@@ -71,6 +66,7 @@
             <groupId>com.ocpsoft</groupId>
             <artifactId>prettyfaces-jsf2</artifactId>
         </dependency>
+
 
     </dependencies>
 

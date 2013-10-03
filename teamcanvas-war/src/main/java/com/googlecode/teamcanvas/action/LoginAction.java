@@ -2,8 +2,7 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.UserService;
-
-
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,7 +12,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-import java.util.logging.Logger;
 
 @Named
 @RequestScoped
@@ -117,6 +115,7 @@ public class LoginAction {
 
     private void storeUserInSession(User authenticatedUser) {
         httpSession.setAttribute(LOGIN_USER_SESSION_KEY, authenticatedUser);
+        log.info(authenticatedUser.getEmail() + " saved in session");
     }
 
     private boolean isUserFound(User user){

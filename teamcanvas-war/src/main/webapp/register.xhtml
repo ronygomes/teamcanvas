@@ -5,7 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" >
 
 <h:body>
     <ui:composition template="WEB-INF/template/bare-layout.xhtml">
@@ -16,32 +17,39 @@
         <ui:define name="content">
             <h:form>
                 <h:panelGrid columns="3">
+                    <f:event listener="#{registerAction.validatePassword}" type="postValidate" />
+
+                    <h:outputText />
+                    <h:message for="registerButton" />
+                    <h:outputText />
+
                     <h:outputLabel for="email">Email:</h:outputLabel>
                     <h:panelGroup>
-                        <h:inputText id="email" value="#{registerBean.userEmail}"/>
+                        <h:inputText id="email" value="#{registerAction.user.email}" required="true"/>
                         <span class="reruired">*</span>
                     </h:panelGroup>
                     <h:message for="email" />
 
                     <h:outputLabel for="firstname">First Name:</h:outputLabel>
 
-                    <h:inputText id="firstname" value="#{registerBean.firstName}"/>
+                    <h:inputText id="firstname" value="#{registerAction.user.firstName}"/>
                     <h:message for="firstname" />
 
                     <h:outputLabel for="lastname">Last Name:</h:outputLabel>
-                    <h:inputText id="lastname" value="#{registerBean.lastName}"/>
+                    <h:inputText id="lastname" value="#{registerAction.user.lastName}"/>
                     <h:message for="lastname" />
 
                     <h:outputLabel for="password">Password:</h:outputLabel>
                     <h:panelGroup>
-                        <h:inputSecret id="password" value="#{registerBean.userPassword}"/>
+                        <h:inputSecret id="password" value="#{registerAction.user.hashedPassword}" required="true"/>
                         <span class="reruired">*</span>
                     </h:panelGroup>
                     <h:message for="password" />
 
                     <h:outputLabel for="confirmPassword">Confirm password:</h:outputLabel>
                     <h:panelGroup>
-                        <h:inputSecret id="confirmPassword" value="#{registerBean.confirmPassword}"/>
+                        <h:inputSecret id="confirmPassword" value="#{registerAction.confirmPassword}"
+                                       required="true" label="Conrofm password"/>
                         <span class="reruired">*</span>
                     </h:panelGroup>
                     <h:message for="confirmPassword" />
@@ -49,7 +57,10 @@
 
                     <h:outputText />
                     <h:panelGroup>
-                        <h:commandButton id="submitButton" action="#{registerBean.register()}" value="Register"/>
+                        <h:commandButton id="registerButton" action="#{registerAction.register()}"
+                                         value="Register"
+                                         binding="#{registerAction.registerButton}"/>
+
                         <span class="ten-pixel-padding">
                             <h:outputLink value="index.xhtml">Sign in</h:outputLink>
                         </span>

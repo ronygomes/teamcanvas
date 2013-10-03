@@ -15,12 +15,12 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
     private final Logger log = Logger.getLogger("UserServiceImpl");
 
-    public User saveUser(User userToSave){
-        userDao.saveUser(userToSave);
-        return null;
+    public boolean saveUser(User userToSave){
+        return userDao.saveUser(userToSave);
     }
 
     public User findUserByEmail(String emailOfUser){
+        log.info("Simple logging mec");
         return userDao.findUserByEmail(emailOfUser);
 
     }

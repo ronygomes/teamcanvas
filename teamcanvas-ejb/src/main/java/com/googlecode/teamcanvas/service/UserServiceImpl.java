@@ -6,21 +6,20 @@ import com.googlecode.teamcanvas.domain.User;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 @Stateless
 public class UserServiceImpl implements UserService{
 
     @EJB
     private UserDao userDao;
-    private final Logger log = Logger.getLogger("UserServiceImpl");
+    private final Logger log = Logger.getLogger(UserServiceImpl.class);
 
     public boolean saveUser(User userToSave){
         return userDao.saveUser(userToSave);
     }
 
     public User findUserByEmail(String emailOfUser){
-        log.info("Simple logging mec");
         return userDao.findUserByEmail(emailOfUser);
 
     }
@@ -36,14 +35,12 @@ public class UserServiceImpl implements UserService{
         if(!isValidPassword(storedUser, providedPassword)){
             return null;
         }
+        log.info(storedUser.getEmail() + ", Found!");
         return storedUser;
     }
 
     private boolean isValidPassword(User storedUser, String providedPassword){
-        if(storedUser != null){
-            return storedUser.getHashedPassword().equals(providedPassword);
-        }
-        return false;
+        return storedUser != null && storedUser.getHashedPassword().equals(providedPassword);
     }
 
 

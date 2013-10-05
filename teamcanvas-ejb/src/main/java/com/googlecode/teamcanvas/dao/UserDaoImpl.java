@@ -9,11 +9,11 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 @Stateless
 public class UserDaoImpl implements UserDao{
-    private final Logger log = Logger.getLogger("UserDaoImpl");
+    private final Logger log = Logger.getLogger(UserDaoImpl.class);
 
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;
@@ -30,7 +30,6 @@ public class UserDaoImpl implements UserDao{
     }
 
     public User findUserByEmail(String emailOfUser) {
-        log.info("Trying to find user");
         return em.find(User.class, emailOfUser);
     }
 

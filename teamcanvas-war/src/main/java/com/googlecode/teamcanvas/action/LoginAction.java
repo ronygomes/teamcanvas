@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @Named
 @RequestScoped
 public class LoginAction {
-    private final Logger log = Logger.getLogger("LoginAction");
+    private final Logger log = Logger.getLogger(LoginAction.class);
 
     private String userEmail;
     private String userPassword;
@@ -28,7 +28,7 @@ public class LoginAction {
     @EJB
     private UserService userService;
 
-    public static String LOGIN_USER_SESSION_KEY = "loggedInUser";
+    private static final String LOGIN_USER_SESSION_KEY = "loggedInUser";
 
 
     @PostConstruct
@@ -59,30 +59,6 @@ public class LoginAction {
 
     public void setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    public FacesContext getFacesContext() {
-        return facesContext;
-    }
-
-    public void setFacesContext(FacesContext facesContext) {
-        this.facesContext = facesContext;
-    }
-
-    public HttpSession getHttpSession() {
-        return httpSession;
-    }
-
-    public void setHttpSession(HttpSession httpSession) {
-        this.httpSession = httpSession;
     }
 
     public UIComponent getSubmitButton() {

@@ -18,7 +18,7 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class RegisterAction {
-    private final Logger log = Logger.getLogger("RegisterAction");
+    private final Logger log = Logger.getLogger(RegisterAction.class);
 
     private User user;
     private String confirmPassword;
@@ -28,8 +28,8 @@ public class RegisterAction {
     @EJB
     private UserService userService;
 
-    private final String INPUT_PASSWORD_VIEW_ID = "password";
-    private final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
+    private static final String INPUT_PASSWORD_VIEW_ID = "password";
+    private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
 
     @PostConstruct
     public void setUp(){
@@ -53,14 +53,6 @@ public class RegisterAction {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
-    }
-
-    public FacesContext getFacesContext() {
-        return facesContext;
-    }
-
-    public void setFacesContext(FacesContext facesContext) {
-        this.facesContext = facesContext;
     }
 
     public String register(){
@@ -130,7 +122,6 @@ public class RegisterAction {
     }
 
     private UIInput getInputComponent(UIComponent components, String componentName){
-        UIInput inputComponent = (UIInput) components.findComponent(componentName);
-        return  inputComponent;
+        return (UIInput) components.findComponent(componentName);
     }
 }

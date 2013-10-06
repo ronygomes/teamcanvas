@@ -6,66 +6,79 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core" >
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:body>
     <ui:composition template="WEB-INF/template/bare-layout.xhtml">
-        <ui:param name="pageTitle" value="Team Canvas | Register" />
+        <ui:param name="pageTitle" value="Team Canvas | Register"/>
         <ui:define name="head-include">
-            <h:outputStylesheet library="css" name="index.css"/>
+            <h:outputStylesheet library="css" name="register.css"/>
         </ui:define>
         <ui:define name="content">
+            <div id="logo">
+                <h:graphicImage library="images" name="logo.jpg"/>
+            </div>
             <h:form>
-                <h:panelGrid columns="3">
-                    <f:event listener="#{registerAction.validatePassword}" type="postValidate" />
+                <fieldset>
+                    <legend>Register</legend>
+                    <h:panelGrid columns="2">
+                        <f:event listener="#{registerAction.validatePassword}" type="postValidate"/>
 
-                    <h:outputText />
-                    <h:message for="registerButton" />
-                    <h:outputText />
+                        <h:outputText/>
+                        <h:message for="registerButton" styleClass="error-message"/>
 
-                    <h:outputLabel for="email">Email:</h:outputLabel>
-                    <h:panelGroup>
-                        <h:inputText id="email" value="#{registerAction.user.email}" required="true"/>
-                        <span class="reruired">*</span>
-                    </h:panelGroup>
-                    <h:message for="email" />
+                        <h:outputText/>
+                        <h:message for="email" styleClass="error-message"/>
 
-                    <h:outputLabel for="firstname">First Name:</h:outputLabel>
+                        <h:outputLabel for="email">Email:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="email" value="#{registerAction.user.email}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
 
-                    <h:inputText id="firstname" value="#{registerAction.user.firstName}"/>
-                    <h:message for="firstname" />
+                        <h:outputText/>
+                        <h:message for="firstname" />
 
-                    <h:outputLabel for="lastname">Last Name:</h:outputLabel>
-                    <h:inputText id="lastname" value="#{registerAction.user.lastName}"/>
-                    <h:message for="lastname" />
+                        <h:outputLabel for="firstname">First Name:</h:outputLabel>
+                        <h:inputText id="firstname" value="#{registerAction.user.firstName}"/>
 
-                    <h:outputLabel for="password">Password:</h:outputLabel>
-                    <h:panelGroup>
-                        <h:inputSecret id="password" value="#{registerAction.user.hashedPassword}" required="true"/>
-                        <span class="reruired">*</span>
-                    </h:panelGroup>
-                    <h:message for="password" />
+                        <h:outputText/>
+                        <h:message for="lastname"/>
+                        <h:outputLabel for="lastname">Last Name:</h:outputLabel>
+                        <h:inputText id="lastname" value="#{registerAction.user.lastName}"/>
 
-                    <h:outputLabel for="confirmPassword">Confirm password:</h:outputLabel>
-                    <h:panelGroup>
-                        <h:inputSecret id="confirmPassword" value="#{registerAction.confirmPassword}"
-                                       required="true" label="Conrofm password"/>
-                        <span class="reruired">*</span>
-                    </h:panelGroup>
-                    <h:message for="confirmPassword" />
+                        <h:outputText/>
+                        <h:message for="password" styleClass="error-message"/>
+
+                        <h:outputLabel for="password">Password:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputSecret id="password" value="#{registerAction.user.hashedPassword}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="confirmPassword" styleClass="error-message"/>
+
+                        <h:outputLabel for="confirmPassword">Confirm password:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputSecret id="confirmPassword" value="#{registerAction.confirmPassword}"
+                                           required="true" label="Confirm password"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
 
 
-                    <h:outputText />
-                    <h:panelGroup>
-                        <h:commandButton id="registerButton" action="#{registerAction.register()}"
-                                         value="Register"
-                                         binding="#{registerAction.registerButton}"/>
+                        <h:outputText/>
+                        <h:panelGroup>
+                            <h:commandButton id="registerButton" action="#{registerAction.register()}"
+                                             value="Register"
+                                             binding="#{registerAction.registerButton}"/>
 
                         <span class="ten-pixel-padding">
                             <h:outputLink value="index.xhtml">Sign in</h:outputLink>
                         </span>
-                    </h:panelGroup>
-                </h:panelGrid>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </fieldset>
             </h:form>
         </ui:define>
     </ui:composition>

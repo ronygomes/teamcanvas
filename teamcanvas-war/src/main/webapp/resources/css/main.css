@@ -2,3 +2,17 @@
 .reruired { color:red;}
 .ten-pixel-padding {padding-left: 10px}
 .error-message{ color: red; font-size: 12px;}
+#wrapper{ width: 90%; margin:0 auto;}
+#header{ width:100%; display:block;}
+#header div{float:right;}
+#header #logo{padding:1px 10px; aligh:center;}
+#header #logo span{display: block; font-size: .8em; font-weight: bold;}
+#header #nav{ margin-top:76px; width: 40%; padding-right:40px;}
+#header #nav td{padding: 1px 5px;}
+#sidebar{float:left; width: 30%; margin-top:10px;}
+#sidebar #main-nav ul li{ list-style:none; width:100%; text-align:center; padding: 8px 0px; margin-bottom: 5px; background-color: #f8f8f8}
+#sidebar #main-nav ul li:hover{ background-color: #f0f0f0;}
+#sidebar #main-nav li a{ text-decoration:none; padding:5px 70px; color: black; font-weight: bold; }
+#content{float:right; width: 70%; margin-top:10px; background-color: #f0f0f0;}
+#footer{clear:both; border: 1px solid pink;}
+.selected{ background-color: #f0f0f0 !important;}

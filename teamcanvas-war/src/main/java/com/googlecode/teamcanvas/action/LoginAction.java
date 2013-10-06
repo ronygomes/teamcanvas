@@ -76,12 +76,22 @@ public class LoginAction {
 
         if(isUserFound(user)){
             storeUserInSession(user);
-            outcome = "home";
+            outcome = "dashboard";
         }else{
             showInvalidUserMessage();
         }
 
         return outcome;
+    }
+
+    public String logout(){
+        removeUserLoginInfo();
+        return "index.xhtml?faces-redirect=true";
+    }
+
+    private void removeUserLoginInfo() {
+        httpSession.removeAttribute(LOGIN_USER_SESSION_KEY);
+        httpSession.invalidate();
     }
 
     private void showInvalidUserMessage() {

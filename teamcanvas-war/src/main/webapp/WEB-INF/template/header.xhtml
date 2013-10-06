@@ -2,15 +2,32 @@
 
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+        >
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
 
-<body>
+<h:body>
     <ui:composition>
-        <h1>Header</h1>
+        <div id="logo">
+            <h:graphicImage library="images" name="logo.jpg"/>
+            <span id="tagline">Team Canvas</span>
+        </div>
+        <div id="nav">
+            <h:form>
+                <table>
+                    <tr>
+                    <td><h:outputLink value="dashboard.xhtml" styleClass="nav-item">Dashboard</h:outputLink></td>
+                    <td><h:outputLink value="notification.xhtml" styleClass="nav-item">Notification</h:outputLink></td>
+                    <td><h:outputLink value="profile.xhtml" styleClass="nav-item">Profile</h:outputLink></td>
+                    <td><h:commandLink styleClass="nav-item" action="#{loginAction.logout()}" value="Logout"/></td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
     </ui:composition>
-</body>
+</h:body>
 
 </html>

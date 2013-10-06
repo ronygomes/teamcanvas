@@ -9,50 +9,59 @@
 
 <h:body>
     <ui:composition template="WEB-INF/template/bare-layout.xhtml">
-        <ui:param name="pageTitle" value="Team Canvas | Login" />
+        <ui:param name="pageTitle" value="Team Canvas | Login"/>
         <ui:define name="head-include">
             <h:outputStylesheet library="css" name="index.css"/>
         </ui:define>
         <ui:define name="content">
+            <div id="logo">
+                <h:graphicImage library="images" name="logo.jpg" />
+            </div>
             <h:form>
-                <h:panelGrid columns="3">
-                    <h:outputText />
-                    <h:message for="submitButton" styleClass="error-message"/>
-                    <h:outputText />
+                <fieldset>
+                    <legend>Login</legend>
+                    <h:panelGrid columns="2">
+                        <h:outputText/>
+                        <h:message for="submitButton" styleClass="error-message"/>
 
-                    <h:outputLabel for="email">Email:</h:outputLabel>
-                    <h:panelGroup>
-                        <h:inputText id="email" value="#{loginAction.userEmail}"/>
-                        <span class="reruired">*</span>
-                    </h:panelGroup>
-                    <h:message for="email" />
+                        <h:outputText/>
+                        <h:message for="email" styleClass="error-message"/>
 
-                    <h:outputLabel for="password">Password:</h:outputLabel>
-                    <h:panelGroup>
-                        <h:inputSecret id="password" value="#{loginAction.userPassword}"/>
-                        <span class="reruired">*</span>
-                    </h:panelGroup>
-                    <h:message for="password" />
+                        <h:outputLabel for="email">Email:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="email" value="#{loginAction.userEmail}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
 
-                    <h:outputText />
-                    <h:panelGroup>
-                        <h:selectBooleanCheckbox value="#{loginAction.rememberMe}" />
-                        <h:outputText value="Remember me"/>
-                    </h:panelGroup>
-                    <h:outputText/>
+                        <h:outputText  />
+                        <h:message for="password" styleClass="error-message"/>
+                        <h:outputLabel for="password">Password:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputSecret id="password" value="#{loginAction.userPassword}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
 
-                    <h:outputText />
-                    <h:panelGroup>
-                        <h:commandButton id="submitButton"
-                                         action="#{loginAction.login()}"
-                                         value="Login"
-                                         binding="#{loginAction.submitButton}"
-                                />
+                        <h:outputText/>
+                        <h:panelGroup>
+                            <h:selectBooleanCheckbox value="#{loginAction.rememberMe}"/>
+                            <h:outputText value="Remember me"/>
+                        </h:panelGroup>
+
+
+                        <h:outputText/>
+                        <h:panelGroup>
+                            <h:commandButton id="submitButton"
+                                             action="#{loginAction.login()}"
+                                             value="Login"
+                                             binding="#{loginAction.submitButton}"
+                                    />
                         <span class="ten-pixel-padding">
                             <h:outputLink value="register.xhtml">Register</h:outputLink>
                         </span>
-                    </h:panelGroup>
-                </h:panelGrid>
+                        </h:panelGroup>
+
+                    </h:panelGrid>
+                </fieldset>
             </h:form>
         </ui:define>
     </ui:composition>

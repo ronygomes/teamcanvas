@@ -5,11 +5,18 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
 
 <body>
     <ui:composition>
-        <h1>Footer</h1>
+        <div id="footer-nav">
+            <ul>
+                <li><h:outputLink value="dashboard.xhtml" styleClass="footer-nav-item">Dashboard</h:outputLink></li>
+                <li><h:outputLink value="legal-notice.xhtml" styleClass="footer-nav-item">Legal Notice</h:outputLink></li>
+                <li><h:outputLink value="contact-us.xhtml" styleClass="footer-nav-item">Contact Us</h:outputLink></li>
+            </ul>
+            <span class="copyright">Copyright notice</span>
+        </div>
     </ui:composition>
 </body>
 

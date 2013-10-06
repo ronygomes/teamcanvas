@@ -5,12 +5,24 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" >
 
 <body>
-    <ui:composition>
-        <h1>Sidebar</h1>
-    </ui:composition>
+<ui:composition>
+    <div id="logo">
+        <h:graphicImage library="images" name="default-avatar-small.jpg"/>
+        <span id="username">User name</span>
+    </div>
+    <div id="main-nav">
+        <ul>
+            <li class="#{selectedPage == 'project' ? 'selected' : ''}"><h:outputLink value="project.xhtml" >Project</h:outputLink></li>
+            <li class="#{selectedPage == 'team' ? 'selected' : ''}"><h:outputLink value="team.xhtml" >Team</h:outputLink></li>
+            <li class="#{selectedPage == 'archives' ? 'selected' : ''}"><h:outputLink value="archives.xhtml">Archives</h:outputLink></li>
+            <li class="#{selectedPage == 'calendar' ? 'selected' : ''}"><h:outputLink value="calendar.xhtml">Calendar</h:outputLink></li>
+        </ul>
+    </div>
+</ui:composition>
 </body>
 
 </html>

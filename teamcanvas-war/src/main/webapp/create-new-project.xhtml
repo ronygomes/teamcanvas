@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="WEB-INF/template/layout.xhtml">
+        <ui:param name="selectedPage" value="project"/>
+        <ui:define name="content">
+            <h2>Add New Project</h2>
+            <h:form>
+                <fieldset>
+                    <legend>Project Description</legend>
+                    <h:panelGrid columns="2">
+                        <h:outputText/>
+                        <h:message for="createProjectButton" styleClass="error-message"/>
+
+                        <h:outputText/>
+                        <h:message for="projectName" styleClass="error-message"/>
+
+                        <h:outputLabel for="projectName">Project Name:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="projectName" value="#{createProjectAction.project.projectTitle}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="projectDescription" styleClass="error-message"/>
+
+                        <h:outputLabel for="projectDescription">Project Description:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputTextarea id="projectDescription" value="#{createProjectAction.project.projectDescription}"
+                                         required="true" rows="10" cols="35"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="projectDueDate" styleClass="error-message"/>
+
+                        <h:outputLabel for="projectDueDate">Due Date:</h:outputLabel>
+                        <h:panelGroup>
+                            <p:calendar value="#{createProjectAction.project.projectDueDate}" id="projectDueDate" showOn="button" />
+                        </h:panelGroup>
+                        <h:outputText/>
+                        <h:panelGroup>
+                            <h:commandButton id="createProjectButton"
+                                             action="#{createProjectAction.createProject()}"
+                                             value="Create Project"/>
+                        </h:panelGroup>
+
+                    </h:panelGrid>
+                </fieldset>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

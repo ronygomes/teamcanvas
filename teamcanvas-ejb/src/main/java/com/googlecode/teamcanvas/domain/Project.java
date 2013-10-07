@@ -1,30 +1,45 @@
 package com.googlecode.teamcanvas.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 
 @Entity
 @Table(name = "project")
 public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "project_id")
     private long id;
+
     @Column(name = "project_title")
     private String projectTitle;
+
     @Column(name = "project_description")
     private String projectDescription;
+
     @Column(name = "project_creation_time")
     private Date projectCreationTime;
+
     @Column(name = "project_last_modification_time")
     private Date projectLastModificationTime;
+
     @Column(name = "project_due_date")
     private Date projectDueDate;
+
     @Column(name = "project_complete_percentage")
     private int projectCompletePercentage;
+
     @ManyToOne
     @JoinColumn(name = "project_creator_email")
     private User projectCreator;
+
+    @OneToMany(mappedBy = "parentProject")
+    private List<Phase> projectPhases = new ArrayList<Phase>();
+
+    @OneToMany(mappedBy = "parentProject")
+    private List<Comment> projectComments = new ArrayList<Comment>();
 
     public long getId() {
         return id;
@@ -90,4 +105,11 @@ public class Project {
         this.projectCreator = projectCreator;
     }
 
+    public List<Phase> getProjectPhases() {
+        return projectPhases;
+    }
+
+    public void setProjectPhases(List<Phase> projectPhases) {
+        this.projectPhases = projectPhases;
+    }
 }

@@ -1,11 +1,22 @@
 package com.googlecode.teamcanvas.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "comment")
 public class Comment {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "comment_id")
     private long id;
+
+    @ManyToOne @JoinColumn(name = "project_id")
     private Project parentProject;
+
+    @ManyToOne @JoinColumn(name = "created_by")
     private User commentCreatedBy;
+
+    @Column(name = "create_at")
     private Date commentCreationTime;
 
     public long getId() {

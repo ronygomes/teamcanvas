@@ -1,9 +1,22 @@
 package com.googlecode.teamcanvas.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "phase")
 public class Phase {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "phase_id")
     private long id;
+
+    @Column(name = "phase_name")
     private String phaseName;
+
+    @Column(name = "phase_ordinal")
     private int phaseOrdinal;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
     private Project parentProject;
 
     public long getId() {

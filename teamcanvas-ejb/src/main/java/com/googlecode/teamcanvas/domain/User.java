@@ -11,14 +11,27 @@ public class User implements Serializable{
     @Id
     @Column(name = "user_email")
     private String email;
+
     @Column(name = "user_first_name")
     private String firstName;
+
     @Column(name = "user_last_name")
     private String lastName;
+
     @Column(name = "hashed_password")
     private String hashedPassword;
+
     @OneToMany(mappedBy = "projectCreator")
     private List<Project> projects = new ArrayList<Project>();
+
+    @OneToMany(mappedBy = "commentCreatedBy")
+    private List<Comment> comments = new ArrayList<Comment>();
+
+    @ManyToMany(mappedBy = "teamMembers")
+    private List<Team> teams = new ArrayList<Team>();
+
+    @ManyToMany(mappedBy = "assignedToUsers")
+    private List<Task> userTasks = new ArrayList<Task>();
 
     public String getEmail() {
         return email;
@@ -58,5 +71,13 @@ public class User implements Serializable{
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

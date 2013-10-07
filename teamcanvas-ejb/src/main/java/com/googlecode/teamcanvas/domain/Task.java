@@ -1,21 +1,57 @@
 package com.googlecode.teamcanvas.domain;
 
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "task")
 public class Task {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "task_id")
     private long id;
+
+    @Column(name = "task_title")
     private String taskTitle;
+
+    @Column(name = "task_description")
     private String taskDescription;
+
+    @Column(name = "complete_percentage")
     private int completePercentage;
+
+    @Column(name = "task_priority")
     private int taskPriority;
+
+    @Column(name = "task_created_on")
     private Date taskCreationTime;
+
+    @Column(name = "task_modified_on")
     private Date taskLastModifiedTime;
-    private boolean isPrivate;
+
+    @Column(name = "task_is_private")
+    private int isPrivate;
+
+    @Column(name = "task_due_date")
     private Date taskDueDate;
+
+    @ManyToOne
+    @JoinColumn(name = "phase_id")
     private Phase parentPhase;
+
+    @ManyToOne
+    @JoinColumn(name = "user_email")
     private User taskCreatedBy;
+
+    @ManyToMany
+    @JoinTable(name = "user_has_task",
+               joinColumns = @JoinColumn(name = "task_id",
+                       referencedColumnName = "task_id"),
+               inverseJoinColumns = @JoinColumn(name = "user_email",
+                       referencedColumnName = "user_email")
+    )
+    private List<User> assignedToUsers = new ArrayList<User>();
 
     public long getId() {
         return id;
@@ -73,11 +109,11 @@ public class Task {
         this.taskLastModifiedTime = taskLastModifiedTime;
     }
 
-    public boolean isPrivate() {
+    public int isPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(boolean aPrivate) {
+    public void setPrivate(int aPrivate) {
         isPrivate = aPrivate;
     }
 

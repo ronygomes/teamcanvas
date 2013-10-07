@@ -17,16 +17,14 @@ import java.util.Date;
 
 @Named
 @RequestScoped
-public class CreateProjectAction {
+public class CreateProjectAction extends UserLoginTemplate{
     private final Logger log = Logger.getLogger(CreateProjectAction.class);
 
     private Project project;
-    private User user;
 
     @EJB
     private ProjectService projectService;
 
-    private static final String LOGIN_USER_SESSION_KEY = "loggedInUser";
 
     @PostConstruct
     private void setUp(){
@@ -48,27 +46,12 @@ public class CreateProjectAction {
         this.project = project;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    private void loadUserFromSession() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession)facesContext.getExternalContext().getSession(true);
-        user = (User) httpSession.getAttribute(LOGIN_USER_SESSION_KEY);
-        log.info("Logged in user: " + user);
-    }
-
     public String createProject() {
         String outcome = "create-new-project";
         if (isLoggedInUserFound()) {
             configureProject();
             if(saveProject()){
-                outcome = "index.xhtml?faces-redirect=true";
+                outcome = "project.xhtml?faces-redirect=true";
             }
         }
         return outcome;
@@ -89,10 +72,10 @@ public class CreateProjectAction {
     }
 
     private void setLoggedInUserAsProjectCreator() {
-        project.setProjectCreator(user);
+        project.setProjectCreator(getUser());
     }
 
     public boolean isLoggedInUserFound() {
-        return user != null;
+        return getUser() != null;
     }
 }

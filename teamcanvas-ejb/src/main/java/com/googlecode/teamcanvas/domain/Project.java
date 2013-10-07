@@ -1,16 +1,30 @@
 package com.googlecode.teamcanvas.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "project")
 public class Project {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "project_id")
     private long id;
+    @Column(name = "project_title")
     private String projectTitle;
+    @Column(name = "project_description")
     private String projectDescription;
+    @Column(name = "project_creation_time")
     private Date projectCreationTime;
+    @Column(name = "project_last_modification_time")
     private Date projectLastModificationTime;
+    @Column(name = "project_due_date")
     private Date projectDueDate;
+    @Column(name = "project_complete_percentage")
     private int projectCompletePercentage;
-    private User createdBy;
+    @ManyToOne
+    @JoinColumn(name = "project_creator_email")
+    private User projectCreator;
 
     public long getId() {
         return id;
@@ -68,11 +82,12 @@ public class Project {
         this.projectCompletePercentage = projectCompletePercentage;
     }
 
-    public User getCreatedBy() {
-        return createdBy;
+    public User getProjectCreator() {
+        return projectCreator;
     }
 
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
+    public void setProjectCreator(User projectCreator) {
+        this.projectCreator = projectCreator;
     }
+
 }

@@ -1,10 +1,9 @@
 package com.googlecode.teamcanvas.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -18,6 +17,8 @@ public class User implements Serializable{
     private String lastName;
     @Column(name = "hashed_password")
     private String hashedPassword;
+    @OneToMany(mappedBy = "projectCreator")
+    private List<Project> projects = new ArrayList<Project>();
 
     public String getEmail() {
         return email;
@@ -49,5 +50,13 @@ public class User implements Serializable{
 
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="WEB-INF/template/layout.xhtml">
+        <f:metadata>
+            <h:inputHidden value="#{addTeamMemberAction.urlParamTeamId}" />
+        </f:metadata>
+        <ui:param name="selectedPage" value="team"/>
+        <ui:define name="content">
+
+            <h2>Add Team Member: #{addTeamMemberAction.team.teamName}</h2>
+            <h:form>
+                <h:inputHidden id="team_id" value="#{addTeamMemberAction.team.id}" />
+                <fieldset>
+                    <legend>Team Description</legend>
+                    <h:panelGrid columns="2">
+                        <h:message for="addTeamMemberButton" styleClass="error-message"/>
+                        <ui:repeat var="member" value="#{addTeamMemberAction.team.teamMembers}" varStatus="status">
+                            <div class="project">
+                                #{member.email}
+                            </div>
+                        </ui:repeat>
+
+                        <h:outputText/>
+                        <h:message for="teamMemberEmail" styleClass="error-message"/>
+
+                        <h:outputLabel for="teamMemberEmail">Member Email:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="teamMemberEmail" value="#{addTeamMemberAction.member.email}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <h:commandButton value="Add Member" action="#{addTeamMemberAction.appendMember()}" id="addTeamMemberButton" />
+
+                            <h:outputLink value="team.xhtml">List Teams</h:outputLink>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </fieldset>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -19,7 +18,7 @@ import java.util.Map;
 
 @Named
 @ConversationScoped
-public class EditProjectAction extends UserLoginTemplate implements Serializable{
+public class EditProjectAction extends UserSessionTemplate implements Serializable{
     private final Logger log = Logger.getLogger(EditProjectAction.class);
 
     private Project project;

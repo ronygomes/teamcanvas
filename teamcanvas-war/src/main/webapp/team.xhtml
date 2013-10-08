@@ -5,7 +5,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Simple JSF Facelets page</title>
@@ -14,6 +15,21 @@
 <h:body>
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="team"/>
+        <ui:define name="content">
+            <h2>Project List</h2>
+            <h:outputLink value="create-new-project.xhtml">Create New Project</h:outputLink>
+            <ui:repeat var="team" value="#{teamAction.teams}" varStatus="status">
+                <div class="project">
+                    #{team.id}
+                    #{team.teamName}
+                    <h:outputLink value="add-team-member.xhtml">
+                        <h:outputText value="Add Member" />
+                        <f:param name="team_id" value="#{team.id}"/>
+                    </h:outputLink>
+                </div>
+            </ui:repeat>
+            <h:outputText rendered="#{empty teamAction.teams}" value="No Team Found!"/>
+        </ui:define>
     </ui:composition>
 </h:body>
 

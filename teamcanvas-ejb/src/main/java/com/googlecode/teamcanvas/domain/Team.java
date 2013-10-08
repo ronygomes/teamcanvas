@@ -22,7 +22,7 @@ public class Team {
     @JoinColumn(name = "user_email")
     private User teamCreator;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name="team_has_user",
                 joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "team_id"),
                 inverseJoinColumns = @JoinColumn(name = "user_email", referencedColumnName = "user_email")

@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.apache.log4j.Logger;
 
+import java.util.List;
+
 @Stateless
 public class UserServiceImpl implements UserService{
 
@@ -28,6 +30,11 @@ public class UserServiceImpl implements UserService{
     public User checkAuthenticity(String providedEmail, String providedPassword) {
         User storedUser = userDao.findUserByEmail(providedEmail);
         return checkForUserPassword(storedUser, providedPassword);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userDao.findAllUser();
     }
 
 

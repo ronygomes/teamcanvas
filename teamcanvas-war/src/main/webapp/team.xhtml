@@ -17,7 +17,7 @@
         <ui:param name="selectedPage" value="team"/>
         <ui:define name="content">
             <h2>Project List</h2>
-            <h:outputLink value="create-new-project.xhtml">Create New Project</h:outputLink>
+            <h:outputLink value="create-new-team.xhtml">Create New Team</h:outputLink>
             <ui:repeat var="team" value="#{teamAction.teams}" varStatus="status">
                 <div class="project">
                     #{team.id}

@@ -2,6 +2,7 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.service.ProjectService;
+import com.googlecode.teamcanvas.template.AppUtilTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Named
 @RequestScoped
-public class ProjectAction extends UserSessionTemplate {
+public class ProjectAction extends AppUtilTemplate {
     private List<Project> projects;
 
     @EJB

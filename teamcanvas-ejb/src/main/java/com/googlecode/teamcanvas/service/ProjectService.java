@@ -1,6 +1,7 @@
 package com.googlecode.teamcanvas.service;
 
 
+import com.googlecode.teamcanvas.domain.Phase;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.User;
 
@@ -11,4 +12,5 @@ public interface ProjectService {
     public List<Project> findProjectByUser(User user);
     public Project findProjectById(long id);
     public boolean updateProject(Project project);
+    public void addPhase(Project project, Phase phase);
 }

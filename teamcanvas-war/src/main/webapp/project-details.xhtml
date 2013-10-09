@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="WEB-INF/template/layout.xhtml">
+        <ui:param name="selectedPage" value="project"/>
+        <ui:define name="content">
+            <h2>Project Details : #{projectDetails.project.projectTitle}</h2>
+            <ul>
+                <h:outputLink value="add-phase.xhtml">
+                    <h:outputText value="Add Phase"/>
+                    <f:param name="project_id" value="#{projectDetails.project.id}"/>
+                </h:outputLink>
+            </ul>
+            <ui:repeat value="#{projectDetails.project.projectPhases}" var="phase">
+                <div>
+                    <span class="phase-title">#{phase.phaseName}</span>
+                    <h:outputLink value="add-task.xhtml">
+                        <h:outputText value="Add Task"/>
+                        <f:param name="phase_id" value="#{phase.id}" />
+                    </h:outputLink>
+
+                    <ul>
+                        <ui:repeat value="#{phase.tasks}" var="task">
+                            <li>
+                                <h:outputText value="#{task.taskTitle}"/>
+                                <h:outputLink value="task-details.xhtml">
+                                    <h:outputText value="Details" />
+                                    <f:param name="task_id" value="#{task.id}"/>
+                                </h:outputLink>
+                                <h:outputLink value="task-edit.xhtml">
+                                    <h:outputText value="Edit" />
+                                    <f:param name="task_id" value="#{task.id}"/>
+                                </h:outputLink>
+
+                            </li>
+                        </ui:repeat>
+                    </ul>
+
+                </div>
+            </ui:repeat>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

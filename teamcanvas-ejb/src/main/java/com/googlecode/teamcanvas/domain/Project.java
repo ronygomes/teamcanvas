@@ -1,15 +1,15 @@
 package com.googlecode.teamcanvas.domain;
 
+
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
 @Table(name = "project")
 public class Project {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "project_id")
     private long id;
 
@@ -35,7 +35,7 @@ public class Project {
     @JoinColumn(name = "project_creator_email")
     private User projectCreator;
 
-    @OneToMany(mappedBy = "parentProject")
+    @OneToMany(mappedBy = "parentProject", fetch = FetchType.EAGER)
     private List<Phase> projectPhases = new ArrayList<Phase>();
 
     @OneToMany(mappedBy = "parentProject")

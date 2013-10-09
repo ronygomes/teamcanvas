@@ -1,7 +1,9 @@
 package com.googlecode.teamcanvas.service;
 
+import com.googlecode.teamcanvas.dao.PhaseDao;
 import com.googlecode.teamcanvas.dao.ProjectDao;
 import com.googlecode.teamcanvas.dao.UserDao;
+import com.googlecode.teamcanvas.domain.Phase;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.User;
 import org.apache.log4j.Logger;
@@ -21,6 +23,8 @@ public class ProjectServiceImpl implements ProjectService{
 
     @EJB
     private ProjectDao projectDao;
+    @EJB
+    private PhaseDao phaseDao;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean saveProject(Project projectToSave){
@@ -34,6 +38,7 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<Project> findProjectByUser(User user) {
         List<Project> projects;
         try{
@@ -72,6 +77,16 @@ public class ProjectServiceImpl implements ProjectService{
             log.info("Unable to update project:" + project.getProjectTitle(), e);
         }
         return false;
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void addPhase(Project project, Phase phase) {
+
+        phase.setParentProject(project);
+        phaseDao.savePhase(phase);
+
+        projectDao.updateProject(project);
     }
 
 

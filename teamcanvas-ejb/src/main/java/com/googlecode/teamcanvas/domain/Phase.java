@@ -1,6 +1,8 @@
 package com.googlecode.teamcanvas.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "phase")
@@ -18,6 +20,9 @@ public class Phase {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project parentProject;
+
+    @OneToMany(mappedBy = "parentPhase")
+    private List<Task> tasks = new ArrayList<Task>();
 
     public long getId() {
         return id;
@@ -49,5 +54,13 @@ public class Phase {
 
     public void setParentProject(Project parentProject) {
         this.parentProject = parentProject;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

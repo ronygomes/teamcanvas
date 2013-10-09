@@ -4,6 +4,7 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.service.TeamService;
+import com.googlecode.teamcanvas.template.AppUtilTemplate;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,7 @@ import java.util.Date;
 
 @Named
 @RequestScoped
-public class CreateNewTeamAction extends UserSessionTemplate {
+public class CreateNewTeamAction extends AppUtilTemplate {
     private final Logger log = Logger.getLogger(CreateNewTeamAction.class);
 
     private Team team;
@@ -71,6 +72,8 @@ public class CreateNewTeamAction extends UserSessionTemplate {
     private void setTeamCreator() {
         team.setTeamCreator(getLoggedInUser());
     }
+
+
 
 
 }

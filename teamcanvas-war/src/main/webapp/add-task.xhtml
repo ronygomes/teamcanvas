@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="WEB-INF/template/layout.xhtml">
+        <ui:param name="selectedPage" value="project"/>
+        <ui:define name="content">
+            <h2>Add New Task: Phase (#{addTaskAction.phase.phaseName})</h2>
+            <h:form>
+                <h:inputHidden id="project_id" value="#{addTaskAction.phase.id}" />
+                <fieldset>
+                    <legend>Phase Name</legend>
+                    <h:panelGrid columns="2">
+                        <h:outputText/>
+                        <h:message for="addTaskToPhase" styleClass="error-message"/>
+
+                        <h:outputText/>
+                        <h:message for="taskTitle" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskTitle">Task Title</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="taskTitle" value="#{addTaskAction.task.taskTitle}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <h:commandButton id="addTaskToPhase"
+                                             action="#{addTaskAction.addTaskToPhase()}"
+                                             value="Add phase"/>
+                            <h:outputLink value="project-details.xhtml">
+                                <h:outputText value="Project Details"/>
+                                <f:param name="project_id" value="#{addTaskAction.phase.parentProject.id}"/>
+                            </h:outputLink>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </fieldset>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

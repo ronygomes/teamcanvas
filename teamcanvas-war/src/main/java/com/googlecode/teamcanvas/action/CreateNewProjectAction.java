@@ -3,6 +3,7 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.service.ProjectService;
+import com.googlecode.teamcanvas.template.AppUtilTemplate;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +15,7 @@ import java.util.Date;
 
 @Named
 @RequestScoped
-public class CreateNewProjectAction extends UserSessionTemplate {
+public class CreateNewProjectAction extends AppUtilTemplate {
     private final Logger log = Logger.getLogger(CreateNewProjectAction.class);
 
     private Project project;

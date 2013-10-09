@@ -12,7 +12,7 @@
 <ui:composition>
     <div id="logo">
         <h:graphicImage library="images" name="default-avatar-small.jpg"/>
-        <span id="username">User name</span>
+        <span id="username">#{facesContext.externalContext.sessionMap["loggedInUser"].email}</span>
     </div>
     <div id="main-nav">
         <ul>

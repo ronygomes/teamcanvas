@@ -2,18 +2,18 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.service.TeamService;
+import com.googlecode.teamcanvas.template.AppUtilTemplate;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @RequestScoped
-public class TeamAction extends UserSessionTemplate{
+public class TeamAction extends AppUtilTemplate {
     private final Logger log = Logger.getLogger(TeamAction.class);
 
     private List<Team> teams;

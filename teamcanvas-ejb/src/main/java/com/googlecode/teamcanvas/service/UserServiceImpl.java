@@ -3,11 +3,10 @@ package com.googlecode.teamcanvas.service;
 
 import com.googlecode.teamcanvas.dao.UserDao;
 import com.googlecode.teamcanvas.domain.User;
+import org.apache.log4j.Logger;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import org.apache.log4j.Logger;
-
 import java.util.List;
 
 @Stateless

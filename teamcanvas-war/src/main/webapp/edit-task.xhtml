@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" >
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="WEB-INF/template/layout.xhtml">
+        <ui:param name="selectedPage" value="project"/>
+        <ui:define name="content">
+            <h2>Edit Task</h2>
+            <h:form>
+
+                    <h:panelGrid columns="2">
+                        <h:outputText/>
+                        <h:inputHidden value="#{editTaskAction.task.id}" />
+                        <h:outputText/>
+                        <h:message for="editTaskButton" styleClass="error-message"/>
+
+                        <h:outputText/>
+                        <h:message for="taskTitle" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskTitle">Task Title</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="taskTitle" value="#{editTaskAction.task.taskTitle}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="taskDescription" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskDescription">Task Description</h:outputLabel>
+                        <h:inputTextarea id="taskDescription" value="#{editTaskAction.task.taskDescription}" />
+
+                        <ui:remove>
+                        <h:outputText/>
+                        <h:message for="taskDueDate" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskDueDate">Due Date</h:outputLabel>
+                        <h:inputText id="taskDueDate" value="#{editTaskAction.task.taskDueDate}" />
+                        </ui:remove>
+
+                        <h:outputText/>
+                        <h:message for="taskCompletePercentage" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskCompletePercentage">Complete Percentage</h:outputLabel>
+                        <h:inputText id="taskCompletePercentage" value="#{editTaskAction.task.completePercentage}" />
+
+                        <h:outputText/>
+                        <h:message for="taskPriority" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskPriority">Task Priority</h:outputLabel>
+                        <h:panelGroup>
+                            <h:selectOneMenu id="taskPriority" value="#{editTaskAction.task.taskPriority}">
+                                <f:selectItem itemLabel="1" itemValue="1"/>
+                                <f:selectItem itemLabel="2" itemValue="2"/>
+                                <f:selectItem itemLabel="3" itemValue="3"/>
+                                <f:selectItem itemLabel="4" itemValue="4"/>
+                                <f:selectItem itemLabel="5" itemValue="5"/>
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="taskIsPrivate" styleClass="error-message"/>
+
+                        <h:outputLabel for="taskIsPrivate">Task Type</h:outputLabel>
+                        <h:panelGroup>
+                            <h:selectOneRadio id="taskIsPrivate" value="#{editTaskAction.task.private}">
+                                <f:selectItem itemLabel="Personal" itemValue="#{true}" />
+                                <f:selectItem itemLabel="Public" itemValue="#{false}" />
+                            </h:selectOneRadio>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:panelGroup>
+                            <h:commandButton id="editTaskButton"
+                                             action="#{editTaskAction.editTask()}"
+                                             value="Edit"
+                                    />
+                        <span class="ten-pixel-padding">
+                            <h:outputLink value="register.xhtml">Back</h:outputLink>
+                        </span>
+                        </h:panelGroup>
+
+                    </h:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

@@ -31,7 +31,7 @@ public class Task {
     private Date taskLastModifiedTime;
 
     @Column(name = "task_is_private")
-    private int isPrivate;
+    private boolean isPrivate;
 
     @Column(name = "task_due_date")
     private Date taskDueDate;
@@ -109,12 +109,12 @@ public class Task {
         this.taskLastModifiedTime = taskLastModifiedTime;
     }
 
-    public int isPrivate() {
+    public boolean getPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(int aPrivate) {
-        isPrivate = aPrivate;
+    public void setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
     public Date getTaskDueDate() {

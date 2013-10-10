@@ -1,6 +1,5 @@
 package com.googlecode.teamcanvas.dao;
 
-import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.domain.User;
 import org.apache.log4j.Logger;
@@ -9,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless

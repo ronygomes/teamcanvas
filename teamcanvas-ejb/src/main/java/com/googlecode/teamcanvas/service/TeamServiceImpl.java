@@ -10,7 +10,6 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.PersistenceException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Stateless

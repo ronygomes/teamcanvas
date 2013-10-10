@@ -1,11 +1,10 @@
 package com.googlecode.teamcanvas.action;
 
 
-import com.googlecode.teamcanvas.dao.TaskDao;
 import com.googlecode.teamcanvas.domain.Phase;
 import com.googlecode.teamcanvas.domain.Task;
 import com.googlecode.teamcanvas.service.PhaseService;
-import com.googlecode.teamcanvas.service.ProjectService;
+import com.googlecode.teamcanvas.service.TaskService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
 import org.apache.log4j.Logger;
 
@@ -26,7 +25,7 @@ public class AddTaskAction extends AppUtilTemplate {
     private PhaseService phaseService;
 
     @EJB
-    private TaskDao taskDao;
+    private TaskService taskService;
 
     private final String PHASE_ID_PARAM_KEY = "phase_id";
 
@@ -83,7 +82,7 @@ public class AddTaskAction extends AppUtilTemplate {
         phase = phaseService.findPhaseById(phase.getId());
         task.setParentPhase(phase);
 
-        taskDao.saveTask(task);
+        taskService.saveTask(task);
         return "project-details.xhtml?project_id=" + phase.getParentProject().getId() + "&faces-redirect=true";
 
     }

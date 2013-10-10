@@ -1,8 +1,8 @@
 package com.googlecode.teamcanvas.dao;
 
 
-import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.domain.User;
+import org.apache.log4j.Logger;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -11,9 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
-
-import org.apache.log4j.Logger;
-
 import java.util.List;
 
 @Stateless

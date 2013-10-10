@@ -2,7 +2,9 @@ package com.googlecode.teamcanvas.domain;
 
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 @Entity

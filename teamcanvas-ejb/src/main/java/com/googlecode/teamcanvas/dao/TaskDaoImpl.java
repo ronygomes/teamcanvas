@@ -26,4 +26,14 @@ public class TaskDaoImpl implements TaskDao {
         return query.getResultList();
 
     }
+
+    @Override
+    public Task findTaskById(long taskId) {
+        return em.find(Task.class, taskId);
+    }
+
+    @Override
+    public void updateTask(Task taskToModify) {
+        em.merge(taskToModify);
+    }
 }

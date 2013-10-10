@@ -1,7 +1,6 @@
 package com.googlecode.teamcanvas.dao;
 
 
-import com.googlecode.teamcanvas.domain.Phase;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.User;
 import org.apache.log4j.Logger;

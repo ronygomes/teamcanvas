@@ -39,7 +39,9 @@
                         </h:panelGroup>
 
                         <h:panelGroup>
-                            <h:commandButton value="Add Member" action="#{addTeamMemberAction.appendMember()}" id="addTeamMemberButton" />
+                            <h:commandButton value="Add Member" action="#{addTeamMemberAction.appendMember()}"
+                                             id="addTeamMemberButton"
+                                                binding="#{addTeamMemberAction.addMemberButton}"/>
 
                             <h:outputLink value="team.xhtml">List Teams</h:outputLink>
                         </h:panelGroup>

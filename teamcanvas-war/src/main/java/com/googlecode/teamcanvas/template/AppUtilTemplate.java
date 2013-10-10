@@ -3,6 +3,8 @@ package com.googlecode.teamcanvas.template;
 import com.googlecode.teamcanvas.domain.User;
 import org.apache.log4j.Logger;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -12,11 +14,12 @@ public abstract class AppUtilTemplate {
     private final Logger log = Logger.getLogger(AppUtilTemplate.class);
     private User loggedInUser;
     private Map<String, String> parameterMap;
+    private FacesContext facesContext;
 
     private static final String LOGIN_USER_SESSION_KEY = "loggedInUser";
 
     protected void loadUserFromSession() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
+        facesContext = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession)facesContext.getExternalContext().getSession(true);
         loggedInUser = (User) httpSession.getAttribute(LOGIN_USER_SESSION_KEY);
         log.info("Logged in loggedInUser: " + (loggedInUser != null ? loggedInUser.getEmail() : "null"));
@@ -67,6 +70,15 @@ public abstract class AppUtilTemplate {
         loadUserFromSession();
         loadParamMap();
 
+    }
+
+    public void addErrorMessage(String message, UIComponent component){
+        if(facesContext != null){
+            facesContext = FacesContext.getCurrentInstance();
+        }
+
+        FacesMessage invalidUserMessage = new FacesMessage(message);
+        facesContext.addMessage(component.getClientId(facesContext), invalidUserMessage);
     }
 
 

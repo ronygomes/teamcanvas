@@ -10,7 +10,9 @@ import org.apache.log4j.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.component.UIComponent;
 import javax.inject.Named;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -19,6 +21,7 @@ public class AddTeamMemberAction extends AppUtilTemplate {
 
     private Team team;
     private User member;
+    private UIComponent addMemberButton;
 
     @EJB
     private TeamService teamService;
@@ -53,16 +56,59 @@ public class AddTeamMemberAction extends AppUtilTemplate {
     public String appendMember(){
         log.info("Team: "  + team.getId());
         loadTeamFromDatabase(team.getId());
-        log.info("Member: "  + member.getEmail());
+        log.info("New Member: "  + member.getEmail());
 
-        member = userService.findUserByEmail(member.getEmail());
-        log.info(member.getEmail());
 
-        team.getTeamMembers().add(member);
-
-        teamService.updateTeam(team);
+        //logTeam();
+        log.info("Is team contain member: " + isTeamAlreadyContainMember(member));
+        if(isTeamAlreadyContainMember(member)) {
+            generateUserExistsErrorMessage();
+        }else{
+            saveMemberToDatabase();
+        }
 
         return "add-team-member";
+    }
+
+    private void saveMemberToDatabase() {
+        member = userService.findUserByEmail(member.getEmail());
+        if(member != null){
+            team.getTeamMembers().add(member);
+            teamService.updateTeam(team);
+        }else{
+            addErrorMessage("User not Found", addMemberButton);
+        }
+    }
+
+    private void logTeam() {
+        List<User> teamMembers = team.getTeamMembers();
+        String teamListString = "";
+        for(User member : teamMembers){
+            teamListString += member.getEmail() + ", ";
+        }
+
+        log.info("Old User: " + teamListString);
+    }
+
+    public UIComponent getAddMemberButton() {
+        return addMemberButton;
+    }
+
+    public void setAddMemberButton(UIComponent addMemberButton) {
+        this.addMemberButton = addMemberButton;
+    }
+
+    private void generateUserExistsErrorMessage() {
+        addErrorMessage("User already in team", addMemberButton);
+    }
+
+    private boolean isTeamAlreadyContainMember(User member) {
+        List<User> users = team.getTeamMembers();
+        for(User user: users){
+            if(user.getEmail().equals(member.getEmail()))
+                return true;
+        }
+        return false;
     }
 
     public User getMember() {

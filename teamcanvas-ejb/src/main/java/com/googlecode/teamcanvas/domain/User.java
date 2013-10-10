@@ -80,4 +80,12 @@ public class User implements Serializable{
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    public boolean equals(User o){
+
+        if(o != null && o instanceof User){
+            return this.email == o.email;
+        }
+        return false;
+    }
 }

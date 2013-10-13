@@ -5,7 +5,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
 
 <h:head>
     <title>Simple JSF Facelets page</title>
@@ -13,8 +16,72 @@
 
 <h:body>
     <ui:composition template="WEB-INF/template/layout.xhtml">
+        <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
+            <h:form enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Profile Settings</legend>
+                    <h:panelGrid columns="2">
+                        <f:event listener="#{profileAction.validatePassword}" type="postValidate"/>
 
+                        <h:outputText/>
+                        <h:message for="editProfileButton" styleClass="error-message"/>
+
+                        <h:outputText/>
+                        <h:message for="email" styleClass="error-message"/>
+
+                        <h:outputLabel for="email">Email:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputText id="email" value="#{profileAction.user.email}" required="true" disabled="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="firstname" />
+
+                        <h:outputLabel for="firstname">First Name:</h:outputLabel>
+                        <h:inputText id="firstname" value="#{profileAction.user.firstName}"/>
+
+                        <h:outputText/>
+                        <h:message for="lastname"/>
+                        <h:outputLabel for="lastname">Last Name:</h:outputLabel>
+                        <h:inputText id="lastname" value="#{profileAction.user.lastName}"/>
+
+                        <h:outputText/>
+                        <h:message for="password" styleClass="error-message"/>
+
+                        <h:outputLabel for="password">Password:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputSecret id="password" value="#{profileAction.user.hashedPassword}" required="true"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="confirmPassword" styleClass="error-message"/>
+
+                        <h:outputLabel for="confirmPassword">Confirm password:</h:outputLabel>
+                        <h:panelGroup>
+                            <h:inputSecret id="confirmPassword" value="#{profileAction.confirmPassword}"
+                                           required="true" label="Confirm password"/>
+                            <span class="reruired">*</span>
+                        </h:panelGroup>
+
+                        <h:outputText/>
+                        <h:message for="profileImage" styleClass="error-message"/>
+
+                        <h:outputText value="Profile Picture" />
+                        <h:panelGroup>
+                            <p:fileUpload id="profileImage" value="#{profileAction.file}" required="false" mode="simple"/>
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <h:commandButton id="editProfileButton"
+                                             actionListener="#{profileAction.editProfile()}"
+                                             value="Edit Profile"/>
+                            </h:panelGroup>
+                    </h:panelGrid>
+                </fieldset>
+            </h:form>
         </ui:define>
     </ui:composition>
 </h:body>

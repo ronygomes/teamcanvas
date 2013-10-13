@@ -33,6 +33,9 @@ public class User implements Serializable{
     @ManyToMany(mappedBy = "assignedToUsers")
     private List<Task> userTasks = new ArrayList<Task>();
 
+    @Lob
+    private byte[] profileImage;
+
     public String getEmail() {
         return email;
     }
@@ -87,5 +90,13 @@ public class User implements Serializable{
             return this.email == o.email;
         }
         return false;
+    }
+
+    public byte[] getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(byte[] profileImage) {
+        this.profileImage = profileImage;
     }
 }

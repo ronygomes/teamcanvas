@@ -72,6 +72,14 @@ public abstract class AppUtilTemplate {
 
     }
 
+    public FacesContext getFacesContext() {
+        return facesContext;
+    }
+
+    public void setFacesContext(FacesContext facesContext) {
+        this.facesContext = facesContext;
+    }
+
     public void addErrorMessage(String message, UIComponent component){
         if(facesContext != null){
             facesContext = FacesContext.getCurrentInstance();

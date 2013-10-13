@@ -10,4 +10,5 @@ public interface TeamDao {
     public List<Team> findTeamByUser(User creatorOfTeam);
     public Team findTeamById(long teamId);
     public void updateTeam(Team team);
+    public void removeTeam(Team team);
 }

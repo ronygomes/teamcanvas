@@ -51,7 +51,7 @@ public abstract class AppUtilTemplate {
         return paramValue != null;
     }
 
-    public long getParamValue(String paramName) {
+    public long getLongParamValue(String paramName) {
         String paramValue = parameterMap.get(paramName);
         log.info("Parameter:(" + paramName + " ) " + paramValue);
         return convertStringToLong(paramValue);
@@ -79,6 +79,12 @@ public abstract class AppUtilTemplate {
 
         FacesMessage invalidUserMessage = new FacesMessage(message);
         facesContext.addMessage(component.getClientId(facesContext), invalidUserMessage);
+    }
+
+    public String getStringParamValue(String paramName) {
+        String paramValue = parameterMap.get(paramName);
+        log.info("Parameter:(" + paramName + ") " + paramValue);
+        return paramValue;
     }
 
 

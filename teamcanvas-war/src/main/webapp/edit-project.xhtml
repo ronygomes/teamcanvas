@@ -48,7 +48,7 @@
 
                         <h:outputLabel for="projectDueDate">Due Date:</h:outputLabel>
                         <h:panelGroup>
-                            <p:calendar value="#{editProjectAction.project.projectDueDate}" id="projectDueDate" showOn="button" />
+                            <p:calendar value="#{editProjectAction.project.projectDueDate}" id="projectDueDate" showOn="button" mindate="#{editProjectAction.today}"/>
                         </h:panelGroup>
                         <h:outputText/>
 

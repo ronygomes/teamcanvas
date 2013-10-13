@@ -12,12 +12,13 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.inject.Named;
+import java.util.Iterator;
 import java.util.List;
 
 @Named
 @RequestScoped
-public class AddTeamMemberAction extends AppUtilTemplate {
-    private final Logger log = Logger.getLogger(AddTeamMemberAction.class);
+public class ManageTeamMemberAction extends AppUtilTemplate {
+    private final Logger log = Logger.getLogger(ManageTeamMemberAction.class);
 
     private Team team;
     private User member;
@@ -29,12 +30,16 @@ public class AddTeamMemberAction extends AppUtilTemplate {
     private UserService userService;
 
     private final String TEAM_ID_PARAM_KEY = "team_id";
+    private final String USER_ID_PARAM_KEY = "user_id";
 
     @PostConstruct
     private void setUp(){
         initUtilParams();
         if(paramExists(TEAM_ID_PARAM_KEY)){
-            loadTeamFromDatabase(getParamValue(TEAM_ID_PARAM_KEY));
+            loadTeamFromDatabase(getLongParamValue(TEAM_ID_PARAM_KEY));
+            if(paramExists(USER_ID_PARAM_KEY)){
+                deleteMember();
+            }
         }else {
             team = new Team();
             member = new User();
@@ -59,9 +64,9 @@ public class AddTeamMemberAction extends AppUtilTemplate {
         log.info("New Member: "  + member.getEmail());
 
 
-        //logTeam();
-        log.info("Is team contain member: " + isTeamAlreadyContainMember(member));
-        if(isTeamAlreadyContainMember(member)) {
+        //logTeams();
+        log.info("Is team contain member: " + isUserAlreadyInTeam(member));
+        if(isUserAlreadyInTeam(member)) {
             generateUserExistsErrorMessage();
         }else{
             saveMemberToDatabase();
@@ -80,7 +85,7 @@ public class AddTeamMemberAction extends AppUtilTemplate {
         }
     }
 
-    private void logTeam() {
+    private void logTeams() {
         List<User> teamMembers = team.getTeamMembers();
         String teamListString = "";
         for(User member : teamMembers){
@@ -102,7 +107,7 @@ public class AddTeamMemberAction extends AppUtilTemplate {
         addErrorMessage("User already in team", addMemberButton);
     }
 
-    private boolean isTeamAlreadyContainMember(User member) {
+    private boolean isUserAlreadyInTeam(User member) {
         List<User> users = team.getTeamMembers();
         for(User user: users){
             if(user.getEmail().equals(member.getEmail()))
@@ -118,4 +123,30 @@ public class AddTeamMemberAction extends AppUtilTemplate {
     public void setMember(User member) {
         this.member = member;
     }
+
+    public void deleteMember(){
+        long teamId =  getLongParamValue(TEAM_ID_PARAM_KEY);
+        String memberId =  getStringParamValue(USER_ID_PARAM_KEY);
+
+        log.info("Team: " + teamId);
+        log.info("User: " + memberId);
+
+        teamService.removeMemberFromTeam(teamId, memberId);
+        removeMemberFromAction(memberId);
+    }
+
+    private void removeMemberFromAction(String memberId) {
+        List<User> users = team.getTeamMembers();
+        Iterator<User> it =  users.iterator();
+
+        while(it.hasNext()){
+            User user = it.next();
+            if(user.getEmail().equals(memberId)){
+                it.remove();
+            }
+        }
+        team.setTeamMembers(users);
+    }
+
+
 }

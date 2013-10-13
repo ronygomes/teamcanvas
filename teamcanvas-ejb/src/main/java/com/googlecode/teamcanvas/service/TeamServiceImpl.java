@@ -1,6 +1,7 @@
 package com.googlecode.teamcanvas.service;
 
 import com.googlecode.teamcanvas.dao.TeamDao;
+import com.googlecode.teamcanvas.dao.UserDao;
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.domain.User;
 import org.apache.log4j.Logger;
@@ -18,6 +19,8 @@ public class TeamServiceImpl implements TeamService {
 
     @EJB
     private TeamDao teamDao;
+    @EJB
+    private UserDao userDao;
 
     @Override
     public List<Team> findTeamByOwner(User creatorOfTeam) {
@@ -51,6 +54,26 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public void updateTeam(Team team) {
+
+        teamDao.updateTeam(team);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void removeTeam(long teamId){
+        Team team = teamDao.findTeamById(teamId);
+        teamDao.removeTeam(team);
+    }
+
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public void removeMemberFromTeam(long teamId, String memberId) {
+        Team team = teamDao.findTeamById(teamId);
+        User user = userDao.findUserByEmail(memberId);
+        List<User> teamMembers = team.getTeamMembers();
+        if(teamMembers.contains(user) ){
+            teamMembers.remove(user);
+        }
 
         teamDao.updateTeam(team);
     }

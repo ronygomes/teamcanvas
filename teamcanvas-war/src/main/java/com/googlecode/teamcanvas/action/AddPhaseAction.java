@@ -42,7 +42,7 @@ public class AddPhaseAction extends AppUtilTemplate {
     }
 
     private void loadProjectFromDatabase() {
-        long projectId = getParamValue(PROJECT_ID_PARAM_KEY);
+        long projectId = getLongParamValue(PROJECT_ID_PARAM_KEY);
         project = projectService.findProjectById(projectId);
     }
 

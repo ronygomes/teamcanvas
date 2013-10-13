@@ -87,5 +87,19 @@ public class ProjectServiceImpl implements ProjectService{
         projectDao.updateProject(project);
     }
 
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public List<Project> getInProgressProject(User user) {
+        List<Project> projects = projectDao.getInProgressProjects(user);
+        loadPhases(projects);
+        return projects;
+    }
+
+    private void loadPhases(List<Project> projects) {
+        for(Project project : projects){
+            project.getProjectPhases();
+        }
+    }
+
 
 }

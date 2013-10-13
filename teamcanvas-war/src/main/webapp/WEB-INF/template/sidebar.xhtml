@@ -19,7 +19,9 @@
             <li class="#{selectedPage == 'project' ? 'selected' : ''}"><h:outputLink value="project.xhtml" >Project</h:outputLink></li>
             <li class="#{selectedPage == 'team' ? 'selected' : ''}"><h:outputLink value="team.xhtml" >Team</h:outputLink></li>
             <li class="#{selectedPage == 'archives' ? 'selected' : ''}"><h:outputLink value="archives.xhtml">Archives</h:outputLink></li>
-            <li class="#{selectedPage == 'calendar' ? 'selected' : ''}"><h:outputLink value="calendar.xhtml">Calendar</h:outputLink></li>
+            <ui:remove>
+            <li class="#{selectedPage == 'calendar' ? 'selected' : ''}"><h:outputLink value="calendar.xhtml">Calendar</h:outputLink></li>-->
+            </ui:remove>
         </ul>
     </div>
 </ui:composition>

@@ -16,32 +16,38 @@
         <ui:param name="selectedPage" value="team"/>
         <ui:define name="content">
 
-            <h2>Add Team Member: #{addTeamMemberAction.team.teamName}</h2>
+            <h2>Add Team Member: #{manageTeamMemberAction.team.teamName}</h2>
             <h:form>
-                <h:inputHidden id="team_id" value="#{addTeamMemberAction.team.id}" />
+                <h:inputHidden id="team_id" value="#{manageTeamMemberAction.team.id}" />
                 <fieldset>
-                    <legend>Team Description</legend>
+                    <legend>Team Members</legend>
                     <h:panelGrid columns="2">
                         <h:message for="addTeamMemberButton" styleClass="error-message"/>
-                        <ui:repeat var="member" value="#{addTeamMemberAction.team.teamMembers}" varStatus="status">
+                        <ui:repeat var="member" value="#{manageTeamMemberAction.team.teamMembers}" varStatus="status">
                             <div class="project">
-                                #{member.email}
+                                <h:outputText value="#{member.email}"/>
+                                <h:outputLink>
+                                    Remove
+                                    <f:param name="team_id" value="#{manageTeamMemberAction.team.id}"/>
+                                    <f:param name="user_id" value="#{member.email}"/>
+                                </h:outputLink>
                             </div>
                         </ui:repeat>
+                        <h:outputText rendered="#{empty manageTeamMemberAction.team.teamMembers}" value="No Member Found!"/>
 
                         <h:outputText/>
                         <h:message for="teamMemberEmail" styleClass="error-message"/>
 
                         <h:outputLabel for="teamMemberEmail">Member Email:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="teamMemberEmail" value="#{addTeamMemberAction.member.email}" required="true"/>
+                            <h:inputText id="teamMemberEmail" value="#{manageTeamMemberAction.member.email}" required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
                         <h:panelGroup>
-                            <h:commandButton value="Add Member" action="#{addTeamMemberAction.appendMember()}"
+                            <h:commandButton value="Add Member" action="#{manageTeamMemberAction.appendMember()}"
                                              id="addTeamMemberButton"
-                                                binding="#{addTeamMemberAction.addMemberButton}"/>
+                                                binding="#{manageTeamMemberAction.addMemberButton}"/>
 
                             <h:outputLink value="team.xhtml">List Teams</h:outputLink>
                         </h:panelGroup>

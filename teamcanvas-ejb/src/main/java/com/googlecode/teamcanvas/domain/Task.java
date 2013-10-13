@@ -36,6 +36,9 @@ public class Task {
     @Column(name = "task_due_date")
     private Date taskDueDate;
 
+    @Column(name = "task_status")
+    private int taskStatus;
+
     @ManyToOne
     @JoinColumn(name = "phase_id")
     private Phase parentPhase;
@@ -139,5 +142,20 @@ public class Task {
 
     public void setTaskCreatedBy(User taskCreatedBy) {
         this.taskCreatedBy = taskCreatedBy;
+    }
+
+    public int getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(int taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
+    public static class Status{
+        public static int COMPLETE = 1;
+        public static int FAILED = 2;
+        public static int IN_PROGRESS = 3;
+
     }
 }

@@ -15,6 +15,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 @Named
@@ -94,5 +96,9 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable{
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public Date getToday(){
+        return Calendar.getInstance().getTime();
     }
 }

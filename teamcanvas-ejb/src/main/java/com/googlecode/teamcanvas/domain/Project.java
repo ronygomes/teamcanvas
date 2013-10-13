@@ -33,6 +33,9 @@ public class Project {
     @Column(name = "project_complete_percentage")
     private int projectCompletePercentage;
 
+    @Column (name = "project_status")
+    private int projectStatus;
+
     @ManyToOne
     @JoinColumn(name = "project_creator_email")
     private User projectCreator;
@@ -113,5 +116,28 @@ public class Project {
 
     public void setProjectPhases(List<Phase> projectPhases) {
         this.projectPhases = projectPhases;
+    }
+
+    public int getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(int projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    public List<Comment> getProjectComments() {
+        return projectComments;
+    }
+
+    public void setProjectComments(List<Comment> projectComments) {
+        this.projectComments = projectComments;
+    }
+
+    public static class Status{
+        public static int COMPLETE = 1;
+        public static int FAILED = 2;
+        public static int IN_PROGRESS = 3;
+
     }
 }

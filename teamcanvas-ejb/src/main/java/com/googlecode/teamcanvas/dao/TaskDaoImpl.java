@@ -17,6 +17,7 @@ public class TaskDaoImpl implements TaskDao {
     private final String FIND_TASK_BY_PHASE_ID = "SELECT t FROM Task t WHERE t.parentPhase.id = :phaseId";
     @Override
     public void saveTask(Task task) {
+        task.setTaskStatus(Task.Status.IN_PROGRESS);
         em.persist(task);
     }
 

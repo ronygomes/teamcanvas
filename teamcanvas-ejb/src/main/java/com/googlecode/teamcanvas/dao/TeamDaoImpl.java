@@ -44,4 +44,9 @@ public class TeamDaoImpl implements TeamDao {
         em.merge(team);
     }
 
+    @Override
+    public void removeTeam(Team team) {
+        em.remove(team);
+    }
+
 }

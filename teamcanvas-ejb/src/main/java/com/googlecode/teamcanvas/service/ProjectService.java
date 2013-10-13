@@ -13,4 +13,5 @@ public interface ProjectService {
     public Project findProjectById(long id);
     public boolean updateProject(Project project);
     public void addPhase(Project project, Phase phase);
+    public List<Project> getInProgressProject(User user);
 }

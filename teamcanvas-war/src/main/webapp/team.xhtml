@@ -16,16 +16,30 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="team"/>
         <ui:define name="content">
-            <h2>Project List</h2>
+            <h2>Team List</h2>
             <h:outputLink value="create-new-team.xhtml">Create New Team</h:outputLink>
             <ui:repeat var="team" value="#{teamAction.teams}" varStatus="status">
                 <div class="project">
-                    #{team.id}
-                    #{team.teamName}
-                    <h:outputLink value="add-team-member.xhtml">
-                        <h:outputText value="Add Member" />
-                        <f:param name="team_id" value="#{team.id}"/>
-                    </h:outputLink>
+                    <h:outputText styleClass="team-name" value="#{team.teamName}"/>
+                    <h:outputText styleClass="team-name" value="#{team.teamMembers.size()}" />
+                    <h:outputText styleClass="team-name" value=" member(s)"/>
+
+                    <h:form>
+                        <h:outputLink value="manage-team-member.xhtml">
+                            <h:outputText value="Manage Member" />
+                            <f:param name="team_id" value="#{team.id}"/>
+                        </h:outputLink>
+
+                        <input type="hidden" name="team_id" value="#{team.id}" />
+
+                        <h:commandButton value="Delete Team" action="#{teamAction.deleteTeam()}"/>
+
+                        <h:outputLink value="edit-team.xhtml">
+                            <h:outputText value="Edit Team" />
+                            <f:param name="team_id" value="#{team.id}"/>
+                        </h:outputLink>
+                    </h:form>
+
                 </div>
             </ui:repeat>
             <h:outputText rendered="#{empty teamAction.teams}" value="No Team Found!"/>

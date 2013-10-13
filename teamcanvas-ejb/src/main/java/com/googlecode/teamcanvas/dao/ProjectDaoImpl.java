@@ -18,13 +18,12 @@ public class ProjectDaoImpl implements ProjectDao{
     private EntityManager em;
 
     private String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.id = :userEmail";
-    private static final String FIND_PROJECT_BY_USER_EAGER_FETCH = "SELECT p FROM Project p "  +
-            "LEFT JOIN FETCH p.projectPhases h " +
-            "LEFT JOIN FETCH h.tasks t " +
-            "WHERE p.projectCreator.email = :userEmail";
+    private String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.id = :userEmail " +
+            "AND p.projectStatus = :status";
 
     @Override
     public void saveProject(Project projectToSave) {
+        projectToSave.setProjectStatus(Project.Status.IN_PROGRESS);
         em.persist(projectToSave);
     }
 
@@ -36,7 +35,6 @@ public class ProjectDaoImpl implements ProjectDao{
     @Override
     public List<Project> findProjectByUser(User user) {
         TypedQuery<Project> query = em.createQuery(FIND_PROJECT_BY_USER, Project.class);
-        //TypedQuery<Project> query2 = em.createQuery(FIND_PROJECT_BY_USER_EAGER_FETCH, Project.class);
 
         query.setParameter("userEmail", user.getEmail());
         List<Project> projects = query.getResultList();
@@ -47,6 +45,16 @@ public class ProjectDaoImpl implements ProjectDao{
     @Override
     public void updateProject(Project project) {
         em.merge(project);
+    }
+
+    @Override
+    public List<Project> getInProgressProjects(User user) {
+        TypedQuery<Project> query = em.createQuery(FIND_IN_PROGRESS_PROJECT_BY_USER, Project.class);
+        query.setParameter("userEmail", user.getEmail());
+        query.setParameter("status", Project.Status.IN_PROGRESS);
+        List<Project> projects = query.getResultList();
+
+        return projects;
     }
 
 

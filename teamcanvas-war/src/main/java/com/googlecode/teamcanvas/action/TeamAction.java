@@ -17,19 +17,20 @@ public class TeamAction extends AppUtilTemplate {
     private final Logger log = Logger.getLogger(TeamAction.class);
 
     private List<Team> teams;
+    private long teamId;
+
+    private static String TEAM_ID_URL_PARAM = "team_id";
 
     @EJB
     private TeamService teamService;
 
     @PostConstruct
     public void setUp(){
-        loadUserFromSession();
+        initUtilParams();
         teams = teamService.findTeamByOwner(getLoggedInUser());
-        //log.info("" + teams.size() + " team found!");
 
         log.info(teamService);
         log.info("setUp : " + getLoggedInUser());
-        //teams = new ArrayList<Team>();
     }
 
     public List<Team> getTeams() {
@@ -38,5 +39,20 @@ public class TeamAction extends AppUtilTemplate {
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    public long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(long teamId) {
+        this.teamId = teamId;
+    }
+
+    public String deleteTeam(){
+
+        log.info("Team Id: " + getLongParamValue(TEAM_ID_URL_PARAM));
+        teamService.removeTeam(getLongParamValue(TEAM_ID_URL_PARAM));
+        return "team.xhtml?faces-redirect=true";
     }
 }

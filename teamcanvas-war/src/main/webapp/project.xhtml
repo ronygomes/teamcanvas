@@ -16,22 +16,33 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
-            <h2>Project List</h2>
-            <h:outputLink value="create-new-project.xhtml">Create New Project</h:outputLink>
-            <ui:repeat var="project" value="#{projectAction.projects}" varStatus="status">
-                <div class="project">
-                    <h:outputLink value="project-details.xhtml">
-                        <h:outputText value="#{project.projectTitle}" />
-                        <f:param name="project_id" value="#{project.id}"/>
-                    </h:outputLink>
+            <div class="project-list">
+                <h2>Project List</h2>
+                <h:outputLink value="create-new-project.xhtml">Create New Project</h:outputLink>
+                <ui:repeat var="project" value="#{projectAction.projects}" varStatus="status">
+                    <div class="project">
+                        <h:outputText value="#{project.projectTitle}" styleClass="project-title" style="font-weight: bold"/>
+                        <h:outputText rendered="#{project.projectDueDate ne null}" value="Due Date: " styleClass="project-date"/>
+                        <h:outputText rendered="#{project.projectDueDate ne null}" value="#{project.projectDueDate}" styleClass="project-date">
+                            <f:convertDateTime pattern="EEE, MMM d, yyyy"/>
+                        </h:outputText>
 
-                    <h:outputLink value="edit-project.xhtml">
-                        <h:outputText value="Edit" />
-                        <f:param name="project_id" value="#{project.id}"/>
-                    </h:outputLink>
-                </div>
-            </ui:repeat>
-            <h:outputText rendered="#{empty projectAction.projects}" value="No Project Found!"/>
+                        <h:outputLink value="project-details.xhtml" styleClass="project-details-link">
+                            <h:outputText value="Details"/>
+                            <f:param name="project_id" value="#{project.id}"/>
+                        </h:outputLink>
+
+                        <h:outputLink value="edit-project.xhtml" styleClass="project-edit-link">
+                            <h:outputText value="Edit"/>
+                            <f:param name="project_id" value="#{project.id}"/>
+                        </h:outputLink>
+                        <h:outputText value="#{project.projectDescription}" styleClass="project-details-text">
+                            <f:converter converterId="com.googlecode.teamcanvas.TextEllipsisConverter"/>
+                        </h:outputText>
+                    </div>
+                </ui:repeat>
+                <h:outputText styleClass="no-project-found-message" rendered="#{empty projectAction.projects}" value="No Project Found!"/>
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>

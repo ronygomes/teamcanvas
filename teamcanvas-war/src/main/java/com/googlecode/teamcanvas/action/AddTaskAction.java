@@ -54,7 +54,7 @@ public class AddTaskAction extends AppUtilTemplate {
     }
 
     private void loadPhaseFromDatabase() {
-        long phaseId = getParamValue(PHASE_ID_PARAM_KEY);
+        long phaseId = getLongParamValue(PHASE_ID_PARAM_KEY);
         phase = phaseService.findPhaseById(phaseId);
         log.info("Phase : " + phase.getPhaseName());
     }

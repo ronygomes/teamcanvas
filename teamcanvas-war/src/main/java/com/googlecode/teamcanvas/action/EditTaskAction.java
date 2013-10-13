@@ -41,7 +41,7 @@ public class EditTaskAction extends AppUtilTemplate implements Serializable{
     }
 
     private void loadFromDatabase() {
-        task = taskService.findTaskById(getParamValue(TEAM_ID_URL_PARAM));
+        task = taskService.findTaskById(getLongParamValue(TEAM_ID_URL_PARAM));
     }
 
     public Task getTask() {

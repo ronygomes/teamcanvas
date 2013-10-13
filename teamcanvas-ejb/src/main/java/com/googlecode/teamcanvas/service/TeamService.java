@@ -10,4 +10,6 @@ public interface TeamService {
     public boolean saveTeam(Team team);
     public Team findTeamById(long teamId);
     public void updateTeam(Team team);
+    public void removeTeam(long teamId);
+    public void removeMemberFromTeam(long teamId, String memberId);
 }

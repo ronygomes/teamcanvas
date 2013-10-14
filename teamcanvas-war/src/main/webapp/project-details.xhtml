@@ -26,21 +26,23 @@
             <ui:repeat value="#{projectDetails.project.projectPhases}" var="phase">
                 <div>
                     <span class="phase-title">#{phase.phaseName}</span>
-                    <h:outputLink value="add-task.xhtml">
+                    <h:outputLink value="add-task.xhtml" styleClass="add-task-link">
                         <h:outputText value="Add Task"/>
                         <f:param name="phase_id" value="#{phase.id}" />
                     </h:outputLink>
 
-                    <ul>
+                    <ul class="tasks">
                         <ui:repeat value="#{phase.tasks}" var="task">
                             <li>
-                                <h:outputText value="#{task.taskTitle}"/>
+                                <h:outputText styleClass="li-item" value="#{task.taskTitle}"/>
+                                <ui:remove>
                                 <h:outputLink value="task-details.xhtml">
-                                    <h:outputText value="Details" />
+                                    <h:outputText styleClass="li-item" value="Details" />
                                     <f:param name="task_id" value="#{task.id}"/>
                                 </h:outputLink>
+                                </ui:remove>
                                 <h:outputLink value="edit-task.xhtml">
-                                    <h:outputText value="Edit" />
+                                    <h:outputText styleClass="li-item" value="Edit" />
                                     <f:param name="task_id" value="#{task.id}"/>
                                 </h:outputLink>
 

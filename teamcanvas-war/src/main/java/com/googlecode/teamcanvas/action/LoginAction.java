@@ -3,6 +3,8 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.UserService;
 import org.apache.log4j.Logger;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,6 +14,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 @Named
 @RequestScoped
@@ -107,6 +111,12 @@ public class LoginAction {
     private boolean isUserFound(User user){
         return user != null;
     }
+
+
+
+
+
+
 
 
 }

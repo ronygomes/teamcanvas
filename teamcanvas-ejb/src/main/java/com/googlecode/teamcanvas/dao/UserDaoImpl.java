@@ -43,5 +43,10 @@ public class UserDaoImpl implements UserDao{
         return query.getResultList();
     }
 
+    @Override
+    public void update(User user) {
+        em.merge(user);
+    }
+
 
 }

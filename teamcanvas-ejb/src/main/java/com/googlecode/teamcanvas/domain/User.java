@@ -1,6 +1,8 @@
 package com.googlecode.teamcanvas.domain;
 
 import javax.persistence.*;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,4 +101,5 @@ public class User implements Serializable{
     public void setProfileImage(byte[] profileImage) {
         this.profileImage = profileImage;
     }
+
 }

@@ -26,3 +26,6 @@ div.project{margin-bottom: 10px; border: 1px solid gray; padding: 1px 4px;}
 .project-details-link,
 .project-edit-link{padding: 1px 3px; font-size:12px}
 .no-project-found-message{display: block; margin-top: 10px; margin-bottom: 300px;}
+.phase-title{font-weight: bold; padding-left: 10px; padding-right: 20px; border-bottom: 1px solid gray; }
+.tasks li { list-style: none;}
+.li-item{ padding: 1px 5px;}

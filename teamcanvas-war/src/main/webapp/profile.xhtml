@@ -70,16 +70,17 @@
                         <h:message for="profileImage" styleClass="error-message"/>
 
                         <h:outputText value="Profile Picture" />
-                        <h:panelGroup>
-                            <p:fileUpload id="profileImage" value="#{profileAction.file}" required="false" mode="simple"/>
-                        </h:panelGroup>
 
-                        <h:panelGroup>
-                            <h:commandButton id="editProfileButton"
-                                             actionListener="#{profileAction.editProfile()}"
-                                             value="Edit Profile"/>
-                            </h:panelGroup>
+                        <p:fileUpload id="profileImage" value="#{profileAction.file}"
+                                      required="false" mode="simple" binding="#{profileAction.fileUploadComponent}"/>
+
+
+
+                        <p:commandButton id="editProfileButton"
+                                         ajax="false"
+                                         value="Edit Profile" action="#{profileAction.editProfile()}"/>
                     </h:panelGrid>
+
                 </fieldset>
             </h:form>
         </ui:define>

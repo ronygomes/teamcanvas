@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService{
         return userDao.findAllUser();
     }
 
+    @Override
+    public void updateUser(User user) {
+        userDao.update(user);
+    }
+
 
     private User checkForUserPassword(User storedUser, String providedPassword) {
         if(!isValidPassword(storedUser, providedPassword)){

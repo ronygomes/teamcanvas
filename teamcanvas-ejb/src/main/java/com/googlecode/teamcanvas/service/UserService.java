@@ -9,4 +9,5 @@ public interface UserService {
     public User findUserByEmail(String userEmail);
     public User checkAuthenticity(String userEmail, String userPassword);
     public List<User> findAllUsers();
+    public void updateUser(User user);
 }

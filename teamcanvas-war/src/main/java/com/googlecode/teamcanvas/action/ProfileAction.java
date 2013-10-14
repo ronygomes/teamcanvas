@@ -1,18 +1,23 @@
 package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.User;
+import com.googlecode.teamcanvas.service.UserService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
 import org.apache.log4j.Logger;
-import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Named;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 @Named
 @RequestScoped
@@ -23,6 +28,10 @@ public class ProfileAction extends AppUtilTemplate{
     private User user;
     private String confirmPassword;
     private UploadedFile file;
+    private UIComponent fileUploadComponent;
+
+    @EJB
+    private UserService userService;
 
     private static final String INPUT_PASSWORD_VIEW_ID = "password";
     private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
@@ -98,8 +107,37 @@ public class ProfileAction extends AppUtilTemplate{
         this.file = file;
     }
 
-    public void editProfile(){
-        log.info("File Name" + file.getFileName());
+    public String editProfile(){
 
+        String fileName = file.getFileName();
+        int lastIndexOfDot = fileName.lastIndexOf('.');
+        String extension = fileName.substring(lastIndexOfDot + 1);
+
+        if(extension.equals("jpeg") || extension.equals("png") || extension.equals("jpg") || extension.equals("gif")) {
+            user.setProfileImage(file.getContents());
+            userService.updateUser(user);
+            return "project";
+        }
+
+        addErrorMessage("Only jpeg, jpg, png, gif are allowed", fileUploadComponent);
+        return "profile";
+
+    }
+
+    public UIComponent getFileUploadComponent() {
+        return fileUploadComponent;
+    }
+
+    public void setFileUploadComponent(UIComponent fileUploadComponent) {
+        this.fileUploadComponent = fileUploadComponent;
+    }
+
+    public StreamedContent getBinaryImage(){
+        if(user.getProfileImage() != null){
+            InputStream is = new ByteArrayInputStream(user.getProfileImage());
+            StreamedContent image = new DefaultStreamedContent(is, "image/jpeg", "fileName.jpg");
+            return image;
+        }
+        return null;
     }
 }

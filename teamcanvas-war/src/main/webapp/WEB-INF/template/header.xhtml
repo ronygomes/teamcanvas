@@ -12,7 +12,9 @@
 <h:body>
     <ui:composition>
         <div id="logo">
-            <h:graphicImage library="images" name="logo.jpg"/>
+            <h:outputLink value="project.xhtml">
+                <h:graphicImage library="images" name="logo.jpg"/>
+            </h:outputLink>
             <span id="tagline">Team Canvas</span>
         </div>
         <div id="nav">

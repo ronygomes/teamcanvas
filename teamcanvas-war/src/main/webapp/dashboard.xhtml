@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">>
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">>
 
 <h:head>
     <title>Simple JSF Facelets page</title>
@@ -15,34 +15,37 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:define name="content">
             <h3>Dashboard</h3>
+            <div class="project-list">
             <h4>Project Summary</h4>
-            <ui:repeat var="project" value="#{dashboardAction.projects}">
-                <div class="project-list">
-                    <h:outputText value="#{project.projectTitle}"/>
-                    <h:outputText value=" ( #{project.projectPhases.size()} phases)" />
-                    <h:outputText value="#{project.projectDueDate}" >
+                <ui:repeat var="project" value="#{dashboardAction.projects}">
+                    <div class="project-list">
+                        <h:outputText style="font-weight: bold" value="#{project.projectTitle}"/>
+                        <h:outputText value=" ( #{project.projectPhases.size()} phases )" />
+                        Due Date:
+                        <h:outputText value="#{project.projectDueDate}" >
+                            <f:convertDateTime pattern="EEE, MMM d, yyyy"/>
+                        </h:outputText>
+                    </div>
+                </ui:repeat>
 
-                    </h:outputText>
-                </div>
-            </ui:repeat>
+                <h:outputText rendered="#{empty dashboardAction.projects}" value="No Project Found!" />
+                <h:outputLink rendered="#{empty dashboardAction.projects}" value="create-new-project.xhtml">
+                    <h:outputText value="Create New Project"/>
+                </h:outputLink>
 
-            <h:outputText rendered="#{empty dashboardAction.projects}" value="No Project Found!" />
-            <h:outputLink rendered="#{empty dashboardAction.projects}" value="create-new-project.xhtml">
-                <h:outputText value="Create New Project"/>
-            </h:outputLink>
+                <h4>Team Summary</h4>
+                <ui:repeat var="team" value="#{dashboardAction.teams}">
+                    <div class="team-list">
+                        <h:outputText value="#{team.teamName}"/>
+                        <h:outputText value=" ( #{team.teamMembers.size()} members)" />
+                    </div>
+                </ui:repeat>
 
-            <h4>Team Summary</h4>
-            <ui:repeat var="team" value="#{dashboardAction.teams}">
-                <div class="team-list">
-                    <h:outputText value="#{team.teamName}"/>
-                    <h:outputText value=" ( #{team.teamMembers.size()} members)" />
-                </div>
-            </ui:repeat>
-
-            <h:outputText rendered="#{empty dashboardAction.teams}" value="No Team Found!" />
-            <h:outputLink rendered="#{empty dashboardAction.teams}" value="create-new-team.xhtml">
-                <h:outputText value="Create New Project"/>
-            </h:outputLink>
+                <h:outputText rendered="#{empty dashboardAction.teams}" value="No Team Found!" />
+                <h:outputLink rendered="#{empty dashboardAction.teams}" value="create-new-team.xhtml">
+                    <h:outputText styleClass="link-button" value="Create New Project"/>
+                </h:outputLink>
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>

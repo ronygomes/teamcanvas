@@ -1,31 +1,174 @@
 /*this is test in css file */
-.reruired { color:red; vertical-align: text-top;}
-.ten-pixel-padding {padding-left: 10px}
-.error-message{ color: red; font-size: 12px;}
-#wrapper{ width: 90%; margin:0 auto;}
-#header{ width:100%; display:block;}
-#header div{float:right;}
-#header #logo{padding:1px 10px; aligh:center;}
-#header #logo span{display: block; font-size: .8em; font-weight: bold;}
-#header #nav{ margin-top:76px; width: 40%; padding-right:40px;}
-#header #nav td{padding: 1px 5px;}
-#sidebar{float:left; width: 30%; margin-top:10px;}
-#sidebar #main-nav ul li{ list-style:none; width:100%; text-align:center; padding: 8px 0px; margin-bottom: 5px; background-color: #f8f8f8}
-#sidebar #main-nav ul li:hover{ background-color: #f0f0f0;}
-#sidebar #main-nav li a{ text-decoration:none; padding:5px 70px; color: black; font-weight: bold; }
-#content{float:right; width: 70%; margin-top:10px; background-color: #f0f0f0;}
-#footer{clear:both;}
-#footer ul li{float:left; list-style:none; padding: 2px 10px;}
-.selected{ background-color: #f0f0f0 !important;}
-.copyright{clear: both; text-align: center;}
-div.project-list{padding: 0px 20px;}
-div.project{margin-bottom: 10px; border: 1px solid gray; padding: 1px 4px;}
-.project-details-text{ display: block}
-.project-title{display: block;}
-.project-date{font-size: 12px}
+.reruired {
+    color: red;
+    vertical-align: text-top;
+}
+
+.ten-pixel-padding {
+    padding-left: 10px
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+#wrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#header {
+    width: 100%;
+    display: block;
+}
+
+#header div {
+    float: right;
+}
+
+#header #logo {
+    padding: 1px 10px;
+    aligh: center;
+}
+
+#header #logo span {
+    display: block;
+    font-size: .8em;
+    font-weight: bold;
+}
+
+#header #nav {
+    margin-top: 76px;
+    width: 40%;
+    padding-right: 40px;
+}
+
+#header #nav td {
+    padding: 1px 5px;
+}
+
+#sidebar {
+    float: left;
+    width: 30%;
+    margin-top: 10px;
+}
+
+#sidebar #main-nav ul li {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    padding: 8px 0px;
+    margin-bottom: 5px;
+    background-color: #f8f8f8
+}
+
+#sidebar #main-nav ul li:hover {
+    background-color: #f0f0f0;
+}
+
+#sidebar #main-nav li a {
+    text-decoration: none;
+    padding: 5px 70px;
+    color: black;
+    font-weight: bold;
+}
+
+#content {
+    float: right;
+    width: 70%;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    min-height: 500px;
+}
+
+#footer {
+    clear: both;
+}
+
+#footer ul li {
+    float: left;
+    list-style: none;
+    padding: 2px 10px;
+}
+
+.selected {
+    background-color: #f0f0f0 !important;
+}
+
+.copyright {
+    clear: both;
+    text-align: center;
+}
+
+div.project-list {
+    padding: 0px 20px;
+}
+
+div.project {
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    padding: 1px 4px;
+}
+
+.project-details-text {
+    display: block
+}
+
+.project-title {
+    display: block;
+}
+
+.project-date {
+    font-size: 12px
+}
+
 .project-details-link,
-.project-edit-link{padding: 1px 3px; font-size:12px}
-.no-project-found-message{display: block; margin-top: 10px; margin-bottom: 300px;}
-.phase-title{font-weight: bold; padding-left: 10px; padding-right: 20px; border-bottom: 1px solid gray; }
-.tasks li { list-style: none;}
-.li-item{ padding: 1px 5px;}
+.project-edit-link {
+    padding: 1px 3px;
+    font-size: 12px
+}
+
+.no-project-found-message {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 300px;
+}
+
+.phase-title {
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 20px;
+    border-bottom: 1px solid gray;
+}
+
+.tasks li {
+    list-style: none;
+}
+
+.li-item {
+    padding: 1px 5px;
+}
+
+#footer #footer-nav {
+    width: 500px;
+    text-align: center;
+    margin-left: 265px
+}
+
+#footer #footer-nav li a {
+    font-size: 11px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.link-button {
+    border: 1px solid grey;
+    padding: 2px 5px;
+    border-radius: 5px;
+    background-color: #e3e3e3;
+    color: black;
+    font-weight: bold;
+    font-size: 11px;
+}

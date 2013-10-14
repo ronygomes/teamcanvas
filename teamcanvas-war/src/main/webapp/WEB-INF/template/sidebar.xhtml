@@ -12,9 +12,12 @@
 <body>
 <ui:composition>
     <div id="logo">
-        <h:graphicImage rendered="#{facesContext.externalContext.sessionMap['loggedInUser'].profileImage == null}" library="images" name="default-avatar-small.jpg"/>
-        <p:graphicImage rendered="#{facesContext.externalContext.sessionMap['loggedInUser'].profileImage != null}" width="100" height="100" value="#{profileAction.binaryImage}"/>
-        <span id="username">#{facesContext.externalContext.sessionMap["loggedInUser"].email}</span>
+        <h:outputLink value="profile.xhtml">
+            <h:graphicImage rendered="#{facesContext.externalContext.sessionMap['loggedInUser'].profileImage == null}" library="images" name="default-avatar-small.jpg"/>
+            <p:graphicImage rendered="#{facesContext.externalContext.sessionMap['loggedInUser'].profileImage != null}" width="100" height="100" value="#{profileAction.binaryImage}"/>
+        </h:outputLink>
+        <span id="username">Email:  #{facesContext.externalContext.sessionMap["loggedInUser"].email}</span>
+
     </div>
     <div id="main-nav">
         <ul>

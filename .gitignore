@@ -4,7 +4,7 @@ target/
 #idea
 *.impl
 *.iml
-/.idea
+.idea/
 
 #eclipse
 .classpath

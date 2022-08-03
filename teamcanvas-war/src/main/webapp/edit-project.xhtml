@@ -16,7 +16,9 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
-            <h2>Edit Project: <h:outputText value="#{editProjectAction.project.projectTitle}"/></h2>
+            <h2>Edit Project:
+                <h:outputText value="#{editProjectAction.project.projectTitle}"/>
+            </h2>
             <h:form>
                 <fieldset>
                     <legend>Project Description</legend>
@@ -29,7 +31,8 @@
 
                         <h:outputLabel for="projectName">Project Name:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="projectName" value="#{editProjectAction.project.projectTitle}" required="true"/>
+                            <h:inputText id="projectName" value="#{editProjectAction.project.projectTitle}"
+                                         required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
@@ -38,7 +41,8 @@
 
                         <h:outputLabel for="projectDescription">Project Description:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputTextarea id="projectDescription" value="#{editProjectAction.project.projectDescription}"
+                            <h:inputTextarea id="projectDescription"
+                                             value="#{editProjectAction.project.projectDescription}"
                                              required="true" rows="10" cols="35"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
@@ -48,7 +52,8 @@
 
                         <h:outputLabel for="projectDueDate">Due Date:</h:outputLabel>
                         <h:panelGroup>
-                            <p:calendar value="#{editProjectAction.project.projectDueDate}" id="projectDueDate" showOn="button" mindate="#{editProjectAction.today}"/>
+                            <p:calendar value="#{editProjectAction.project.projectDueDate}" id="projectDueDate"
+                                        showOn="button" mindate="#{editProjectAction.today}"/>
                         </h:panelGroup>
                         <h:outputText/>
 

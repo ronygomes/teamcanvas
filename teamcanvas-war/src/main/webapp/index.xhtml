@@ -15,7 +15,7 @@
         </ui:define>
         <ui:define name="content">
             <div id="logo">
-                <h:graphicImage library="images" name="logo.jpg" />
+                <h:graphicImage library="images" name="logo.jpg"/>
             </div>
             <h:form>
                 <fieldset>
@@ -33,7 +33,7 @@
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
-                        <h:outputText  />
+                        <h:outputText/>
                         <h:message for="password" styleClass="error-message"/>
                         <h:outputLabel for="password">Password:</h:outputLabel>
                         <h:panelGroup>
@@ -54,8 +54,8 @@
                                              action="#{loginAction.login()}"
                                              value="Login"
                                              binding="#{loginAction.submitButton}"
-                                    />
-                        <span class="ten-pixel-padding">
+                            />
+                            <span class="ten-pixel-padding">
                             <h:outputLink value="register.xhtml">Register</h:outputLink>
                         </span>
                         </h:panelGroup>

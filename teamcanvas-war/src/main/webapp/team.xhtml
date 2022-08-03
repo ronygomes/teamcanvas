@@ -21,21 +21,21 @@
             <ui:repeat var="team" value="#{teamAction.teams}" varStatus="status">
                 <div class="project">
                     <h:outputText styleClass="team-name" value="#{team.teamName}"/>
-                    <h:outputText styleClass="team-name" value="#{team.teamMembers.size()}" />
+                    <h:outputText styleClass="team-name" value="#{team.teamMembers.size()}"/>
                     <h:outputText styleClass="team-name" value=" member(s)"/>
 
                     <h:form>
                         <h:outputLink value="manage-team-member.xhtml">
-                            <h:outputText value="Manage Member" />
+                            <h:outputText value="Manage Member"/>
                             <f:param name="team_id" value="#{team.id}"/>
                         </h:outputLink>
 
-                        <input type="hidden" name="team_id" value="#{team.id}" />
+                        <input type="hidden" name="team_id" value="#{team.id}"/>
 
                         <h:commandButton value="Delete Team" action="#{teamAction.deleteTeam()}"/>
 
                         <h:outputLink value="edit-team.xhtml">
-                            <h:outputText value="Edit Team" />
+                            <h:outputText value="Edit Team"/>
                             <f:param name="team_id" value="#{team.id}"/>
                         </h:outputLink>
                     </h:form>

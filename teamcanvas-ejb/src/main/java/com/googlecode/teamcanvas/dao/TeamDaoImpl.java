@@ -2,12 +2,12 @@ package com.googlecode.teamcanvas.dao;
 
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.domain.User;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -29,7 +29,7 @@ public class TeamDaoImpl implements TeamDao {
         TypedQuery<Team> query = em.createQuery(FIND_TEAM_BY_USER, Team.class);
         query.setParameter("userEmail", creatorOfTeam.getEmail());
         log.info("Creator of Team: " + creatorOfTeam);
-        List<Team> teams =  query.getResultList();
+        List<Team> teams = query.getResultList();
         log.info("" + (teams != null ? teams.size() : "No") + " team found!");
         return teams;
     }

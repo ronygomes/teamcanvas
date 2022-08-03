@@ -32,12 +32,13 @@
 
                         <h:outputLabel for="email">Email:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="email" value="#{profileAction.user.email}" required="true" disabled="true"/>
+                            <h:inputText id="email" value="#{profileAction.user.email}" required="true"
+                                         disabled="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
                         <h:outputText/>
-                        <h:message for="firstname" />
+                        <h:message for="firstname"/>
 
                         <h:outputLabel for="firstname">First Name:</h:outputLabel>
                         <h:inputText id="firstname" value="#{profileAction.user.firstName}"/>
@@ -69,11 +70,10 @@
                         <h:outputText/>
                         <h:message for="profileImage" styleClass="error-message"/>
 
-                        <h:outputText value="Profile Picture" />
+                        <h:outputText value="Profile Picture"/>
 
                         <p:fileUpload id="profileImage" value="#{profileAction.file}"
                                       required="false" mode="simple" binding="#{profileAction.fileUploadComponent}"/>
-
 
 
                         <p:commandButton id="editProfileButton"

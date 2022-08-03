@@ -1,11 +1,10 @@
 package com.googlecode.teamcanvas.dao;
 
 import com.googlecode.teamcanvas.domain.Phase;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
-
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 @Stateless
 public class PhaseDaoImpl implements PhaseDao {

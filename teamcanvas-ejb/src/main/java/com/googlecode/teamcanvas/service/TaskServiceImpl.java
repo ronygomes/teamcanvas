@@ -4,13 +4,13 @@ import com.googlecode.teamcanvas.dao.TaskDao;
 import com.googlecode.teamcanvas.domain.Phase;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.Task;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.persistence.PersistenceException;
 import org.apache.log4j.Logger;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.PersistenceException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +25,11 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public boolean saveTask(Task task) {
-        try{
+        try {
             task.setTaskCreationTime(getCurrentTime());
             taskDao.saveTask(task);
             return true;
-        }catch (PersistenceException e) {
+        } catch (PersistenceException e) {
             log.info("Unable to save task:" + task.getTaskTitle(), e);
         }
         return false;
@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<Task> findTaskByPhaseId(long phaseId) {
-       return taskDao.findTaskByPhaseId(phaseId);
+        return taskDao.findTaskByPhaseId(phaseId);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class TaskServiceImpl implements TaskService {
         modifiedTask.setParentPhase(oldTask.getParentPhase());
     }
 
-    private Date getCurrentTime(){
+    private Date getCurrentTime() {
         return Calendar.getInstance().getTime();
     }
 

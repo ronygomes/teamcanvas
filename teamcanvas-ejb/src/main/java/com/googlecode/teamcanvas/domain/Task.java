@@ -1,6 +1,7 @@
 package com.googlecode.teamcanvas.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "task")
 public class Task {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "task_id")
     private long id;
 
@@ -49,10 +51,10 @@ public class Task {
 
     @ManyToMany
     @JoinTable(name = "user_has_task",
-               joinColumns = @JoinColumn(name = "task_id",
-                       referencedColumnName = "task_id"),
-               inverseJoinColumns = @JoinColumn(name = "user_email",
-                       referencedColumnName = "user_email")
+            joinColumns = @JoinColumn(name = "task_id",
+                    referencedColumnName = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_email",
+                    referencedColumnName = "user_email")
     )
     private List<User> assignedToUsers = new ArrayList<User>();
 
@@ -152,7 +154,7 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    public static class Status{
+    public static class Status {
         public static int COMPLETE = 1;
         public static int FAILED = 2;
         public static int IN_PROGRESS = 3;

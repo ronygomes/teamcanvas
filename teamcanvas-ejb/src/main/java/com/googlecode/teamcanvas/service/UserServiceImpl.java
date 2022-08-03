@@ -3,24 +3,24 @@ package com.googlecode.teamcanvas.service;
 
 import com.googlecode.teamcanvas.dao.UserDao;
 import com.googlecode.teamcanvas.domain.User;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 import org.apache.log4j.Logger;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import java.util.List;
 
 @Stateless
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @EJB
     private UserDao userDao;
     private final Logger log = Logger.getLogger(UserServiceImpl.class);
 
-    public boolean saveUser(User userToSave){
+    public boolean saveUser(User userToSave) {
         return userDao.saveUser(userToSave);
     }
 
-    public User findUserByEmail(String emailOfUser){
+    public User findUserByEmail(String emailOfUser) {
         return userDao.findUserByEmail(emailOfUser);
 
     }
@@ -43,14 +43,14 @@ public class UserServiceImpl implements UserService{
 
 
     private User checkForUserPassword(User storedUser, String providedPassword) {
-        if(!isValidPassword(storedUser, providedPassword)){
+        if (!isValidPassword(storedUser, providedPassword)) {
             return null;
         }
         log.info(storedUser.getEmail() + ", Found!");
         return storedUser;
     }
 
-    private boolean isValidPassword(User storedUser, String providedPassword){
+    private boolean isValidPassword(User storedUser, String providedPassword) {
         return storedUser != null && storedUser.getHashedPassword().equals(providedPassword);
     }
 

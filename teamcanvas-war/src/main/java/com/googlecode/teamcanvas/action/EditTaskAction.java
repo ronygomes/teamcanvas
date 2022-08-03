@@ -5,17 +5,17 @@ import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.Task;
 import com.googlecode.teamcanvas.service.TaskService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.io.Serializable;
 
 @Named
 @RequestScoped
-public class EditTaskAction extends AppUtilTemplate implements Serializable{
+public class EditTaskAction extends AppUtilTemplate implements Serializable {
     private final Logger log = Logger.getLogger(EditTaskAction.class);
 
     private Task task;
@@ -25,17 +25,16 @@ public class EditTaskAction extends AppUtilTemplate implements Serializable{
     private TaskService taskService;
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         initUtilParams();
         initializeTask();
     }
 
 
-
     private void initializeTask() {
-        if(paramExists(TEAM_ID_URL_PARAM)){
+        if (paramExists(TEAM_ID_URL_PARAM)) {
             loadFromDatabase();
-        }else{
+        } else {
             task = new Task();
         }
     }
@@ -52,7 +51,7 @@ public class EditTaskAction extends AppUtilTemplate implements Serializable{
         this.task = task;
     }
 
-    public String editTask(){
+    public String editTask() {
         long projectId = getTaskProjectId();
         log.info("Project Id: " + projectId);
 

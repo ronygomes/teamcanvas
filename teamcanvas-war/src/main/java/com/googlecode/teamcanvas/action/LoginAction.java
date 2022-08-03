@@ -2,20 +2,15 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.UserService;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.servlet.http.HttpSession;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 @Named
 @RequestScoped
@@ -36,9 +31,9 @@ public class LoginAction {
 
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         facesContext = FacesContext.getCurrentInstance();
-        httpSession = (HttpSession)facesContext.getExternalContext().getSession(true);
+        httpSession = (HttpSession) facesContext.getExternalContext().getSession(true);
     }
 
     public String getUserEmail() {
@@ -74,21 +69,21 @@ public class LoginAction {
     }
 
 
-    public String login(){
+    public String login() {
         User user = userService.checkAuthenticity(userEmail, userPassword);
         String outcome = "index";
 
-        if(isUserFound(user)){
+        if (isUserFound(user)) {
             storeUserInSession(user);
             outcome = "dashboard";
-        }else{
+        } else {
             showInvalidUserMessage();
         }
 
         return outcome;
     }
 
-    public String logout(){
+    public String logout() {
         removeUserLoginInfo();
         return "index.xhtml?faces-redirect=true";
     }
@@ -108,15 +103,9 @@ public class LoginAction {
         log.info(authenticatedUser.getEmail() + " saved in session");
     }
 
-    private boolean isUserFound(User user){
+    private boolean isUserFound(User user) {
         return user != null;
     }
-
-
-
-
-
-
 
 
 }

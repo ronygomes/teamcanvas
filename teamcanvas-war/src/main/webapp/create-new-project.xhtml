@@ -29,7 +29,8 @@
 
                         <h:outputLabel for="projectName">Project Name:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="projectName" value="#{createNewProjectAction.project.projectTitle}" required="true"/>
+                            <h:inputText id="projectName" value="#{createNewProjectAction.project.projectTitle}"
+                                         required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
@@ -38,8 +39,9 @@
 
                         <h:outputLabel for="projectDescription">Project Description:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputTextarea id="projectDescription" value="#{createNewProjectAction.project.projectDescription}"
-                                         required="true" rows="10" cols="35"/>
+                            <h:inputTextarea id="projectDescription"
+                                             value="#{createNewProjectAction.project.projectDescription}"
+                                             required="true" rows="10" cols="35"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
@@ -48,7 +50,8 @@
 
                         <h:outputLabel for="projectDueDate">Due Date:</h:outputLabel>
                         <h:panelGroup>
-                            <p:calendar value="#{createNewProjectAction.project.projectDueDate}" id="projectDueDate" showOn="button" />
+                            <p:calendar value="#{createNewProjectAction.project.projectDueDate}" id="projectDueDate"
+                                        showOn="button"/>
                         </h:panelGroup>
                         <h:outputText/>
 

@@ -4,13 +4,13 @@ import com.googlecode.teamcanvas.dao.TeamDao;
 import com.googlecode.teamcanvas.dao.UserDao;
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.domain.User;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.persistence.PersistenceException;
 import org.apache.log4j.Logger;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.PersistenceException;
 import java.util.List;
 
 @Stateless
@@ -31,10 +31,10 @@ public class TeamServiceImpl implements TeamService {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean saveTeam(Team team) {
-        try{
+        try {
             teamDao.saveTeam(team);
             return true;
-        }catch (PersistenceException e){
+        } catch (PersistenceException e) {
             log.info("Unable to save team: " + team.getTeamName(), e);
             return false;
         }
@@ -43,10 +43,10 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public Team findTeamById(long teamId) {
         Team team = null;
-        try{
+        try {
             team = teamDao.findTeamById(teamId);
             log.info("Team Found with id :" + teamId + " Team Name: " + team.getTeamName());
-        }catch (PersistenceException e){
+        } catch (PersistenceException e) {
             log.info("Team not found: " + teamId, e);
         }
         return team;
@@ -60,7 +60,7 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void removeTeam(long teamId){
+    public void removeTeam(long teamId) {
         Team team = teamDao.findTeamById(teamId);
         teamDao.removeTeam(team);
     }
@@ -71,7 +71,7 @@ public class TeamServiceImpl implements TeamService {
         Team team = teamDao.findTeamById(teamId);
         User user = userDao.findUserByEmail(memberId);
         List<User> teamMembers = team.getTeamMembers();
-        if(teamMembers.contains(user) ){
+        if (teamMembers.contains(user)) {
             teamMembers.remove(user);
         }
 

@@ -1,7 +1,8 @@
 package com.googlecode.teamcanvas.domain;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Project {
     @Column(name = "project_complete_percentage")
     private int projectCompletePercentage;
 
-    @Column (name = "project_status")
+    @Column(name = "project_status")
     private int projectStatus;
 
     @ManyToOne
@@ -134,7 +135,7 @@ public class Project {
         this.projectComments = projectComments;
     }
 
-    public static class Status{
+    public static class Status {
         public static int COMPLETE = 1;
         public static int FAILED = 2;
         public static int IN_PROGRESS = 3;

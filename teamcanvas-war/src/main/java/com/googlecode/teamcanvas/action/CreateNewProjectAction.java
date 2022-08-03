@@ -4,12 +4,12 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.service.ProjectService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,13 +25,13 @@ public class CreateNewProjectAction extends AppUtilTemplate {
 
 
     @PostConstruct
-    private void setUp(){
+    private void setUp() {
         initializeProject();
         loadUserFromSession();
     }
 
     private void initializeProject() {
-        if(project == null){
+        if (project == null) {
             project = new Project();
         }
     }
@@ -48,7 +48,7 @@ public class CreateNewProjectAction extends AppUtilTemplate {
         String outcome = "create-new-project";
         if (isLoggedInUserFound()) {
             configureProject();
-            if(saveProject()){
+            if (saveProject()) {
                 outcome = "project.xhtml?faces-redirect=true";
             }
         }

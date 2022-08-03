@@ -1,11 +1,11 @@
 package com.googlecode.teamcanvas.dao;
 
 import com.googlecode.teamcanvas.domain.Task;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -15,13 +15,14 @@ public class TaskDaoImpl implements TaskDao {
     private EntityManager em;
 
     private final String FIND_TASK_BY_PHASE_ID = "SELECT t FROM Task t WHERE t.parentPhase.id = :phaseId";
+
     @Override
     public void saveTask(Task task) {
         task.setTaskStatus(Task.Status.IN_PROGRESS);
         em.persist(task);
     }
 
-    public List<Task> findTaskByPhaseId(long phaseId){
+    public List<Task> findTaskByPhaseId(long phaseId) {
         TypedQuery<Task> query = em.createQuery(FIND_TASK_BY_PHASE_ID, Task.class);
         query.setParameter("phaseId", phaseId);
         return query.getResultList();

@@ -28,7 +28,7 @@
                     <span class="phase-title">#{phase.phaseName}</span>
                     <h:outputLink value="add-task.xhtml" styleClass="add-task-link">
                         <h:outputText value="Add Task"/>
-                        <f:param name="phase_id" value="#{phase.id}" />
+                        <f:param name="phase_id" value="#{phase.id}"/>
                     </h:outputLink>
 
                     <ul class="tasks">
@@ -36,13 +36,13 @@
                             <li>
                                 <h:outputText styleClass="li-item" value="#{task.taskTitle}"/>
                                 <ui:remove>
-                                <h:outputLink value="task-details.xhtml">
-                                    <h:outputText styleClass="li-item" value="Details" />
-                                    <f:param name="task_id" value="#{task.id}"/>
-                                </h:outputLink>
+                                    <h:outputLink value="task-details.xhtml">
+                                        <h:outputText styleClass="li-item" value="Details"/>
+                                        <f:param name="task_id" value="#{task.id}"/>
+                                    </h:outputLink>
                                 </ui:remove>
                                 <h:outputLink value="edit-task.xhtml">
-                                    <h:outputText styleClass="li-item" value="Edit" />
+                                    <h:outputText styleClass="li-item" value="Edit"/>
                                     <f:param name="task_id" value="#{task.id}"/>
                                 </h:outputLink>
 

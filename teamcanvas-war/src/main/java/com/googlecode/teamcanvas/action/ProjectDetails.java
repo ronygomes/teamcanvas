@@ -7,12 +7,12 @@ import com.googlecode.teamcanvas.domain.Task;
 import com.googlecode.teamcanvas.service.ProjectService;
 import com.googlecode.teamcanvas.service.TaskService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.util.List;
 
 @Named
@@ -31,9 +31,9 @@ public class ProjectDetails extends AppUtilTemplate {
     private final String PROJECT_ID_PARAM_KEY = "project_id";
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         initUtilParams();
-        if(paramExists(PROJECT_ID_PARAM_KEY)){
+        if (paramExists(PROJECT_ID_PARAM_KEY)) {
             loadProjectFromDatabase();
         }
     }
@@ -47,7 +47,7 @@ public class ProjectDetails extends AppUtilTemplate {
     private void findAllTaskOfPhases() {
         List<Phase> phases = project.getProjectPhases();
 
-        for(Phase phase : phases){
+        for (Phase phase : phases) {
             List<Task> tasks = taskService.findTaskByPhaseId(phase.getId());
             phase.setTasks(tasks);
         }

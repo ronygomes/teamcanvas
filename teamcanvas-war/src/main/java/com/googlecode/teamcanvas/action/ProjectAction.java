@@ -3,11 +3,11 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.service.ProjectService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.util.List;
 
 
@@ -20,7 +20,7 @@ public class ProjectAction extends AppUtilTemplate {
     private ProjectService projectService;
 
     @PostConstruct
-    private void setUp(){
+    private void setUp() {
         loadUserFromSession();
         projects = projectService.findProjectByUser(getLoggedInUser());
     }

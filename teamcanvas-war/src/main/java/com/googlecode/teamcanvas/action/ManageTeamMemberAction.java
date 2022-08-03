@@ -5,13 +5,13 @@ import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.TeamService;
 import com.googlecode.teamcanvas.service.UserService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.component.UIComponent;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.component.UIComponent;
-import javax.inject.Named;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,14 +33,14 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     private final String USER_ID_PARAM_KEY = "user_id";
 
     @PostConstruct
-    private void setUp(){
+    private void setUp() {
         initUtilParams();
-        if(paramExists(TEAM_ID_PARAM_KEY)){
+        if (paramExists(TEAM_ID_PARAM_KEY)) {
             loadTeamFromDatabase(getLongParamValue(TEAM_ID_PARAM_KEY));
-            if(paramExists(USER_ID_PARAM_KEY)){
+            if (paramExists(USER_ID_PARAM_KEY)) {
                 deleteMember();
             }
-        }else {
+        } else {
             team = new Team();
             member = new User();
         }
@@ -50,6 +50,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
         team = teamService.findTeamById(id);
         log.info(team);
     }
+
     public Team getTeam() {
         return team;
     }
@@ -58,17 +59,17 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
         this.team = team;
     }
 
-    public String appendMember(){
-        log.info("Team: "  + team.getId());
+    public String appendMember() {
+        log.info("Team: " + team.getId());
         loadTeamFromDatabase(team.getId());
-        log.info("New Member: "  + member.getEmail());
+        log.info("New Member: " + member.getEmail());
 
 
         //logTeams();
         log.info("Is team contain member: " + isUserAlreadyInTeam(member));
-        if(isUserAlreadyInTeam(member)) {
+        if (isUserAlreadyInTeam(member)) {
             generateUserExistsErrorMessage();
-        }else{
+        } else {
             saveMemberToDatabase();
         }
 
@@ -77,10 +78,10 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
 
     private void saveMemberToDatabase() {
         member = userService.findUserByEmail(member.getEmail());
-        if(member != null){
+        if (member != null) {
             team.getTeamMembers().add(member);
             teamService.updateTeam(team);
-        }else{
+        } else {
             addErrorMessage("User not Found", addMemberButton);
         }
     }
@@ -88,7 +89,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     private void logTeams() {
         List<User> teamMembers = team.getTeamMembers();
         String teamListString = "";
-        for(User member : teamMembers){
+        for (User member : teamMembers) {
             teamListString += member.getEmail() + ", ";
         }
 
@@ -109,8 +110,8 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
 
     private boolean isUserAlreadyInTeam(User member) {
         List<User> users = team.getTeamMembers();
-        for(User user: users){
-            if(user.getEmail().equals(member.getEmail()))
+        for (User user : users) {
+            if (user.getEmail().equals(member.getEmail()))
                 return true;
         }
         return false;
@@ -124,9 +125,9 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
         this.member = member;
     }
 
-    public void deleteMember(){
-        long teamId =  getLongParamValue(TEAM_ID_PARAM_KEY);
-        String memberId =  getStringParamValue(USER_ID_PARAM_KEY);
+    public void deleteMember() {
+        long teamId = getLongParamValue(TEAM_ID_PARAM_KEY);
+        String memberId = getStringParamValue(USER_ID_PARAM_KEY);
 
         log.info("Team: " + teamId);
         log.info("User: " + memberId);
@@ -137,11 +138,11 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
 
     private void removeMemberFromAction(String memberId) {
         List<User> users = team.getTeamMembers();
-        Iterator<User> it =  users.iterator();
+        Iterator<User> it = users.iterator();
 
-        while(it.hasNext()){
+        while (it.hasNext()) {
             User user = it.next();
-            if(user.getEmail().equals(memberId)){
+            if (user.getEmail().equals(memberId)) {
                 it.remove();
             }
         }

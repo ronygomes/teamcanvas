@@ -1,15 +1,14 @@
 package com.googlecode.teamcanvas.domain;
 
-import javax.persistence.*;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="user")
-public class User implements Serializable{
+@Table(name = "users")
+public class User implements Serializable {
     @Id
     @Column(name = "user_email")
     private String email;
@@ -86,9 +85,9 @@ public class User implements Serializable{
         this.comments = comments;
     }
 
-    public boolean equals(User o){
+    public boolean equals(User o) {
 
-        if(o != null && o instanceof User){
+        if (o != null && o instanceof User) {
             return this.email == o.email;
         }
         return false;

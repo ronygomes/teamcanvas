@@ -3,22 +3,22 @@ package com.googlecode.teamcanvas.dao;
 
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.domain.User;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
-public class ProjectDaoImpl implements ProjectDao{
+public class ProjectDaoImpl implements ProjectDao {
     private final Logger log = Logger.getLogger(ProjectDaoImpl.class);
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;
 
-    private String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.id = :userEmail";
-    private String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.id = :userEmail " +
+    private String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.email = :userEmail";
+    private String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.email = :userEmail " +
             "AND p.projectStatus = :status";
 
     @Override

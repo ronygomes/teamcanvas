@@ -1,6 +1,7 @@
 package com.googlecode.teamcanvas.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "team")
 public class Team {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "team_id")
     private long id;
 
@@ -23,10 +25,10 @@ public class Team {
     private User teamCreator;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable( name="team_has_user",
-                joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "team_id"),
-                inverseJoinColumns = @JoinColumn(name = "user_email", referencedColumnName = "user_email")
-              )
+    @JoinTable(name = "team_has_user",
+            joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_email", referencedColumnName = "user_email")
+    )
     private List<User> teamMembers = new ArrayList<User>();
 
     public long getId() {

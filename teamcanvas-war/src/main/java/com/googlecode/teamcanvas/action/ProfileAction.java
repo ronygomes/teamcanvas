@@ -3,25 +3,25 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.UserService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIInput;
+import jakarta.faces.event.ComponentSystemEvent;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.event.ComponentSystemEvent;
-import javax.inject.Named;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @Named
 @RequestScoped
-public class ProfileAction extends AppUtilTemplate{
+public class ProfileAction extends AppUtilTemplate {
 
     private Logger log = Logger.getLogger(ProfileAction.class);
 
@@ -38,7 +38,7 @@ public class ProfileAction extends AppUtilTemplate{
 
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         initUtilParams();
         user = getLoggedInUser();
     }
@@ -60,14 +60,13 @@ public class ProfileAction extends AppUtilTemplate{
     }
 
 
-
     public void validatePassword(ComponentSystemEvent event) {
         UIComponent components = event.getComponent();
 
         UIInput inputPassword = getInputComponent(components, INPUT_PASSWORD_VIEW_ID);
         UIInput inputConfirmPassword = getInputComponent(components, INPUT_CONFIRM_PASSWORD_VIEW_ID);
 
-        if(!passwordMatchesWithConfirmPassword(inputPassword, inputConfirmPassword)) {
+        if (!passwordMatchesWithConfirmPassword(inputPassword, inputConfirmPassword)) {
             renderErrorMessage(inputConfirmPassword);
         }
     }
@@ -75,19 +74,19 @@ public class ProfileAction extends AppUtilTemplate{
     private void renderErrorMessage(UIInput errorCausingComponent) {
         FacesMessage errorMessage = new FacesMessage("Password must match confirm password");
         errorMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-        getFacesContext().addMessage(errorCausingComponent.getClientId(), errorMessage);
-        getFacesContext().renderResponse();
+//        getFacesContext().addMessage(errorCausingComponent.getClientId(), errorMessage);
+//        getFacesContext().renderResponse();
     }
 
     private boolean passwordMatchesWithConfirmPassword(UIInput inputPassword, UIInput inputConfirmPassword) {
-        if(isEmptyInput(inputPassword, inputConfirmPassword)){
+        if (isEmptyInput(inputPassword, inputConfirmPassword)) {
             String password = inputPassword.getLocalValue().toString();
             String confirmPassword = inputConfirmPassword.getLocalValue().toString();
-            if(confirmPassword.equals(password)){
+            if (confirmPassword.equals(password)) {
                 return true;
             }
         }
-        return  false;
+        return false;
     }
 
     private boolean isEmptyInput(UIInput inputPassword, UIInput inputConfirmPassword) {
@@ -95,7 +94,7 @@ public class ProfileAction extends AppUtilTemplate{
                 && inputConfirmPassword.getLocalValue() != null);
     }
 
-    private UIInput getInputComponent(UIComponent components, String componentName){
+    private UIInput getInputComponent(UIComponent components, String componentName) {
         return (UIInput) components.findComponent(componentName);
     }
 
@@ -107,13 +106,13 @@ public class ProfileAction extends AppUtilTemplate{
         this.file = file;
     }
 
-    public String editProfile(){
+    public String editProfile() {
 
         String fileName = file.getFileName();
         int lastIndexOfDot = fileName.lastIndexOf('.');
         String extension = fileName.substring(lastIndexOfDot + 1);
 
-        if(extension.equals("jpeg") || extension.equals("png") || extension.equals("jpg") || extension.equals("gif")) {
+        if (extension.equals("jpeg") || extension.equals("png") || extension.equals("jpg") || extension.equals("gif")) {
             user.setProfileImage(file.getContents());
             userService.updateUser(user);
             return "project";
@@ -132,8 +131,8 @@ public class ProfileAction extends AppUtilTemplate{
         this.fileUploadComponent = fileUploadComponent;
     }
 
-    public StreamedContent getBinaryImage(){
-        if(user.getProfileImage() != null){
+    public StreamedContent getBinaryImage() {
+        if (user.getProfileImage() != null) {
             InputStream is = new ByteArrayInputStream(user.getProfileImage());
             StreamedContent image = new DefaultStreamedContent(is, "image/jpeg", "fileName.jpg");
             return image;

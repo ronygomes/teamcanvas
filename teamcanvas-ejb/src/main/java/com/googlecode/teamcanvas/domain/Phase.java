@@ -1,13 +1,15 @@
 package com.googlecode.teamcanvas.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "phase")
 public class Phase {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "phase_id")
     private long id;
 

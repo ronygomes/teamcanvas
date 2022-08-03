@@ -1,6 +1,15 @@
-.reruired { color:red;}
-.ten-pixel-padding {padding-left: 10px}
-.error-message{ color: red; font-size: 12px;}
+.reruired {
+    color: red;
+}
+
+.ten-pixel-padding {
+    padding-left: 10px
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
 
 div#content {
     border: 1px solid grey;

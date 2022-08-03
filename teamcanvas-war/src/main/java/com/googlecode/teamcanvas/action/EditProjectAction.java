@@ -4,16 +4,16 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.Project;
 import com.googlecode.teamcanvas.service.ProjectService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.Conversation;
+import jakarta.enterprise.context.ConversationScoped;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Named
 @ConversationScoped
-public class EditProjectAction extends AppUtilTemplate implements Serializable{
+public class EditProjectAction extends AppUtilTemplate implements Serializable {
     private final Logger log = Logger.getLogger(EditProjectAction.class);
 
     private Project project;
@@ -32,9 +32,9 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable{
     private Conversation conversation;
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         long id = getProjectId();
-        if(isProjectIdParamFound(id)){
+        if (isProjectIdParamFound(id)) {
             project = projectService.findProjectById(id);
             log.info("Project Found: " + id + " (" + project + ")");
             startConversation();
@@ -42,7 +42,7 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable{
     }
 
     private void startConversation() {
-        if(conversation.isTransient()){
+        if (conversation.isTransient()) {
             conversation.begin();
         }
     }
@@ -65,14 +65,14 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable{
     private long convertStringToLong(String project_id) {
         try {
             return Long.parseLong(project_id);
-        }catch (NumberFormatException n){
+        } catch (NumberFormatException n) {
             return -1L;
         }
     }
 
-    public String editProject(){
+    public String editProject() {
         String outcome = "edit_project";
-        if(completeEdited()){
+        if (completeEdited()) {
             outcome = "project";
             endConversation();
         }
@@ -81,7 +81,7 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable{
     }
 
     private void endConversation() {
-        if(conversation.isTransient()){
+        if (conversation.isTransient()) {
             conversation.end();
         }
     }
@@ -98,7 +98,7 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable{
         this.project = project;
     }
 
-    public Date getToday(){
+    public Date getToday() {
         return Calendar.getInstance().getTime();
     }
 }

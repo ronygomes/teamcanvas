@@ -21,9 +21,12 @@
                 <h:outputLink value="create-new-project.xhtml">Create New Project</h:outputLink>
                 <ui:repeat var="project" value="#{projectAction.projects}" varStatus="status">
                     <div class="project">
-                        <h:outputText value="#{project.projectTitle}" styleClass="project-title" style="font-weight: bold"/>
-                        <h:outputText rendered="#{project.projectDueDate ne null}" value="Due Date: " styleClass="project-date"/>
-                        <h:outputText rendered="#{project.projectDueDate ne null}" value="#{project.projectDueDate}" styleClass="project-date">
+                        <h:outputText value="#{project.projectTitle}" styleClass="project-title"
+                                      style="font-weight: bold"/>
+                        <h:outputText rendered="#{project.projectDueDate ne null}" value="Due Date: "
+                                      styleClass="project-date"/>
+                        <h:outputText rendered="#{project.projectDueDate ne null}" value="#{project.projectDueDate}"
+                                      styleClass="project-date">
                             <f:convertDateTime pattern="EEE, MMM d, yyyy"/>
                         </h:outputText>
 
@@ -41,7 +44,8 @@
                         </h:outputText>
                     </div>
                 </ui:repeat>
-                <h:outputText styleClass="no-project-found-message" rendered="#{empty projectAction.projects}" value="No Project Found!"/>
+                <h:outputText styleClass="no-project-found-message" rendered="#{empty projectAction.projects}"
+                              value="No Project Found!"/>
             </div>
         </ui:define>
     </ui:composition>

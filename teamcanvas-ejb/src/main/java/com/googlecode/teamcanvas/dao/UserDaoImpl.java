@@ -2,19 +2,19 @@ package com.googlecode.teamcanvas.dao;
 
 
 import com.googlecode.teamcanvas.domain.User;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
+import jakarta.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
     private final Logger log = Logger.getLogger(UserDaoImpl.class);
 
     private static final String FIND_ALL_USER = "select u from User u";
@@ -23,11 +23,11 @@ public class UserDaoImpl implements UserDao{
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public boolean saveUser(User userToSave){
-        try{
+    public boolean saveUser(User userToSave) {
+        try {
             em.persist(userToSave);
             return true;
-        }catch (PersistenceException e){
+        } catch (PersistenceException e) {
             log.info(userToSave.getEmail() + " already exists");
             return false;
         }

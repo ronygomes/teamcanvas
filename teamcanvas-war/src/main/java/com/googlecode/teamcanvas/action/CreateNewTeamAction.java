@@ -1,16 +1,15 @@
 package com.googlecode.teamcanvas.action;
 
 
-
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.service.TeamService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -25,13 +24,13 @@ public class CreateNewTeamAction extends AppUtilTemplate {
     private TeamService teamService;
 
     @PostConstruct
-    private void setUp(){
+    private void setUp() {
         initializeTeam();
         loadUserFromSession();
     }
 
     private void initializeTeam() {
-        if(team == null){
+        if (team == null) {
             team = new Team();
         }
     }
@@ -48,7 +47,7 @@ public class CreateNewTeamAction extends AppUtilTemplate {
         String outcome = "create-new-team";
         if (isLoggedInUserFound()) {
             configureTeam();
-            if(saveTeam()){
+            if (saveTeam()) {
                 outcome = "team.xhtml?faces-redirect=true";
             }
         }
@@ -72,8 +71,6 @@ public class CreateNewTeamAction extends AppUtilTemplate {
     private void setTeamCreator() {
         team.setTeamCreator(getLoggedInUser());
     }
-
-
 
 
 }

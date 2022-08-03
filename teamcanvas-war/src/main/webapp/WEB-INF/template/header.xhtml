@@ -21,13 +21,22 @@
             <h:form>
                 <table>
                     <tr>
-                    <td><h:outputLink value="dashboard.xhtml" styleClass="nav-item">Dashboard</h:outputLink></td>
-                    <ui:remove>
-                    <td><h:outputLink value="notification.xhtml" styleClass="nav-item">Notification</h:outputLink></td>
-                    </ui:remove>
-                    <td><h:outputLink value="profile.xhtml" styleClass="nav-item">Profile</h:outputLink></td>
+                        <td>
+                            <h:outputLink value="dashboard.xhtml" styleClass="nav-item">Dashboard</h:outputLink>
+                        </td>
+                        <ui:remove>
+                            <td>
+                                <h:outputLink value="notification.xhtml" styleClass="nav-item">Notification
+                                </h:outputLink>
+                            </td>
+                        </ui:remove>
+                        <td>
+                            <h:outputLink value="profile.xhtml" styleClass="nav-item">Profile</h:outputLink>
+                        </td>
 
-                    <td><h:commandLink styleClass="nav-item" action="#{loginAction.logout()}" value="Logout"/></td>
+                        <td>
+                            <h:commandLink styleClass="nav-item" action="#{loginAction.logout()}" value="Logout"/>
+                        </td>
                     </tr>
                 </table>
             </h:form>

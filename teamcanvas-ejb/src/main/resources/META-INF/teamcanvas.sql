@@ -1,0 +1,1 @@
+CREATE TABLE xyz_124 (id INT NOT NULL);

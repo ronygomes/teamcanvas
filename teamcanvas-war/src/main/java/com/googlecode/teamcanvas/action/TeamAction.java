@@ -3,12 +3,12 @@ package com.googlecode.teamcanvas.action;
 import com.googlecode.teamcanvas.domain.Team;
 import com.googlecode.teamcanvas.service.TeamService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import java.util.List;
 
 @Named
@@ -25,7 +25,7 @@ public class TeamAction extends AppUtilTemplate {
     private TeamService teamService;
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         initUtilParams();
         teams = teamService.findTeamByOwner(getLoggedInUser());
 
@@ -49,7 +49,7 @@ public class TeamAction extends AppUtilTemplate {
         this.teamId = teamId;
     }
 
-    public String deleteTeam(){
+    public String deleteTeam() {
 
         log.info("Team Id: " + getLongParamValue(TEAM_ID_URL_PARAM));
         teamService.removeTeam(getLongParamValue(TEAM_ID_URL_PARAM));

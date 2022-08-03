@@ -6,12 +6,11 @@ import com.googlecode.teamcanvas.domain.Task;
 import com.googlecode.teamcanvas.service.PhaseService;
 import com.googlecode.teamcanvas.service.TaskService;
 import com.googlecode.teamcanvas.template.AppUtilTemplate;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 
 @Named
 @RequestScoped
@@ -30,7 +29,7 @@ public class AddTaskAction extends AppUtilTemplate {
     private final String PHASE_ID_PARAM_KEY = "phase_id";
 
     @PostConstruct
-    public void setUp(){
+    public void setUp() {
         log.info("Initializing AddTaskAction");
         initUtilParams();
         initializePhase();
@@ -38,9 +37,9 @@ public class AddTaskAction extends AppUtilTemplate {
     }
 
     private void initializePhase() {
-        if(paramExists(PHASE_ID_PARAM_KEY)){
+        if (paramExists(PHASE_ID_PARAM_KEY)) {
             loadPhaseFromDatabase();
-        }else{
+        } else {
             initializeNewPhase();
         }
     }
@@ -75,7 +74,7 @@ public class AddTaskAction extends AppUtilTemplate {
         this.task = task;
     }
 
-    public String addTaskToPhase(){
+    public String addTaskToPhase() {
         log.info("Phase id: " + phase.getId());
         log.info("Task : " + task.getTaskTitle());
 

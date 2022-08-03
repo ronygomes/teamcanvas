@@ -1,10 +1,10 @@
 package com.googlecode.teamcanvas.converter;
 
 
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.convert.Converter;
+import jakarta.faces.convert.FacesConverter;
 
 @FacesConverter("com.googlecode.teamcanvas.TextEllipsisConverter")
 public class TextEllipsisConverter implements Converter {
@@ -19,7 +19,7 @@ public class TextEllipsisConverter implements Converter {
         int MAX_SIZE_OF_TEXT = 100;
         String largeText = o.toString();
 
-        if(largeText.length() < MAX_SIZE_OF_TEXT){
+        if (largeText.length() < MAX_SIZE_OF_TEXT) {
             return largeText;
         }
 

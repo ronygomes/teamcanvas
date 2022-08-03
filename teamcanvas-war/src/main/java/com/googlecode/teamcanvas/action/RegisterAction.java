@@ -2,18 +2,17 @@ package com.googlecode.teamcanvas.action;
 
 import com.googlecode.teamcanvas.domain.User;
 import com.googlecode.teamcanvas.service.UserService;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.ejb.EJBException;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIInput;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ComponentSystemEvent;
+import jakarta.inject.Named;
 import org.apache.log4j.Logger;
-
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.EJBException;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
-import javax.inject.Named;
 
 @Named
 @RequestScoped
@@ -32,8 +31,8 @@ public class RegisterAction {
     private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
 
     @PostConstruct
-    public void setUp(){
-        if(user == null){
+    public void setUp() {
+        if (user == null) {
             user = new User();
         }
         facesContext = FacesContext.getCurrentInstance();
@@ -55,8 +54,8 @@ public class RegisterAction {
         this.confirmPassword = confirmPassword;
     }
 
-    public String register(){
-        if(!isSuccessfullyRegistered()) {
+    public String register() {
+        if (!isSuccessfullyRegistered()) {
             generateErrorMessage();
             return "register";
         }
@@ -78,9 +77,9 @@ public class RegisterAction {
 
     private boolean isSuccessfullyRegistered() {
         boolean isSuccessful = false;
-        try{
+        try {
             isSuccessful = userService.saveUser(user);
-        }catch (EJBException e){
+        } catch (EJBException e) {
             log.info(user.getEmail() + " already exists");
         }
         return isSuccessful;
@@ -93,7 +92,7 @@ public class RegisterAction {
         UIInput inputPassword = getInputComponent(components, INPUT_PASSWORD_VIEW_ID);
         UIInput inputConfirmPassword = getInputComponent(components, INPUT_CONFIRM_PASSWORD_VIEW_ID);
 
-        if(!passwordMatchesWithConfirmPassword(inputPassword, inputConfirmPassword)) {
+        if (!passwordMatchesWithConfirmPassword(inputPassword, inputConfirmPassword)) {
             renderErrorMessage(inputConfirmPassword);
         }
     }
@@ -106,14 +105,14 @@ public class RegisterAction {
     }
 
     private boolean passwordMatchesWithConfirmPassword(UIInput inputPassword, UIInput inputConfirmPassword) {
-        if(isEmptyInput(inputPassword, inputConfirmPassword)){
+        if (isEmptyInput(inputPassword, inputConfirmPassword)) {
             String password = inputPassword.getLocalValue().toString();
             String confirmPassword = inputConfirmPassword.getLocalValue().toString();
-            if(confirmPassword.equals(password)){
+            if (confirmPassword.equals(password)) {
                 return true;
             }
         }
-        return  false;
+        return false;
     }
 
     private boolean isEmptyInput(UIInput inputPassword, UIInput inputConfirmPassword) {
@@ -121,7 +120,7 @@ public class RegisterAction {
                 && inputConfirmPassword.getLocalValue() != null);
     }
 
-    private UIInput getInputComponent(UIComponent components, String componentName){
+    private UIInput getInputComponent(UIComponent components, String componentName) {
         return (UIInput) components.findComponent(componentName);
     }
 }

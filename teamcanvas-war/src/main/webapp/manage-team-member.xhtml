@@ -18,7 +18,7 @@
 
             <h2>Add Team Member: #{manageTeamMemberAction.team.teamName}</h2>
             <h:form>
-                <h:inputHidden id="team_id" value="#{manageTeamMemberAction.team.id}" />
+                <h:inputHidden id="team_id" value="#{manageTeamMemberAction.team.id}"/>
                 <fieldset>
                     <legend>Team Members</legend>
                     <h:panelGrid columns="2">
@@ -33,21 +33,23 @@
                                 </h:outputLink>
                             </div>
                         </ui:repeat>
-                        <h:outputText rendered="#{empty manageTeamMemberAction.team.teamMembers}" value="No Member Found!"/>
+                        <h:outputText rendered="#{empty manageTeamMemberAction.team.teamMembers}"
+                                      value="No Member Found!"/>
 
                         <h:outputText/>
                         <h:message for="teamMemberEmail" styleClass="error-message"/>
 
                         <h:outputLabel for="teamMemberEmail">Member Email:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="teamMemberEmail" value="#{manageTeamMemberAction.member.email}" required="true"/>
+                            <h:inputText id="teamMemberEmail" value="#{manageTeamMemberAction.member.email}"
+                                         required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
                         <h:panelGroup>
                             <h:commandButton value="Add Member" action="#{manageTeamMemberAction.appendMember()}"
                                              id="addTeamMemberButton"
-                                                binding="#{manageTeamMemberAction.addMemberButton}"/>
+                                             binding="#{manageTeamMemberAction.addMemberButton}"/>
 
                             <h:outputLink value="team.xhtml">List Teams</h:outputLink>
                         </h:panelGroup>

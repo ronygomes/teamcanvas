@@ -1,13 +1,12 @@
 package me.ronygomes.teamcanvas.converter;
 
-
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.convert.Converter;
 import jakarta.faces.convert.FacesConverter;
 
 @FacesConverter("me.ronygomes.teamcanvas.TextEllipsisConverter")
-public class TextEllipsisConverter implements Converter {
+public class TextEllipsisConverter implements Converter<Object> {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent component, String text) {

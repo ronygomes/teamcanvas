@@ -1,19 +1,19 @@
 package me.ronygomes.teamcanvas.service;
 
-
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.domain.Task;
 
 import java.util.List;
 
 public interface TaskService {
-    public boolean saveTask(Task task);
 
-    public List<Task> findTaskByPhaseId(long phaseId);
+    boolean saveTask(Task task);
 
-    public Task findTaskById(long taskId);
+    List<Task> findTaskByPhaseId(long phaseId);
 
-    public void updateTask(Task task);
+    Task findTaskById(long taskId);
 
-    public Project findProjectByTaskId(long taskId);
+    void updateTask(Task task);
+
+    Project findProjectByTaskId(long taskId);
 }

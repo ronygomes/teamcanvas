@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.domain.Team;
 import me.ronygomes.teamcanvas.service.TeamService;
 import me.ronygomes.teamcanvas.template.AppUtilTemplate;
@@ -16,6 +15,7 @@ import java.util.Date;
 @Named
 @RequestScoped
 public class CreateNewTeamAction extends AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(CreateNewTeamAction.class);
 
     private Team team;
@@ -71,6 +71,4 @@ public class CreateNewTeamAction extends AppUtilTemplate {
     private void setTeamCreator() {
         team.setTeamCreator(getLoggedInUser());
     }
-
-
 }

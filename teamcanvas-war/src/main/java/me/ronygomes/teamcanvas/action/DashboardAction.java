@@ -31,7 +31,6 @@ public class DashboardAction extends AppUtilTemplate {
     @EJB
     private PhaseService phaseService;
 
-
     @PostConstruct
     public void setUp() {
         initUtilParams();

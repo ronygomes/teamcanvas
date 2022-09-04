@@ -1,20 +1,20 @@
 package me.ronygomes.teamcanvas.dao;
 
-import me.ronygomes.teamcanvas.domain.Task;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import me.ronygomes.teamcanvas.domain.Task;
 
 import java.util.List;
 
 @Stateless
 public class TaskDaoImpl implements TaskDao {
 
+    private static final String FIND_TASK_BY_PHASE_ID = "SELECT t FROM Task t WHERE t.parentPhase.id = :phaseId";
+
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;
-
-    private final String FIND_TASK_BY_PHASE_ID = "SELECT t FROM Task t WHERE t.parentPhase.id = :phaseId";
 
     @Override
     public void saveTask(Task task) {

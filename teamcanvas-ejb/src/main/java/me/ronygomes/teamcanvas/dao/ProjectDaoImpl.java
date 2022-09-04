@@ -1,25 +1,27 @@
 package me.ronygomes.teamcanvas.dao;
 
-
-import me.ronygomes.teamcanvas.domain.Project;
-import me.ronygomes.teamcanvas.domain.User;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import me.ronygomes.teamcanvas.domain.Project;
+import me.ronygomes.teamcanvas.domain.User;
 import org.apache.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class ProjectDaoImpl implements ProjectDao {
+
     private final Logger log = Logger.getLogger(ProjectDaoImpl.class);
+
+    private static final String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.email = :userEmail";
+
+    private static final String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p" +
+            " WHERE p.projectCreator.email = :userEmail AND p.projectStatus = :status";
+
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;
-
-    private String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.email = :userEmail";
-    private String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.email = :userEmail " +
-            "AND p.projectStatus = :status";
 
     @Override
     public void saveProject(Project projectToSave) {
@@ -37,9 +39,8 @@ public class ProjectDaoImpl implements ProjectDao {
         TypedQuery<Project> query = em.createQuery(FIND_PROJECT_BY_USER, Project.class);
 
         query.setParameter("userEmail", user.getEmail());
-        List<Project> projects = query.getResultList();
 
-        return projects;
+        return query.getResultList();
     }
 
     @Override
@@ -52,10 +53,7 @@ public class ProjectDaoImpl implements ProjectDao {
         TypedQuery<Project> query = em.createQuery(FIND_IN_PROGRESS_PROJECT_BY_USER, Project.class);
         query.setParameter("userEmail", user.getEmail());
         query.setParameter("status", Project.Status.IN_PROGRESS);
-        List<Project> projects = query.getResultList();
 
-        return projects;
+        return query.getResultList();
     }
-
-
 }

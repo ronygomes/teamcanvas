@@ -17,14 +17,15 @@ import java.util.List;
 
 @Stateless
 public class TaskServiceImpl implements TaskService {
+
     private final Logger log = Logger.getLogger(TaskServiceImpl.class);
 
     @EJB
     private TaskDao taskDao;
 
-
     @Override
     public boolean saveTask(Task task) {
+
         try {
             task.setTaskCreationTime(getCurrentTime());
             taskDao.saveTask(task);
@@ -32,6 +33,7 @@ public class TaskServiceImpl implements TaskService {
         } catch (PersistenceException e) {
             log.info("Unable to save task:" + task.getTaskTitle(), e);
         }
+
         return false;
     }
 
@@ -71,6 +73,4 @@ public class TaskServiceImpl implements TaskService {
     private Date getCurrentTime() {
         return Calendar.getInstance().getTime();
     }
-
-
 }

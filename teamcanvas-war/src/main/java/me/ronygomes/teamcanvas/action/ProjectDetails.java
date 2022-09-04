@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.domain.Phase;
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.domain.Task;
@@ -18,7 +17,10 @@ import java.util.List;
 @Named
 @RequestScoped
 public class ProjectDetails extends AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(ProjectDetails.class);
+
+    private final String PROJECT_ID_PARAM_KEY = "project_id";
 
     private Project project;
 
@@ -27,8 +29,6 @@ public class ProjectDetails extends AppUtilTemplate {
 
     @EJB
     private TaskService taskService;
-
-    private final String PROJECT_ID_PARAM_KEY = "project_id";
 
     @PostConstruct
     public void setUp() {

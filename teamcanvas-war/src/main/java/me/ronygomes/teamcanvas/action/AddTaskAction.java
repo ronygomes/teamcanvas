@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.domain.Phase;
 import me.ronygomes.teamcanvas.domain.Task;
 import me.ronygomes.teamcanvas.service.PhaseService;
@@ -15,7 +14,10 @@ import org.apache.log4j.Logger;
 @Named
 @RequestScoped
 public class AddTaskAction extends AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(AddTaskAction.class);
+
+    private static final String PHASE_ID_PARAM_KEY = "phase_id";
 
     private Phase phase;
     private Task task;
@@ -25,8 +27,6 @@ public class AddTaskAction extends AppUtilTemplate {
 
     @EJB
     private TaskService taskService;
-
-    private final String PHASE_ID_PARAM_KEY = "phase_id";
 
     @PostConstruct
     public void setUp() {

@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.service.MailSender;
 import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
@@ -12,7 +11,8 @@ import org.apache.log4j.Logger;
 @Named
 @RequestScoped
 public class ContactUsAction extends AppUtilTemplate {
-    private Logger log = Logger.getLogger(ContactUsAction.class);
+
+    private final Logger log = Logger.getLogger(ContactUsAction.class);
 
     private String message;
     private String infoMessage;

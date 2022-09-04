@@ -1,7 +1,6 @@
 package me.ronygomes.teamcanvas.dao;
 
 
-import me.ronygomes.teamcanvas.domain.User;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
@@ -9,12 +8,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
+import me.ronygomes.teamcanvas.domain.User;
 import org.apache.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class UserDaoImpl implements UserDao {
+
     private final Logger log = Logger.getLogger(UserDaoImpl.class);
 
     private static final String FIND_ALL_USER = "select u from User u";
@@ -47,6 +48,4 @@ public class UserDaoImpl implements UserDao {
     public void update(User user) {
         em.merge(user);
     }
-
-
 }

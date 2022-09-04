@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 @Stateless
 public class PhaseServiceImpl implements PhaseService {
+
     private final Logger log = Logger.getLogger(PhaseServiceImpl.class);
 
     @EJB
@@ -17,12 +18,14 @@ public class PhaseServiceImpl implements PhaseService {
     @Override
     public Phase findPhaseById(long id) {
         Phase phase = null;
+
         try {
             phase = phaseDao.findPhaseById(id);
             phase.getTasks();
         } catch (PersistenceException e) {
             log.info("Phase not found: phaseId -> " + id, e);
         }
+
         return phase;
     }
 }

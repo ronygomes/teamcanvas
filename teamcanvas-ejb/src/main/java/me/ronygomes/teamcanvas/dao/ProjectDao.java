@@ -6,13 +6,14 @@ import me.ronygomes.teamcanvas.domain.User;
 import java.util.List;
 
 public interface ProjectDao {
-    public void saveProject(Project projectToSave);
 
-    public Project findProjectById(long projectId);
+    void saveProject(Project projectToSave);
 
-    public List<Project> findProjectByUser(User user);
+    Project findProjectById(long projectId);
 
-    public void updateProject(Project project);
+    List<Project> findProjectByUser(User user);
 
-    public List<Project> getInProgressProjects(User user);
+    void updateProject(Project project);
+
+    List<Project> getInProgressProjects(User user);
 }

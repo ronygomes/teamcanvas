@@ -2,13 +2,17 @@ package me.ronygomes.teamcanvas.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "task")
-public class Task {
+public class Task implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "task_id")
@@ -56,7 +60,11 @@ public class Task {
             inverseJoinColumns = @JoinColumn(name = "user_email",
                     referencedColumnName = "user_email")
     )
-    private List<User> assignedToUsers = new ArrayList<User>();
+    private List<User> assignedToUsers;
+
+    public Task() {
+        this.assignedToUsers = new ArrayList<>();
+    }
 
     public long getId() {
         return id;

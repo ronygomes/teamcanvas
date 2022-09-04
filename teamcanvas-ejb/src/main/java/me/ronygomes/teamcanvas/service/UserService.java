@@ -5,13 +5,14 @@ import me.ronygomes.teamcanvas.domain.User;
 import java.util.List;
 
 public interface UserService {
-    public boolean saveUser(User userToSave);
 
-    public User findUserByEmail(String userEmail);
+    boolean saveUser(User userToSave);
 
-    public User checkAuthenticity(String userEmail, String userPassword);
+    User findUserByEmail(String userEmail);
 
-    public List<User> findAllUsers();
+    User checkAuthenticity(String userEmail, String userPassword);
 
-    public void updateUser(User user);
+    List<User> findAllUsers();
+
+    void updateUser(User user);
 }

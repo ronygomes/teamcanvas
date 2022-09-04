@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.domain.Task;
 import me.ronygomes.teamcanvas.service.TaskService;
@@ -16,6 +15,7 @@ import java.io.Serializable;
 @Named
 @RequestScoped
 public class EditTaskAction extends AppUtilTemplate implements Serializable {
+
     private final Logger log = Logger.getLogger(EditTaskAction.class);
 
     private Task task;
@@ -29,7 +29,6 @@ public class EditTaskAction extends AppUtilTemplate implements Serializable {
         initUtilParams();
         initializeTask();
     }
-
 
     private void initializeTask() {
         if (paramExists(TEAM_ID_URL_PARAM)) {

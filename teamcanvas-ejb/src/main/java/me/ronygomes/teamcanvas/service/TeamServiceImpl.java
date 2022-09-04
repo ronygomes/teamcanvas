@@ -19,6 +19,7 @@ public class TeamServiceImpl implements TeamService {
 
     @EJB
     private TeamDao teamDao;
+
     @EJB
     private UserDao userDao;
 
@@ -77,6 +78,4 @@ public class TeamServiceImpl implements TeamService {
 
         teamDao.updateTeam(team);
     }
-
-
 }

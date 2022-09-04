@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 @Named
 @RequestScoped
 public class LoginAction {
+
     private final Logger log = Logger.getLogger(LoginAction.class);
 
     private String userEmail;
@@ -28,7 +29,6 @@ public class LoginAction {
     private UserService userService;
 
     private static final String LOGIN_USER_SESSION_KEY = "loggedInUser";
-
 
     @PostConstruct
     public void setUp() {
@@ -106,6 +106,4 @@ public class LoginAction {
     private boolean isUserFound(User user) {
         return user != null;
     }
-
-
 }

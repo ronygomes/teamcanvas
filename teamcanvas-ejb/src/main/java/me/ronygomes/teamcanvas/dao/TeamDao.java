@@ -6,13 +6,14 @@ import me.ronygomes.teamcanvas.domain.User;
 import java.util.List;
 
 public interface TeamDao {
-    public void saveTeam(Team team);
 
-    public List<Team> findTeamByUser(User creatorOfTeam);
+    void saveTeam(Team team);
 
-    public Team findTeamById(long teamId);
+    List<Team> findTeamByUser(User creatorOfTeam);
 
-    public void updateTeam(Team team);
+    Team findTeamById(long teamId);
 
-    public void removeTeam(Team team);
+    void updateTeam(Team team);
+
+    void removeTeam(Team team);
 }

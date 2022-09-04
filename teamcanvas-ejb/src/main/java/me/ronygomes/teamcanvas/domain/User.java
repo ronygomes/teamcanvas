@@ -9,6 +9,9 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "user_email")
     private String email;
@@ -23,19 +26,26 @@ public class User implements Serializable {
     private String hashedPassword;
 
     @OneToMany(mappedBy = "projectCreator")
-    private List<Project> projects = new ArrayList<Project>();
+    private List<Project> projects;
 
     @OneToMany(mappedBy = "commentCreatedBy")
-    private List<Comment> comments = new ArrayList<Comment>();
+    private List<Comment> comments;
 
     @ManyToMany(mappedBy = "teamMembers")
-    private List<Team> teams = new ArrayList<Team>();
+    private List<Team> teams;
 
     @ManyToMany(mappedBy = "assignedToUsers")
-    private List<Task> userTasks = new ArrayList<Task>();
+    private List<Task> userTasks;
 
     @Lob
     private byte[] profileImage;
+
+    public User() {
+        this.projects = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.teams = new ArrayList<>();
+        this.userTasks = new ArrayList<>();
+    }
 
     public String getEmail() {
         return email;

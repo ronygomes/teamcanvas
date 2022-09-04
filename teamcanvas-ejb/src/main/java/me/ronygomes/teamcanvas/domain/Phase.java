@@ -2,12 +2,16 @@ package me.ronygomes.teamcanvas.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "phase")
-public class Phase {
+public class Phase implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "phase_id")
@@ -24,7 +28,11 @@ public class Phase {
     private Project parentProject;
 
     @OneToMany(mappedBy = "parentPhase")
-    private List<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasks;
+
+    public Phase() {
+        this.tasks = new ArrayList<>();
+    }
 
     public long getId() {
         return id;

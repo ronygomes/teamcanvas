@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.service;
 
-
 import me.ronygomes.teamcanvas.domain.Phase;
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.domain.User;
@@ -8,15 +7,16 @@ import me.ronygomes.teamcanvas.domain.User;
 import java.util.List;
 
 public interface ProjectService {
-    public boolean saveProject(Project projectToSave);
 
-    public List<Project> findProjectByUser(User user);
+    boolean saveProject(Project projectToSave);
 
-    public Project findProjectById(long id);
+    List<Project> findProjectByUser(User user);
 
-    public boolean updateProject(Project project);
+    Project findProjectById(long id);
 
-    public void addPhase(Project project, Phase phase);
+    boolean updateProject(Project project);
 
-    public List<Project> getInProgressProject(User user);
+    void addPhase(Project project, Phase phase);
+
+    List<Project> getInProgressProject(User user);
 }

@@ -17,7 +17,11 @@ import org.apache.log4j.Logger;
 @Named
 @RequestScoped
 public class RegisterAction {
+
     private final Logger log = Logger.getLogger(RegisterAction.class);
+
+    private static final String INPUT_PASSWORD_VIEW_ID = "password";
+    private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
 
     private User user;
     private String confirmPassword;
@@ -26,9 +30,6 @@ public class RegisterAction {
 
     @EJB
     private UserService userService;
-
-    private static final String INPUT_PASSWORD_VIEW_ID = "password";
-    private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
 
     @PostConstruct
     public void setUp() {

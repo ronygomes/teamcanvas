@@ -4,13 +4,13 @@ import me.ronygomes.teamcanvas.domain.Task;
 
 import java.util.List;
 
-
 public interface TaskDao {
-    public void saveTask(Task task);
 
-    public List<Task> findTaskByPhaseId(long phaseId);
+    void saveTask(Task task);
 
-    public Task findTaskById(long taskId);
+    List<Task> findTaskByPhaseId(long phaseId);
 
-    public void updateTask(Task taskToModify);
+    Task findTaskById(long taskId);
+
+    void updateTask(Task taskToModify);
 }

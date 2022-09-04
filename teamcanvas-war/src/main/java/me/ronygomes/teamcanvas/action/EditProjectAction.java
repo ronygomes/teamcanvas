@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.service.ProjectService;
 import me.ronygomes.teamcanvas.template.AppUtilTemplate;
@@ -22,12 +21,14 @@ import java.util.Map;
 @Named
 @ConversationScoped
 public class EditProjectAction extends AppUtilTemplate implements Serializable {
+
     private final Logger log = Logger.getLogger(EditProjectAction.class);
 
     private Project project;
 
     @EJB
     private ProjectService projectService;
+
     @Inject
     private Conversation conversation;
 

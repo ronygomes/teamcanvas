@@ -1,6 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-
 import me.ronygomes.teamcanvas.domain.Phase;
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.service.ProjectService;
@@ -14,6 +13,7 @@ import org.apache.log4j.Logger;
 @Named
 @RequestScoped
 public class AddPhaseAction extends AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(AddPhaseAction.class);
 
     private Project project;

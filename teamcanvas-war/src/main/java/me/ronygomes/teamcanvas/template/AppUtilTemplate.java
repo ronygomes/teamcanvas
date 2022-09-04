@@ -11,7 +11,9 @@ import org.apache.log4j.Logger;
 import java.util.Map;
 
 public abstract class AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(AppUtilTemplate.class);
+
     private User loggedInUser;
     private Map<String, String> parameterMap;
     private FacesContext facesContext;
@@ -95,6 +97,4 @@ public abstract class AppUtilTemplate {
         log.info("Parameter:(" + paramName + ") " + paramValue);
         return paramValue;
     }
-
-
 }

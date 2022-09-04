@@ -2,13 +2,17 @@ package me.ronygomes.teamcanvas.domain;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "team")
-public class Team {
+public class Team implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "team_id")
@@ -29,7 +33,11 @@ public class Team {
             joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "team_id"),
             inverseJoinColumns = @JoinColumn(name = "user_email", referencedColumnName = "user_email")
     )
-    private List<User> teamMembers = new ArrayList<User>();
+    private List<User> teamMembers;
+
+    public Team() {
+        this.teamMembers = new ArrayList<>();
+    }
 
     public long getId() {
         return id;

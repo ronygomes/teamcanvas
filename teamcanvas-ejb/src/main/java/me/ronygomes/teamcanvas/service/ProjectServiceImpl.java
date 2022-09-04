@@ -17,33 +17,40 @@ import java.util.List;
 
 @Stateless
 public class ProjectServiceImpl implements ProjectService {
+
     private final Logger log = Logger.getLogger(ProjectServiceImpl.class);
 
     @EJB
     private ProjectDao projectDao;
+
     @EJB
     private PhaseDao phaseDao;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean saveProject(Project projectToSave) {
+
         try {
             projectDao.saveProject(projectToSave);
             return true;
         } catch (PersistenceException e) {
             log.info("Unable to save project:" + projectToSave.getProjectTitle(), e);
         }
+
         return false;
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<Project> findProjectByUser(User user) {
+
         List<Project> projects;
+
         try {
             if (user != null) {
                 projects = projectDao.findProjectByUser(user);
                 return projects;
             }
+
             log.info("Find project by user : User is null");
             return Collections.emptyList();
 
@@ -56,12 +63,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project findProjectById(long id) {
         Project project = null;
+
         try {
             project = projectDao.findProjectById(id);
             log.info("Project found id: " + id);
         } catch (PersistenceException e) {
             log.info("Project not found by id " + id, e);
         }
+
         return project;
     }
 
@@ -74,6 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
         } catch (PersistenceException e) {
             log.info("Unable to update project:" + project.getProjectTitle(), e);
         }
+
         return false;
     }
 
@@ -92,6 +102,7 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> getInProgressProject(User user) {
         List<Project> projects = projectDao.getInProgressProjects(user);
         loadPhases(projects);
+
         return projects;
     }
 
@@ -100,6 +111,4 @@ public class ProjectServiceImpl implements ProjectService {
             project.getProjectPhases();
         }
     }
-
-
 }

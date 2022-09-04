@@ -10,10 +10,10 @@ import jakarta.inject.Named;
 
 import java.util.List;
 
-
 @Named
 @RequestScoped
 public class ProjectAction extends AppUtilTemplate {
+
     private List<Project> projects;
 
     @EJB
@@ -32,5 +32,4 @@ public class ProjectAction extends AppUtilTemplate {
     public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
-
 }

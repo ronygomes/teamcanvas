@@ -23,7 +23,10 @@ import java.io.InputStream;
 @RequestScoped
 public class ProfileAction extends AppUtilTemplate {
 
-    private Logger log = Logger.getLogger(ProfileAction.class);
+    private final Logger log = Logger.getLogger(ProfileAction.class);
+
+    private static final String INPUT_PASSWORD_VIEW_ID = "password";
+    private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
 
     private User user;
     private String confirmPassword;
@@ -32,10 +35,6 @@ public class ProfileAction extends AppUtilTemplate {
 
     @EJB
     private UserService userService;
-
-    private static final String INPUT_PASSWORD_VIEW_ID = "password";
-    private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";
-
 
     @PostConstruct
     public void setUp() {
@@ -59,7 +58,6 @@ public class ProfileAction extends AppUtilTemplate {
         return confirmPassword;
     }
 
-
     public void validatePassword(ComponentSystemEvent event) {
         UIComponent components = event.getComponent();
 
@@ -74,18 +72,16 @@ public class ProfileAction extends AppUtilTemplate {
     private void renderErrorMessage(UIInput errorCausingComponent) {
         FacesMessage errorMessage = new FacesMessage("Password must match confirm password");
         errorMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-//        getFacesContext().addMessage(errorCausingComponent.getClientId(), errorMessage);
-//        getFacesContext().renderResponse();
     }
 
     private boolean passwordMatchesWithConfirmPassword(UIInput inputPassword, UIInput inputConfirmPassword) {
         if (isEmptyInput(inputPassword, inputConfirmPassword)) {
             String password = inputPassword.getLocalValue().toString();
             String confirmPassword = inputConfirmPassword.getLocalValue().toString();
-            if (confirmPassword.equals(password)) {
-                return true;
-            }
+
+            return confirmPassword.equals(password);
         }
+
         return false;
     }
 

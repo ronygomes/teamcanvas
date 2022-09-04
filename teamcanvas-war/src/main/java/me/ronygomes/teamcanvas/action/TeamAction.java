@@ -14,12 +14,13 @@ import java.util.List;
 @Named
 @RequestScoped
 public class TeamAction extends AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(TeamAction.class);
+
+    private static final String TEAM_ID_URL_PARAM = "team_id";
 
     private List<Team> teams;
     private long teamId;
-
-    private static String TEAM_ID_URL_PARAM = "team_id";
 
     @EJB
     private TeamService teamService;

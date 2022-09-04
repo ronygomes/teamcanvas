@@ -6,15 +6,16 @@ import me.ronygomes.teamcanvas.domain.User;
 import java.util.List;
 
 public interface TeamService {
-    public List<Team> findTeamByOwner(User creatorOfTeam);
 
-    public boolean saveTeam(Team team);
+    List<Team> findTeamByOwner(User creatorOfTeam);
 
-    public Team findTeamById(long teamId);
+    boolean saveTeam(Team team);
 
-    public void updateTeam(Team team);
+    Team findTeamById(long teamId);
 
-    public void removeTeam(long teamId);
+    void updateTeam(Team team);
 
-    public void removeMemberFromTeam(long teamId, String memberId);
+    void removeTeam(long teamId);
+
+    void removeMemberFromTeam(long teamId, String memberId);
 }

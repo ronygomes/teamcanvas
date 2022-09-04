@@ -18,6 +18,7 @@ import java.util.List;
 @Named
 @RequestScoped
 public class ManageTeamMemberAction extends AppUtilTemplate {
+
     private final Logger log = Logger.getLogger(ManageTeamMemberAction.class);
 
     private Team team;
@@ -26,6 +27,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
 
     @EJB
     private TeamService teamService;
+
     @EJB
     private UserService userService;
 
@@ -64,8 +66,6 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
         loadTeamFromDatabase(team.getId());
         log.info("New Member: " + member.getEmail());
 
-
-        //logTeams();
         log.info("Is team contain member: " + isUserAlreadyInTeam(member));
         if (isUserAlreadyInTeam(member)) {
             generateUserExistsErrorMessage();
@@ -84,16 +84,6 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
         } else {
             addErrorMessage("User not Found", addMemberButton);
         }
-    }
-
-    private void logTeams() {
-        List<User> teamMembers = team.getTeamMembers();
-        String teamListString = "";
-        for (User member : teamMembers) {
-            teamListString += member.getEmail() + ", ";
-        }
-
-        log.info("Old User: " + teamListString);
     }
 
     public UIComponent getAddMemberButton() {
@@ -148,6 +138,4 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
         }
         team.setTeamMembers(users);
     }
-
-
 }

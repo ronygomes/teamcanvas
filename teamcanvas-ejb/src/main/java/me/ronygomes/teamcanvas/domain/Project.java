@@ -1,16 +1,18 @@
 package me.ronygomes.teamcanvas.domain;
 
-
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
 @Table(name = "project")
-public class Project {
+public class Project implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "project_id")
@@ -42,10 +44,15 @@ public class Project {
     private User projectCreator;
 
     @OneToMany(mappedBy = "parentProject", fetch = FetchType.EAGER)
-    private List<Phase> projectPhases = new ArrayList<Phase>();
+    private List<Phase> projectPhases;
 
     @OneToMany(mappedBy = "parentProject")
-    private List<Comment> projectComments = new ArrayList<Comment>();
+    private List<Comment> projectComments;
+
+    public Project() {
+        this.projectPhases = new ArrayList<>();
+        this.projectComments = new ArrayList<>();
+    }
 
     public long getId() {
         return id;

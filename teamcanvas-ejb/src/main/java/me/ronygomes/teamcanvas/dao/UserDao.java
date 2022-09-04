@@ -5,11 +5,12 @@ import me.ronygomes.teamcanvas.domain.User;
 import java.util.List;
 
 public interface UserDao {
-    public boolean saveUser(User userToSave);
 
-    public User findUserByEmail(String emailOfUser);
+    boolean saveUser(User userToSave);
 
-    public List<User> findAllUser();
+    User findUserByEmail(String emailOfUser);
 
-    public void update(User user);
+    List<User> findAllUser();
+
+    void update(User user);
 }

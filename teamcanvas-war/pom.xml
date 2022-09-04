@@ -1,14 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>com.googlecode</groupId>
+        <groupId>me.ronygomes</groupId>
         <artifactId>teamcanvas</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.googlecode</groupId>
     <artifactId>teamcanvas-war</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -16,7 +15,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.googlecode</groupId>
+            <groupId>me.ronygomes</groupId>
             <artifactId>teamcanvas-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>

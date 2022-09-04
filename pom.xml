@@ -2,13 +2,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.googlecode</groupId>
+    <groupId>me.ronygomes</groupId>
     <artifactId>teamcanvas</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <name>Team Canvas Project Management Application</name>
-    <url>https://code.google.com/p/teamcanvas</url>
+    <url>https://github.com/ronygomes/teamcanvas</url>
 
     <modules>
         <module>teamcanvas-ejb</module>
@@ -20,14 +20,14 @@
         <dependencies>
 
             <dependency>
-                <groupId>com.googlecode</groupId>
+                <groupId>me.ronygomes</groupId>
                 <artifactId>teamcanvas-ejb</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <type>ejb</type>
             </dependency>
 
             <dependency>
-                <groupId>com.googlecode</groupId>
+                <groupId>me.ronygomes</groupId>
                 <artifactId>teamcanvas-war</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <type>war</type>

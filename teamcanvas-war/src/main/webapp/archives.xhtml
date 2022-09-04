@@ -40,7 +40,7 @@
                             <f:param name="project_id" value="#{project.id}"/>
                         </h:outputLink>
                         <h:outputText value="#{project.projectDescription}" styleClass="project-details-text">
-                            <f:converter converterId="com.googlecode.teamcanvas.TextEllipsisConverter"/>
+                            <f:converter converterId="me.ronygomes.teamcanvas.TextEllipsisConverter"/>
                         </h:outputText>
                     </div>
                 </ui:repeat>

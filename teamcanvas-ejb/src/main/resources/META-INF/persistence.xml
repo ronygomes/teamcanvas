@@ -12,7 +12,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         -->
         <jta-data-source>jdbc/teamcanvas</jta-data-source>
-<!--        <class>com.googlecode.teamcanvas.domain.User</class>-->
+<!--        <class>User</class>-->
         <!--
         <properties>
             <property name="hibernate.show_sql" value="true"/>

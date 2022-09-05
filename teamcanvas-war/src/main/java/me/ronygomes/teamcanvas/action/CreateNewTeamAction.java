@@ -65,10 +65,10 @@ public class CreateNewTeamAction extends AppUtilTemplate {
 
     private void setTeamCreationTime() {
         Date currentTime = Calendar.getInstance().getTime();
-        team.setTeamCreationTime(currentTime);
+        team.setCreationDate(currentTime);
     }
 
     private void setTeamCreator() {
-        team.setTeamCreator(getLoggedInUser());
+        team.setCreator(getLoggedInUser());
     }
 }

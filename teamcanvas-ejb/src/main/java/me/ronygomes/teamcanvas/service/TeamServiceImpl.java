@@ -36,7 +36,7 @@ public class TeamServiceImpl implements TeamService {
             teamDao.saveTeam(team);
             return true;
         } catch (PersistenceException e) {
-            log.info("Unable to save team: " + team.getTeamName(), e);
+            log.info("Unable to save team: " + team.getName(), e);
             return false;
         }
     }
@@ -46,7 +46,7 @@ public class TeamServiceImpl implements TeamService {
         Team team = null;
         try {
             team = teamDao.findTeamById(teamId);
-            log.info("Team Found with id :" + teamId + " Team Name: " + team.getTeamName());
+            log.info("Team Found with id :" + teamId + " Team Name: " + team.getName());
         } catch (PersistenceException e) {
             log.info("Team not found: " + teamId, e);
         }
@@ -71,7 +71,7 @@ public class TeamServiceImpl implements TeamService {
     public void removeMemberFromTeam(long teamId, String memberId) {
         Team team = teamDao.findTeamById(teamId);
         User user = userDao.findUserByEmail(memberId);
-        List<User> teamMembers = team.getTeamMembers();
+        List<User> teamMembers = team.getMembers();
         if (teamMembers.contains(user)) {
             teamMembers.remove(user);
         }

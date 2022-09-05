@@ -35,8 +35,8 @@
                 <h4>Team Summary</h4>
                 <ui:repeat var="team" value="#{dashboardAction.teams}">
                     <div class="team-list">
-                        <h:outputText value="#{team.teamName}"/>
-                        <h:outputText value=" ( #{team.teamMembers.size()} members)"/>
+                        <h:outputText value="#{team.name}"/>
+                        <h:outputText value=" ( #{team.members.size()} members)"/>
                     </div>
                 </ui:repeat>
 

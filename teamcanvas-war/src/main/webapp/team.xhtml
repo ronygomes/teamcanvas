@@ -19,8 +19,8 @@
             <h:outputLink value="create-new-team.xhtml">Create New Team</h:outputLink>
             <ui:repeat var="team" value="#{teamAction.teams}" varStatus="status">
                 <div class="project">
-                    <h:outputText styleClass="team-name" value="#{team.teamName}"/>
-                    <h:outputText styleClass="team-name" value="#{team.teamMembers.size()}"/>
+                    <h:outputText styleClass="team-name" value="#{team.name}"/>
+                    <h:outputText styleClass="team-name" value="#{team.members.size()}"/>
                     <h:outputText styleClass="team-name" value=" member(s)"/>
 
                     <h:form>

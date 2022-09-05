@@ -15,7 +15,7 @@ public class TeamDaoImpl implements TeamDao {
 
     private final Logger log = Logger.getLogger(TeamDaoImpl.class);
 
-    private static final String FIND_TEAM_BY_USER = "SELECT t FROM Team t WHERE t.teamCreator.email = :userEmail";
+    private static final String FIND_TEAM_BY_USER = "SELECT t FROM Team t WHERE t.creator.email = :userEmail";
 
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;

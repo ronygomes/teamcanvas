@@ -24,7 +24,9 @@ Enter the admin password again> 12345
 bin/asadmin deploy /Users/manuel/Documents/GitHub/teamcanvas/teamcanvas-app/target/teamcanvas.ear
 
 $ docker run --name teamcanvas -p 3306:3306 -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=teamcanvas -d mysql:5.7.38
-$ docker run -it --rm postgres:14.4 psql -h 192.168.0.60 -U postgres -D teamcanvas
+
+$ docker run -d --name teamcanvas -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=teamcanvas -e POSTGRES_USER=postgres postgres:14.4
+$ docker run -it --rm postgres:14.4 psql -h 192.168.0.60 -U postgres
 
 $ docker run --name teamcanvas -P -e MYSQL_ROOT_PASSWORD=12345 -e MYSQL_DATABASE=teamcanvas -d vsamov/mysql-5.1.73
 

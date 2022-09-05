@@ -23,12 +23,12 @@
                         <h:message for="createTeamButton" styleClass="error-message"/>
 
                         <h:outputText/>
-                        <h:message for="teamName" styleClass="error-message"/>
+                        <h:message for="name" styleClass="error-message"/>
 
-                        <h:outputLabel for="teamName">Team Name:</h:outputLabel>
+                        <h:outputLabel for="name">Team Name:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="teamName" value="#{createNewTeamAction.team.teamName}" required="true"/>
-                            <span class="reruired">*</span>
+                            <h:inputText id="name" value="#{createNewTeamAction.team.name}" required="true"/>
+                            <span class="required">*</span>
                         </h:panelGroup>
 
                         <h:panelGroup>

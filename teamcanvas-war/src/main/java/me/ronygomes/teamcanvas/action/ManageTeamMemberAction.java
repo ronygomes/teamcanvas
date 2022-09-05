@@ -79,7 +79,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     private void saveMemberToDatabase() {
         member = userService.findUserByEmail(member.getEmail());
         if (member != null) {
-            team.getTeamMembers().add(member);
+            team.getMembers().add(member);
             teamService.updateTeam(team);
         } else {
             addErrorMessage("User not Found", addMemberButton);
@@ -99,7 +99,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     }
 
     private boolean isUserAlreadyInTeam(User member) {
-        List<User> users = team.getTeamMembers();
+        List<User> users = team.getMembers();
         for (User user : users) {
             if (user.getEmail().equals(member.getEmail()))
                 return true;
@@ -127,7 +127,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     }
 
     private void removeMemberFromAction(String memberId) {
-        List<User> users = team.getTeamMembers();
+        List<User> users = team.getMembers();
         Iterator<User> it = users.iterator();
 
         while (it.hasNext()) {
@@ -136,6 +136,6 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
                 it.remove();
             }
         }
-        team.setTeamMembers(users);
+        team.setMembers(users);
     }
 }

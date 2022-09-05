@@ -15,14 +15,14 @@
         <ui:param name="selectedPage" value="team"/>
         <ui:define name="content">
 
-            <h2>Add Team Member: #{manageTeamMemberAction.team.teamName}</h2>
+            <h2>Add Team Member: #{manageTeamMemberAction.team.name}</h2>
             <h:form>
                 <h:inputHidden id="team_id" value="#{manageTeamMemberAction.team.id}"/>
                 <fieldset>
                     <legend>Team Members</legend>
                     <h:panelGrid columns="2">
                         <h:message for="addTeamMemberButton" styleClass="error-message"/>
-                        <ui:repeat var="member" value="#{manageTeamMemberAction.team.teamMembers}" varStatus="status">
+                        <ui:repeat var="member" value="#{manageTeamMemberAction.team.members}" varStatus="status">
                             <div class="project">
                                 <h:outputText value="#{member.email}"/>
                                 <h:outputLink>
@@ -32,7 +32,7 @@
                                 </h:outputLink>
                             </div>
                         </ui:repeat>
-                        <h:outputText rendered="#{empty manageTeamMemberAction.team.teamMembers}"
+                        <h:outputText rendered="#{empty manageTeamMemberAction.team.members}"
                                       value="No Member Found!"/>
 
                         <h:outputText/>

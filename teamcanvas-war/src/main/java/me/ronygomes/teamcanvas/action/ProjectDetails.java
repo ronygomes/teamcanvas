@@ -45,7 +45,7 @@ public class ProjectDetails extends AppUtilTemplate {
     }
 
     private void findAllTaskOfPhases() {
-        List<Phase> phases = project.getProjectPhases();
+        List<Phase> phases = project.getPhases();
 
         for (Phase phase : phases) {
             List<Task> tasks = taskService.findTaskByPhaseId(phase.getId());

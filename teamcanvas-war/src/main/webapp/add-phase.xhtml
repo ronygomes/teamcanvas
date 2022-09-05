@@ -15,7 +15,7 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
-            <h2>Add New Phase : #{addPhaseAction.project.projectTitle}</h2>
+            <h2>Add New Phase : #{addPhaseAction.project.title}</h2>
             <h:form>
                 <h:inputHidden id="project_id" value="#{addPhaseAction.project.id}"/>
                 <fieldset>
@@ -25,11 +25,11 @@
                         <h:message for="addPhase" styleClass="error-message"/>
 
                         <h:outputText/>
-                        <h:message for="phaseName" styleClass="error-message"/>
+                        <h:message for="name" styleClass="error-message"/>
 
-                        <h:outputLabel for="phaseName">Phase Name:</h:outputLabel>
+                        <h:outputLabel for="name">Phase Name:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="phaseName" value="#{addPhaseAction.phase.phaseName}" required="true"/>
+                            <h:inputText id="name" value="#{addPhaseAction.phase.name}" required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 

@@ -3,8 +3,7 @@ package me.ronygomes.teamcanvas.domain;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -12,39 +11,38 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final int EMAIL_LENGTH = 100;
+    private static final int FIRST_NAME_LENGTH = 70;
+    private static final int LAST_NAME_LENGTH = 50;
+    private static final int PASSWORD_LENGTH = 50;
+
     @Id
-    @Column(name = "user_email")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUser")
+    @SequenceGenerator(name = "seqUser", sequenceName = "users_id_seq", allocationSize = 1)
+    private int id;
+
+    @Column(nullable = false, updatable = false, unique = true, length = EMAIL_LENGTH)
     private String email;
 
-    @Column(name = "user_first_name")
+    @Column(name = "first_name", nullable = false, length = FIRST_NAME_LENGTH)
     private String firstName;
 
-    @Column(name = "user_last_name")
+    @Column(name = "last_name", nullable = false, length = LAST_NAME_LENGTH)
     private String lastName;
 
-    @Column(name = "hashed_password")
+    @Column(name = "hashed_password", nullable = false, length = PASSWORD_LENGTH)
     private String hashedPassword;
 
-    @OneToMany(mappedBy = "projectCreator")
-    private List<Project> projects;
-
-    @OneToMany(mappedBy = "commentCreatedBy")
-    private List<Comment> comments;
-
-    @ManyToMany(mappedBy = "teamMembers")
-    private List<Team> teams;
-
-    @ManyToMany(mappedBy = "assignedToUsers")
-    private List<Task> userTasks;
-
     @Lob
+    @Column(name = "profile_image")
     private byte[] profileImage;
 
-    public User() {
-        this.projects = new ArrayList<>();
-        this.comments = new ArrayList<>();
-        this.teams = new ArrayList<>();
-        this.userTasks = new ArrayList<>();
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -79,30 +77,6 @@ public class User implements Serializable {
         this.hashedPassword = hashedPassword;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public boolean equals(User o) {
-
-        if (o != null && o instanceof User) {
-            return this.email == o.email;
-        }
-        return false;
-    }
-
     public byte[] getProfileImage() {
         return profileImage;
     }
@@ -111,4 +85,17 @@ public class User implements Serializable {
         this.profileImage = profileImage;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getId() == user.getId() &&
+                getEmail().equals(user.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail());
+    }
 }

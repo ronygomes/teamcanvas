@@ -16,7 +16,7 @@
         <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
             <h2>Edit Project:
-                <h:outputText value="#{editProjectAction.project.projectTitle}"/>
+                <h:outputText value="#{editProjectAction.project.title}"/>
             </h2>
             <h:form>
                 <fieldset>
@@ -30,28 +30,28 @@
 
                         <h:outputLabel for="projectName">Project Name:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="projectName" value="#{editProjectAction.project.projectTitle}"
+                            <h:inputText id="projectName" value="#{editProjectAction.project.title}"
                                          required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
                         <h:outputText/>
-                        <h:message for="projectDescription" styleClass="error-message"/>
+                        <h:message for="description" styleClass="error-message"/>
 
-                        <h:outputLabel for="projectDescription">Project Description:</h:outputLabel>
+                        <h:outputLabel for="description">Project Description:</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputTextarea id="projectDescription"
-                                             value="#{editProjectAction.project.projectDescription}"
+                            <h:inputTextarea id="description"
+                                             value="#{editProjectAction.project.description}"
                                              required="true" rows="10" cols="35"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
                         <h:outputText/>
-                        <h:message for="projectDueDate" styleClass="error-message"/>
+                        <h:message for="dueDate" styleClass="error-message"/>
 
-                        <h:outputLabel for="projectDueDate">Due Date:</h:outputLabel>
+                        <h:outputLabel for="dueDate">Due Date:</h:outputLabel>
                         <h:panelGroup>
-                            <p:calendar value="#{editProjectAction.project.projectDueDate}" id="projectDueDate"
+                            <p:calendar value="#{editProjectAction.project.dueDate}" id="dueDate"
                                         showOn="button" mindate="#{editProjectAction.today}"/>
                         </h:panelGroup>
                         <h:outputText/>

@@ -15,16 +15,16 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
-            <h2>Project Details : #{projectDetails.project.projectTitle}</h2>
+            <h2>Project Details : #{projectDetails.project.title}</h2>
             <ul>
                 <h:outputLink value="add-phase.xhtml">
                     <h:outputText value="Add Phase"/>
                     <f:param name="project_id" value="#{projectDetails.project.id}"/>
                 </h:outputLink>
             </ul>
-            <ui:repeat value="#{projectDetails.project.projectPhases}" var="phase">
+            <ui:repeat value="#{projectDetails.project.phases}" var="phase">
                 <div>
-                    <span class="phase-title">#{phase.phaseName}</span>
+                    <span class="phase-title">#{phase.name}</span>
                     <h:outputLink value="add-task.xhtml" styleClass="add-task-link">
                         <h:outputText value="Add Task"/>
                         <f:param name="phase_id" value="#{phase.id}"/>
@@ -33,7 +33,7 @@
                     <ul class="tasks">
                         <ui:repeat value="#{phase.tasks}" var="task">
                             <li>
-                                <h:outputText styleClass="li-item" value="#{task.taskTitle}"/>
+                                <h:outputText styleClass="li-item" value="#{task.title}"/>
                                 <ui:remove>
                                     <h:outputLink value="task-details.xhtml">
                                         <h:outputText styleClass="li-item" value="Details"/>

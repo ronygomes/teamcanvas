@@ -20,11 +20,11 @@
                 <h:outputLink value="create-new-project.xhtml">Create New Project</h:outputLink>
                 <ui:repeat var="project" value="#{projectAction.projects}" varStatus="status">
                     <div class="project">
-                        <h:outputText value="#{project.projectTitle}" styleClass="project-title"
+                        <h:outputText value="#{project.title}" styleClass="project-title"
                                       style="font-weight: bold"/>
-                        <h:outputText rendered="#{project.projectDueDate ne null}" value="Due Date: "
+                        <h:outputText rendered="#{project.dueDate ne null}" value="Due Date: "
                                       styleClass="project-date"/>
-                        <h:outputText rendered="#{project.projectDueDate ne null}" value="#{project.projectDueDate}"
+                        <h:outputText rendered="#{project.dueDate ne null}" value="#{project.dueDate}"
                                       styleClass="project-date">
                             <f:convertDateTime pattern="EEE, MMM d, yyyy"/>
                         </h:outputText>
@@ -38,7 +38,7 @@
                             <h:outputText value="Edit"/>
                             <f:param name="project_id" value="#{project.id}"/>
                         </h:outputLink>
-                        <h:outputText value="#{project.projectDescription}" styleClass="project-details-text">
+                        <h:outputText value="#{project.description}" styleClass="project-details-text">
                             <f:converter converterId="me.ronygomes.teamcanvas.TextEllipsisConverter"/>
                         </h:outputText>
                     </div>

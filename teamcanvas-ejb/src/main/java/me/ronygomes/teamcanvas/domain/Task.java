@@ -3,68 +3,56 @@ package me.ronygomes.teamcanvas.domain;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 public class Task implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final int TASK_TITLE_LENGTH = 100;
+    private static final int TASK_DESCRIPTION_LENGTH = 2000;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "task_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqTask")
+    @SequenceGenerator(name = "seqTask", sequenceName = "tasks_id_seq", allocationSize = 1)
     private long id;
 
-    @Column(name = "task_title")
-    private String taskTitle;
+    @Column(nullable = false, length = TASK_TITLE_LENGTH)
+    private String title;
 
-    @Column(name = "task_description")
-    private String taskDescription;
+    @Column(length = TASK_DESCRIPTION_LENGTH)
+    private String description;
 
-    @Column(name = "complete_percentage")
+    @Column(name = "complete_percentage", nullable = false)
     private int completePercentage;
 
-    @Column(name = "task_priority")
-    private int taskPriority;
+    private int priority;
 
-    @Column(name = "task_created_on")
-    private Date taskCreationTime;
+    @Column(name = "creation_date", nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
 
-    @Column(name = "task_modified_on")
-    private Date taskLastModifiedTime;
+    @Column(name = "last_modification_date", insertable = false)
+    private Date lastModificationDate;
 
-    @Column(name = "task_is_private")
+    @Column(name = "is_private")
     private boolean isPrivate;
 
-    @Column(name = "task_due_date")
-    private Date taskDueDate;
+    @Column(name = "due_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dueDate;
 
-    @Column(name = "task_status")
-    private int taskStatus;
+    private int status;
 
     @ManyToOne
     @JoinColumn(name = "phase_id")
-    private Phase parentPhase;
+    private Phase phase;
 
     @ManyToOne
-    @JoinColumn(name = "user_email")
-    private User taskCreatedBy;
-
-    @ManyToMany
-    @JoinTable(name = "user_has_task",
-            joinColumns = @JoinColumn(name = "task_id",
-                    referencedColumnName = "task_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_email",
-                    referencedColumnName = "user_email")
-    )
-    private List<User> assignedToUsers;
-
-    public Task() {
-        this.assignedToUsers = new ArrayList<>();
-    }
+    @JoinColumn(name = "creator_id", nullable = false, updatable = false)
+    private User creator;
 
     public long getId() {
         return id;
@@ -74,20 +62,20 @@ public class Task implements Serializable {
         this.id = id;
     }
 
-    public String getTaskTitle() {
-        return taskTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTaskTitle(String taskTitle) {
-        this.taskTitle = taskTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getCompletePercentage() {
@@ -98,28 +86,28 @@ public class Task implements Serializable {
         this.completePercentage = completePercentage;
     }
 
-    public int getTaskPriority() {
-        return taskPriority;
+    public int getPriority() {
+        return priority;
     }
 
-    public void setTaskPriority(int taskPriority) {
-        this.taskPriority = taskPriority;
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 
-    public Date getTaskCreationTime() {
-        return taskCreationTime;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setTaskCreationTime(Date taskCreationTime) {
-        this.taskCreationTime = taskCreationTime;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Date getTaskLastModifiedTime() {
-        return taskLastModifiedTime;
+    public Date getLastModificationDate() {
+        return lastModificationDate;
     }
 
-    public void setTaskLastModifiedTime(Date taskLastModifiedTime) {
-        this.taskLastModifiedTime = taskLastModifiedTime;
+    public void setLastModificationDate(Date lastModificationDate) {
+        this.lastModificationDate = lastModificationDate;
     }
 
     public boolean getPrivate() {
@@ -130,36 +118,36 @@ public class Task implements Serializable {
         this.isPrivate = isPrivate;
     }
 
-    public Date getTaskDueDate() {
-        return taskDueDate;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public void setTaskDueDate(Date taskDueDate) {
-        this.taskDueDate = taskDueDate;
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public Phase getParentPhase() {
-        return parentPhase;
+    public Phase getPhase() {
+        return phase;
     }
 
-    public void setParentPhase(Phase parentPhase) {
-        this.parentPhase = parentPhase;
+    public void setPhase(Phase phase) {
+        this.phase = phase;
     }
 
-    public User getTaskCreatedBy() {
-        return taskCreatedBy;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setTaskCreatedBy(User taskCreatedBy) {
-        this.taskCreatedBy = taskCreatedBy;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
-    public int getTaskStatus() {
-        return taskStatus;
+    public int getStatus() {
+        return status;
     }
 
-    public void setTaskStatus(int taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public static class Status {

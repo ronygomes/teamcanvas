@@ -15,17 +15,17 @@ public class ProjectDaoImpl implements ProjectDao {
 
     private final Logger log = Logger.getLogger(ProjectDaoImpl.class);
 
-    private static final String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.projectCreator.email = :userEmail";
+    private static final String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.creator.email = :userEmail";
 
     private static final String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p" +
-            " WHERE p.projectCreator.email = :userEmail AND p.projectStatus = :status";
+            " WHERE p.creator.email = :userEmail AND p.status = :status";
 
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;
 
     @Override
     public void saveProject(Project projectToSave) {
-        projectToSave.setProjectStatus(Project.Status.IN_PROGRESS);
+        projectToSave.setStatus(Project.Status.IN_PROGRESS);
         em.persist(projectToSave);
     }
 

@@ -8,50 +8,49 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "project")
+@Table(name = "projects")
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final int PROJECT_NAME_LENGTH = 100;
+    private static final int PROJECT_DESCRIPTION_LENGTH = 2000;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "project_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProject")
+    @SequenceGenerator(name = "seqProject", sequenceName = "projects_id_seq", allocationSize = 1)
     private long id;
 
-    @Column(name = "project_title")
-    private String projectTitle;
+    @Column(nullable = false, length = PROJECT_NAME_LENGTH)
+    private String title;
 
-    @Column(name = "project_description")
-    private String projectDescription;
+    @Column(length = PROJECT_DESCRIPTION_LENGTH)
+    private String description;
 
-    @Column(name = "project_creation_time")
-    private Date projectCreationTime;
+    @Column(name = "creation_date", updatable = false, nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
 
-    @Column(name = "project_last_modification_time")
-    private Date projectLastModificationTime;
+    @Column(name = "last_modification_date", insertable = false)
+    private Date lastModificationDate;
 
-    @Column(name = "project_due_date")
-    private Date projectDueDate;
+    @Column(name = "due_date")
+    private Date dueDate;
 
-    @Column(name = "project_complete_percentage")
-    private int projectCompletePercentage;
+    @Column(name = "complete_percentage")
+    private int completePercentage;
 
-    @Column(name = "project_status")
-    private int projectStatus;
+    private int status;
 
     @ManyToOne
-    @JoinColumn(name = "project_creator_email")
-    private User projectCreator;
+    @JoinColumn(name = "creator_id", nullable = false, updatable = false)
+    private User creator;
 
-    @OneToMany(mappedBy = "parentProject", fetch = FetchType.EAGER)
-    private List<Phase> projectPhases;
-
-    @OneToMany(mappedBy = "parentProject")
-    private List<Comment> projectComments;
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private List<Phase> phases;
 
     public Project() {
-        this.projectPhases = new ArrayList<>();
-        this.projectComments = new ArrayList<>();
+        this.phases = new ArrayList<>();
     }
 
     public long getId() {
@@ -62,84 +61,76 @@ public class Project implements Serializable {
         this.id = id;
     }
 
-    public String getProjectTitle() {
-        return projectTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setProjectTitle(String projectTitle) {
-        this.projectTitle = projectTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getProjectDescription() {
-        return projectDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setProjectDescription(String projectDescription) {
-        this.projectDescription = projectDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Date getProjectCreationTime() {
-        return projectCreationTime;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setProjectCreationTime(Date projectCreationTime) {
-        this.projectCreationTime = projectCreationTime;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Date getProjectLastModificationTime() {
-        return projectLastModificationTime;
+    public Date getLastModificationDate() {
+        return lastModificationDate;
     }
 
-    public void setProjectLastModificationTime(Date projectLastModificationTime) {
-        this.projectLastModificationTime = projectLastModificationTime;
+    public void setLastModificationDate(Date lastModificationDate) {
+        this.lastModificationDate = lastModificationDate;
     }
 
-    public Date getProjectDueDate() {
-        return projectDueDate;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public void setProjectDueDate(Date projectDueDate) {
-        this.projectDueDate = projectDueDate;
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public int getProjectCompletePercentage() {
-        return projectCompletePercentage;
+    public int getCompletePercentage() {
+        return completePercentage;
     }
 
-    public void setProjectCompletePercentage(int projectCompletePercentage) {
-        this.projectCompletePercentage = projectCompletePercentage;
+    public void setCompletePercentage(int completePercentage) {
+        this.completePercentage = completePercentage;
     }
 
-    public User getProjectCreator() {
-        return projectCreator;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setProjectCreator(User projectCreator) {
-        this.projectCreator = projectCreator;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
-    public List<Phase> getProjectPhases() {
-        return projectPhases;
+    public List<Phase> getPhases() {
+        return phases;
     }
 
-    public void setProjectPhases(List<Phase> projectPhases) {
-        this.projectPhases = projectPhases;
+    public void setPhases(List<Phase> phases) {
+        this.phases = phases;
     }
 
-    public int getProjectStatus() {
-        return projectStatus;
+    public int getStatus() {
+        return status;
     }
 
-    public void setProjectStatus(int projectStatus) {
-        this.projectStatus = projectStatus;
-    }
-
-    public List<Comment> getProjectComments() {
-        return projectComments;
-    }
-
-    public void setProjectComments(List<Comment> projectComments) {
-        this.projectComments = projectComments;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public static class Status {

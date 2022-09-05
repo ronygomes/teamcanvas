@@ -33,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectDao.saveProject(projectToSave);
             return true;
         } catch (PersistenceException e) {
-            log.info("Unable to save project:" + projectToSave.getProjectTitle(), e);
+            log.info("Unable to save project:" + projectToSave.getTitle(), e);
         }
 
         return false;
@@ -81,7 +81,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectDao.updateProject(project);
             return true;
         } catch (PersistenceException e) {
-            log.info("Unable to update project:" + project.getProjectTitle(), e);
+            log.info("Unable to update project:" + project.getTitle(), e);
         }
 
         return false;
@@ -91,7 +91,7 @@ public class ProjectServiceImpl implements ProjectService {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addPhase(Project project, Phase phase) {
 
-        phase.setParentProject(project);
+        phase.setProject(project);
         phaseDao.savePhase(phase);
 
         projectDao.updateProject(project);
@@ -108,7 +108,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     private void loadPhases(List<Project> projects) {
         for (Project project : projects) {
-            project.getProjectPhases();
+            project.getPhases();
         }
     }
 }

@@ -15,7 +15,7 @@
     <ui:composition template="WEB-INF/template/layout.xhtml">
         <ui:param name="selectedPage" value="project"/>
         <ui:define name="content">
-            <h2>Add New Task: Phase (#{addTaskAction.phase.phaseName})</h2>
+            <h2>Add New Task: Phase (#{addTaskAction.phase.name})</h2>
             <h:form>
                 <h:inputHidden id="project_id" value="#{addTaskAction.phase.id}"/>
                 <fieldset>
@@ -25,11 +25,11 @@
                         <h:message for="addTaskToPhase" styleClass="error-message"/>
 
                         <h:outputText/>
-                        <h:message for="taskTitle" styleClass="error-message"/>
+                        <h:message for="title" styleClass="error-message"/>
 
-                        <h:outputLabel for="taskTitle">Task Title</h:outputLabel>
+                        <h:outputLabel for="title">Task Title</h:outputLabel>
                         <h:panelGroup>
-                            <h:inputText id="taskTitle" value="#{addTaskAction.task.taskTitle}" required="true"/>
+                            <h:inputText id="title" value="#{addTaskAction.task.title}" required="true"/>
                             <span class="reruired">*</span>
                         </h:panelGroup>
 
@@ -39,7 +39,7 @@
                                              value="Add Task"/>
                             <h:outputLink value="project-details.xhtml">
                                 <h:outputText value="Project Details"/>
-                                <f:param name="project_id" value="#{addTaskAction.phase.parentProject.id}"/>
+                                <f:param name="project_id" value="#{addTaskAction.phase.project.id}"/>
                             </h:outputLink>
                         </h:panelGroup>
                     </h:panelGrid>

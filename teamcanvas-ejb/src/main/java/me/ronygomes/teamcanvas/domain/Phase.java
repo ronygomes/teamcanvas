@@ -7,27 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "phase")
+@Table(name = "phases")
 public class Phase implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final int PHASE_NAME_LENGTH = 100;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "phase_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPhase")
+    @SequenceGenerator(name = "seqPhase", sequenceName = "phases_id_seq", allocationSize = 1)
     private long id;
 
-    @Column(name = "phase_name")
-    private String phaseName;
+    @Column(nullable = false, length = PHASE_NAME_LENGTH)
+    private String name;
 
-    @Column(name = "phase_ordinal")
-    private int phaseOrdinal;
+    @Column(nullable = false)
+    private int ordinal;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project parentProject;
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
 
-    @OneToMany(mappedBy = "parentPhase")
+    @OneToMany(mappedBy = "phase")
     private List<Task> tasks;
 
     public Phase() {
@@ -42,28 +44,28 @@ public class Phase implements Serializable {
         this.id = id;
     }
 
-    public String getPhaseName() {
-        return phaseName;
+    public String getName() {
+        return name;
     }
 
-    public void setPhaseName(String phaseName) {
-        this.phaseName = phaseName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getPhaseOrdinal() {
-        return phaseOrdinal;
+    public int getOrdinal() {
+        return ordinal;
     }
 
-    public void setPhaseOrdinal(int phaseOrdinal) {
-        this.phaseOrdinal = phaseOrdinal;
+    public void setOrdinal(int ordinal) {
+        this.ordinal = ordinal;
     }
 
-    public Project getParentProject() {
-        return parentProject;
+    public Project getProject() {
+        return project;
     }
 
-    public void setParentProject(Project parentProject) {
-        this.parentProject = parentProject;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public List<Task> getTasks() {

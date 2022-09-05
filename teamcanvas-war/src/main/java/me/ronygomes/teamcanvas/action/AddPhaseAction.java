@@ -62,11 +62,11 @@ public class AddPhaseAction extends AppUtilTemplate {
     }
 
     public String addPhaseToProject() {
-        log.info("Phase : " + phase.getPhaseName());
+        log.info("Phase : " + phase.getName());
         log.info("Project:" + project.getId());
         project = projectService.findProjectById(project.getId());
 
-        project.getProjectPhases().add(phase);
+        project.getPhases().add(phase);
         projectService.addPhase(project, phase);
 
         return "project-details.xhtml?project_id=" + project.getId() + "&faces-redirect=true";

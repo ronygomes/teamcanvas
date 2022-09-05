@@ -27,11 +27,11 @@ public class TaskServiceImpl implements TaskService {
     public boolean saveTask(Task task) {
 
         try {
-            task.setTaskCreationTime(getCurrentTime());
+            task.setCreationDate(getCurrentTime());
             taskDao.saveTask(task);
             return true;
         } catch (PersistenceException e) {
-            log.info("Unable to save task:" + task.getTaskTitle(), e);
+            log.info("Unable to save task:" + task.getTitle(), e);
         }
 
         return false;
@@ -58,16 +58,16 @@ public class TaskServiceImpl implements TaskService {
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Project findProjectByTaskId(long taskId) {
         Task task = taskDao.findTaskById(taskId);
-        Phase phase = task.getParentPhase();
-        Project project = phase.getParentProject();
+        Phase phase = task.getPhase();
+        Project project = phase.getProject();
         log.info("Project Id: " + (project == null ? "null" : project.getId()));
         return project;
     }
 
     private void updateTaskInstance(Task modifiedTask, Task oldTask) {
-        modifiedTask.setTaskCreatedBy(oldTask.getTaskCreatedBy());
-        modifiedTask.setTaskCreationTime(oldTask.getTaskCreationTime());
-        modifiedTask.setParentPhase(oldTask.getParentPhase());
+        modifiedTask.setCreator(oldTask.getCreator());
+        modifiedTask.setCreationDate(oldTask.getCreationDate());
+        modifiedTask.setPhase(oldTask.getPhase());
     }
 
     private Date getCurrentTime() {

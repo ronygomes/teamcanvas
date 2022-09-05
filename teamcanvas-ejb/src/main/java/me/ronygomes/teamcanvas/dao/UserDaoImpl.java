@@ -18,7 +18,8 @@ public class UserDaoImpl implements UserDao {
 
     private final Logger log = Logger.getLogger(UserDaoImpl.class);
 
-    private static final String FIND_ALL_USER = "select u from User u";
+    private static final String FIND_ALL_USER = "FROM User";
+    private static final String FIND_USER_EMAIL = "FROM User u WHERE u.email = :email";
 
     @PersistenceContext(unitName = "persistDB")
     private EntityManager em;
@@ -35,7 +36,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     public User findUserByEmail(String emailOfUser) {
-        return em.find(User.class, emailOfUser);
+        List<User> users = em.createQuery(FIND_USER_EMAIL, User.class)
+                .setParameter("email", emailOfUser)
+                .getResultList();
+
+        log.error("users.size(): " + (users == null ? -1 : users.size()));
+        if (users == null || users.isEmpty()) return null;
+        return users.get(0);
     }
 
     @Override

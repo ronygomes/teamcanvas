@@ -24,7 +24,9 @@
 
         <!-- Payara server uses eclipse link as JPA implementation -->
         <properties>
+            <!--
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            -->
             <property name="jakarta.persistence.sql-load-script-source" value="META-INF/teamcanvas.sql"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>

@@ -66,10 +66,10 @@ public class CreateNewProjectAction extends AppUtilTemplate {
 
     private void setCurrentTimeAsProjectCreationTime() {
         Date currentTime = Calendar.getInstance().getTime();
-        project.setProjectCreationTime(currentTime);
+        project.setCreationDate(currentTime);
     }
 
     private void setLoggedInUserAsProjectCreator() {
-        project.setProjectCreator(getLoggedInUser());
+        project.setCreator(getLoggedInUser());
     }
 }

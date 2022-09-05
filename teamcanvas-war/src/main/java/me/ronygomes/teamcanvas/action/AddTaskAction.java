@@ -55,7 +55,7 @@ public class AddTaskAction extends AppUtilTemplate {
     private void loadPhaseFromDatabase() {
         long phaseId = getLongParamValue(PHASE_ID_PARAM_KEY);
         phase = phaseService.findPhaseById(phaseId);
-        log.info("Phase : " + phase.getPhaseName());
+        log.info("Phase : " + phase.getName());
     }
 
     public Phase getPhase() {
@@ -76,13 +76,14 @@ public class AddTaskAction extends AppUtilTemplate {
 
     public String addTaskToPhase() {
         log.info("Phase id: " + phase.getId());
-        log.info("Task : " + task.getTaskTitle());
+        log.info("Task : " + task.getTitle());
 
         phase = phaseService.findPhaseById(phase.getId());
-        task.setParentPhase(phase);
+        task.setPhase(phase);
+        task.setCreator(getLoggedInUser());
 
         taskService.saveTask(task);
-        return "project-details.xhtml?project_id=" + phase.getParentProject().getId() + "&faces-redirect=true";
+        return "project-details.xhtml?project_id=" + phase.getProject().getId() + "&faces-redirect=true";
 
     }
 }

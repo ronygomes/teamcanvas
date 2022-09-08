@@ -50,6 +50,37 @@
                     <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>
+
+            <!-- Inspiration: https://stackoverflow.com/questions/8902900/how-to-strip-blank-and-comment-lines-from-text-file-during-maven-compile-process -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sanitize-sql</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replaceregexp match="^--.*" replace="" byline="true">
+                                    <fileset dir="${basedir}/target/classes/META-INF/">
+                                        <include name="*.sql"/>
+                                    </fileset>
+                                </replaceregexp>
+
+                                <replaceregexp match="\r?\n" replace=" " flags="gis">
+                                    <fileset dir="${basedir}/target/classes/META-INF/">
+                                        <include name="*.sql"/>
+                                    </fileset>
+                                </replaceregexp>
+                            </target>
+                        </configuration>
+
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
     </build>

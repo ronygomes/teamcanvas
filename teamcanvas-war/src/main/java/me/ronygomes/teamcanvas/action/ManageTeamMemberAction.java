@@ -10,7 +10,8 @@ import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestScoped
 public class ManageTeamMemberAction extends AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(ManageTeamMemberAction.class);
+    private final Logger log = LogManager.getLogger(ManageTeamMemberAction.class);
 
     private Team team;
     private User member;

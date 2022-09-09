@@ -4,14 +4,15 @@ import me.ronygomes.teamcanvas.dao.UserDao;
 import me.ronygomes.teamcanvas.domain.User;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class UserServiceImpl implements UserService {
 
-    private final Logger log = Logger.getLogger(UserServiceImpl.class);
+    private final Logger log = LogManager.getLogger(UserServiceImpl.class);
 
     @EJB
     private UserDao userDao;

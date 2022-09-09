@@ -9,7 +9,8 @@ import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
 import jakarta.persistence.PersistenceException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.List;
 @Stateless
 public class TaskServiceImpl implements TaskService {
 
-    private final Logger log = Logger.getLogger(TaskServiceImpl.class);
+    private final Logger log = LogManager.getLogger(TaskServiceImpl.class);
 
     @EJB
     private TaskDao taskDao;

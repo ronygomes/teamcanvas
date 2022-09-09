@@ -10,13 +10,14 @@ import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named
 @RequestScoped
 public class LoginAction {
 
-    private final Logger log = Logger.getLogger(LoginAction.class);
+    private final Logger log = LogManager.getLogger(LoginAction.class);
 
     private String userEmail;
     private String userPassword;

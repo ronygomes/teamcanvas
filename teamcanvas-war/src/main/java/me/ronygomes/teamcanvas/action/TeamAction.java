@@ -7,7 +7,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestScoped
 public class TeamAction extends AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(TeamAction.class);
+    private final Logger log = LogManager.getLogger(TeamAction.class);
 
     private static final String TEAM_ID_URL_PARAM = "team_id";
 

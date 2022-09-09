@@ -9,13 +9,14 @@ import jakarta.ejb.Stateless;
 import jakarta.ejb.TransactionAttribute;
 import jakarta.ejb.TransactionAttributeType;
 import jakarta.persistence.PersistenceException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class TeamServiceImpl implements TeamService {
-    private final Logger log = Logger.getLogger(TeamServiceImpl.class);
+    private final Logger log = LogManager.getLogger(TeamServiceImpl.class);
 
     @EJB
     private TeamDao teamDao;

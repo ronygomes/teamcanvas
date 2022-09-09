@@ -6,14 +6,15 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import me.ronygomes.teamcanvas.domain.Project;
 import me.ronygomes.teamcanvas.domain.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class ProjectDaoImpl implements ProjectDao {
 
-    private final Logger log = Logger.getLogger(ProjectDaoImpl.class);
+    private final Logger log = LogManager.getLogger(ProjectDaoImpl.class);
 
     private static final String FIND_PROJECT_BY_USER = "SELECT p FROM Project p WHERE p.creator.email = :userEmail";
 

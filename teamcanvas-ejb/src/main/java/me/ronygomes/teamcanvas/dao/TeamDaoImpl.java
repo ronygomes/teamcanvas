@@ -6,14 +6,15 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import me.ronygomes.teamcanvas.domain.Team;
 import me.ronygomes.teamcanvas.domain.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class TeamDaoImpl implements TeamDao {
 
-    private final Logger log = Logger.getLogger(TeamDaoImpl.class);
+    private final Logger log = LogManager.getLogger(TeamDaoImpl.class);
 
     private static final String FIND_TEAM_BY_USER = "SELECT t FROM Team t WHERE t.creator.email = :userEmail";
 

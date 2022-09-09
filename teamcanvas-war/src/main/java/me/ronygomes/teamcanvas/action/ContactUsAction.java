@@ -6,13 +6,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named
 @RequestScoped
 public class ContactUsAction extends AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(ContactUsAction.class);
+    private final Logger log = LogManager.getLogger(ContactUsAction.class);
 
     private String message;
     private String infoMessage;

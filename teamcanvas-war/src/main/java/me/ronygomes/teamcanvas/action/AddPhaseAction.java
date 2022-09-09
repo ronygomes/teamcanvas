@@ -8,13 +8,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named
 @RequestScoped
 public class AddPhaseAction extends AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(AddPhaseAction.class);
+    private final Logger log = LogManager.getLogger(AddPhaseAction.class);
 
     private Project project;
     private Phase phase;

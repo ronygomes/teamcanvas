@@ -7,7 +7,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.Date;
 @RequestScoped
 public class CreateNewProjectAction extends AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(CreateNewProjectAction.class);
+    private final Logger log = LogManager.getLogger(CreateNewProjectAction.class);
 
     private Project project;
 

@@ -11,7 +11,8 @@ import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -22,7 +23,7 @@ import java.util.Map;
 @ConversationScoped
 public class EditProjectAction extends AppUtilTemplate implements Serializable {
 
-    private final Logger log = Logger.getLogger(EditProjectAction.class);
+    private final Logger log = LogManager.getLogger(EditProjectAction.class);
 
     private Project project;
 

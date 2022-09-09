@@ -11,7 +11,8 @@ import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIInput;
 import jakarta.faces.event.ComponentSystemEvent;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -23,7 +24,7 @@ import java.io.InputStream;
 @RequestScoped
 public class ProfileAction extends AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(ProfileAction.class);
+    private final Logger log = LogManager.getLogger(ProfileAction.class);
 
     private static final String INPUT_PASSWORD_VIEW_ID = "password";
     private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";

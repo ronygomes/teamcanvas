@@ -12,13 +12,14 @@ import jakarta.faces.component.UIInput;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ComponentSystemEvent;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Named
 @RequestScoped
 public class RegisterAction {
 
-    private final Logger log = Logger.getLogger(RegisterAction.class);
+    private final Logger log = LogManager.getLogger(RegisterAction.class);
 
     private static final String INPUT_PASSWORD_VIEW_ID = "password";
     private static final String INPUT_CONFIRM_PASSWORD_VIEW_ID = "confirmPassword";

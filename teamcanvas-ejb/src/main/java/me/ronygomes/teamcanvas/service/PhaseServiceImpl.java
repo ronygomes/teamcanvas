@@ -5,12 +5,13 @@ import me.ronygomes.teamcanvas.domain.Phase;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.PersistenceException;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Stateless
 public class PhaseServiceImpl implements PhaseService {
 
-    private final Logger log = Logger.getLogger(PhaseServiceImpl.class);
+    private final Logger log = LogManager.getLogger(PhaseServiceImpl.class);
 
     @EJB
     private PhaseDao phaseDao;

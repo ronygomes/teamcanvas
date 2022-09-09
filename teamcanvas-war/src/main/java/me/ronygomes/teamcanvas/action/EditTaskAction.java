@@ -8,7 +8,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.Serializable;
 
@@ -16,7 +17,7 @@ import java.io.Serializable;
 @RequestScoped
 public class EditTaskAction extends AppUtilTemplate implements Serializable {
 
-    private final Logger log = Logger.getLogger(EditTaskAction.class);
+    private final Logger log = LogManager.getLogger(EditTaskAction.class);
 
     private Task task;
     private final String TEAM_ID_URL_PARAM = "task_id";

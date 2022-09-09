@@ -9,14 +9,15 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.persistence.TypedQuery;
 import me.ronygomes.teamcanvas.domain.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 @Stateless
 public class UserDaoImpl implements UserDao {
 
-    private final Logger log = Logger.getLogger(UserDaoImpl.class);
+    private final Logger log = LogManager.getLogger(UserDaoImpl.class);
 
     private static final String FIND_ALL_USER = "FROM User";
     private static final String FIND_USER_EMAIL = "FROM User u WHERE u.email = :email";

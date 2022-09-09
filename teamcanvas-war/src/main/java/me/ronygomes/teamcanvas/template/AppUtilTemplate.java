@@ -6,13 +6,14 @@ import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 public abstract class AppUtilTemplate {
 
-    private final Logger log = Logger.getLogger(AppUtilTemplate.class);
+    private final Logger log = LogManager.getLogger(AppUtilTemplate.class);
 
     private User loggedInUser;
     private Map<String, String> parameterMap;

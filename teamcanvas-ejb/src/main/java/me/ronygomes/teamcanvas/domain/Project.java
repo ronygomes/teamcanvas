@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "projects")
@@ -131,6 +132,19 @@ public class Project implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return getId() == project.getId() && getTitle().equals(project.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle());
     }
 
     public static class Status {

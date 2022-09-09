@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tasks")
@@ -148,6 +149,19 @@ public class Task implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return getId() == task.getId() && getTitle().equals(task.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle());
     }
 
     public static class Status {

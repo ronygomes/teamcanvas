@@ -3,6 +3,7 @@ CREATE SEQUENCE teams_id_seq;
 CREATE SEQUENCE projects_id_seq;
 CREATE SEQUENCE phases_id_seq;
 CREATE SEQUENCE tasks_id_seq;
+
 -- Note: Postgres produces error for keyword `user` as table name
 CREATE TABLE users (
     id INTEGER DEFAULT nextval('users_id_seq') PRIMARY KEY,

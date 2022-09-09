@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_ALL_USER = "FROM User";
     private static final String FIND_USER_EMAIL = "FROM User u WHERE u.email = :email";
 
-    @PersistenceContext(unitName = "persistDB")
+    @PersistenceContext(unitName = "teamcanvas")
     private EntityManager em;
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)

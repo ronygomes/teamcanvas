@@ -6,36 +6,25 @@
              https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
 
-
-    <persistence-unit name="persistDB" transaction-type="JTA">
-        <!--
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        -->
+    <persistence-unit name="teamcanvas" transaction-type="JTA">
         <jta-data-source>jdbc/teamcanvas</jta-data-source>
-<!--        <class>User</class>-->
-        <!--
-        <properties>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-        </properties>
-        -->
 
         <!-- Payara server uses eclipse link as JPA implementation -->
-        <properties>
+        <!-- Eclipse Link executes SQL by line. Multiline query causes error while deploying.
+             In teamcanvas-ejb/pom.xml SQL files are processed to make them single line. -->
+
+         <properties>
             <property name="eclipselink.target-database" value="PostgreSQL"/>
             <!-- Source: https://wiki.eclipse.org/EclipseLink/Release/2.5/JPA21 -->
-            <!-- TODO: Remove JPA drop-and-create and load DDL from teamcanvas.sql -->
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
 
             <property name="jakarta.persistence.schema-generation.create-source" value="script"/>
-            <property name="jakarta.persistence.schema-generation.create-script-source" value="META-INF/teamcanvas.sql"/>
+            <property name="jakarta.persistence.schema-generation.create-script-source" value="META-INF/postgres-create-ddl.sql"/>
 
             <property name="jakarta.persistence.schema-generation.drop-source" value="script"/>
-            <property name="jakarta.persistence.schema-generation.drop-script-source" value="META-INF/drop.sql"/>
+            <property name="jakarta.persistence.schema-generation.drop-script-source" value="META-INF/postgres-drop-ddl.sql"/>
 
-            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/seed.sql"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/postgres-data.sql"/>
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
     </persistence-unit>

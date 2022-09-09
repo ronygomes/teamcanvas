@@ -17,7 +17,7 @@ public class TeamDaoImpl implements TeamDao {
 
     private static final String FIND_TEAM_BY_USER = "SELECT t FROM Team t WHERE t.creator.email = :userEmail";
 
-    @PersistenceContext(unitName = "persistDB")
+    @PersistenceContext(unitName = "teamcanvas")
     private EntityManager em;
 
     @Override

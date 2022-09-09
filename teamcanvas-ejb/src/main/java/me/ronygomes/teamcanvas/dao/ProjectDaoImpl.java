@@ -20,7 +20,7 @@ public class ProjectDaoImpl implements ProjectDao {
     private static final String FIND_IN_PROGRESS_PROJECT_BY_USER = "SELECT p FROM Project p" +
             " WHERE p.creator.email = :userEmail AND p.status = :status";
 
-    @PersistenceContext(unitName = "persistDB")
+    @PersistenceContext(unitName = "teamcanvas")
     private EntityManager em;
 
     @Override

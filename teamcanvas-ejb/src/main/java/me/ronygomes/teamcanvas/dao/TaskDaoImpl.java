@@ -13,7 +13,7 @@ public class TaskDaoImpl implements TaskDao {
 
     private static final String FIND_TASK_BY_PHASE_ID = "SELECT t FROM Task t WHERE t.phase.id = :phaseId";
 
-    @PersistenceContext(unitName = "persistDB")
+    @PersistenceContext(unitName = "teamcanvas")
     private EntityManager em;
 
     @Override

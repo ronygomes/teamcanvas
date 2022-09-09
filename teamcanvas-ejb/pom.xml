@@ -64,17 +64,9 @@
                         </goals>
                         <configuration>
                             <target>
-                                <replaceregexp match="^--.*" replace="" byline="true">
-                                    <fileset dir="${basedir}/target/classes/META-INF/">
-                                        <include name="*.sql"/>
-                                    </fileset>
-                                </replaceregexp>
-
-                                <replaceregexp match="\r?\n" replace=" " flags="gis">
-                                    <fileset dir="${basedir}/target/classes/META-INF/">
-                                        <include name="*.sql"/>
-                                    </fileset>
-                                </replaceregexp>
+                                <ant antfile="${basedir}/prepare-sql.xml">
+                                    <target name="prepare"/>
+                                </ant>
                             </target>
                         </configuration>
 

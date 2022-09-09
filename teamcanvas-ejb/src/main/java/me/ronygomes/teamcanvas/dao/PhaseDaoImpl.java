@@ -11,7 +11,7 @@ public class PhaseDaoImpl implements PhaseDao {
 
     private final Logger log = Logger.getLogger(PhaseDaoImpl.class);
 
-    @PersistenceContext(unitName = "persistDB")
+    @PersistenceContext(unitName = "teamcanvas")
     private EntityManager em;
 
     @Override

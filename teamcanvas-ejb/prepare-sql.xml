@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<!--
+EclipseLink processes SQL scripts one line at a time. Multi line SQL causes error. This ant file tires to solve the
+issue by post processing the SQL in following steps:
+
+Step 01: Remove single line commends
+Step 02: Replace new line with space
+Step 03: Replace semicolon with new line
+
+This post processing is quite basic and will fail to process successfully in following cases:
+- Comments after the SQL
+- SQL string contains semicolon
+
+Reference: https://stackoverflow.com/questions/21729097/jpa-eclipselink-create-script-source-with-one-sql-statement-taking-multiple
+-->
+<project name="teamcanvas-ejb">
+    <target name="prepare">
+        <replaceregexp match="^--.*" replace="" byline="true">
+            <fileset dir="${basedir}/target/classes/META-INF/">
+                <include name="*.sql"/>
+            </fileset>
+        </replaceregexp>
+
+        <replaceregexp match="\r?\n" replace=" " flags="gs">
+            <fileset dir="${basedir}/target/classes/META-INF/">
+                <include name="*.sql"/>
+            </fileset>
+        </replaceregexp>
+
+        <replaceregexp match=";" replace=";${line.separator}" flags="gs">
+            <fileset dir="${basedir}/target/classes/META-INF/">
+                <include name="*.sql"/>
+            </fileset>
+        </replaceregexp>
+    </target>
+</project>

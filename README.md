@@ -1,10 +1,10 @@
 # Team Canvas
 
 A project management application build using Jakarta Server Faces (JSF), Jakarta Enterprise Beans (EJB). Initial project
-was built for Java 7 and Glassfish Server 3 in 2013. Later migrated to Java 11, Jakarta 9 and Payara Server 5. 
-
+was built using Java 7 and Glassfish Server 3 in 2013. Later migrated to Java 11, Jakarta 9 and Payara Server 5. 
 
 ## Payara Server Configuration
+
 Download 'Payara Server 5.x.x (Full)' from [here](https://www.payara.fish/downloads/payara-platform-community-edition/).
 Assuming downloaded archive is extracted and moved as `/opt/payara5/`. This location is denoted as '$PAYARA_HOME' in this guide.
 
@@ -22,12 +22,12 @@ Assuming Java 11 is installed and set as `$JAVA_HOME`, run the following command
 $ $PAYARA_HOME/bin/asadmin start-domain $DOMAIN_NAME
 ```
 
-If multiple Java Development Kit (JDK) is installed can run like below in Linux. Assuming Java 11 Path is `/usr/lib/jvm/jdk-11.0.15.1/`
+If multiple Java Development Kit (JDK) is installed, can run like below in Linux. Assuming Java 11 Path is `/usr/lib/jvm/jdk-11.0.15.1/`
 ```sh
 $ JAVA_HOME=JAVA_HOME=/usr/lib/jvm/jdk-11.0.15.1/ $PAYARA_HOME/bin/asadmin start-domain $DOMAIN_NAME
 
 ```
-or in Mac using `java_home`
+or in macOS using `java_home`
 ```sh
 $ JAVA_HOME=$( /usr/libexec/java_home -v 11 ) $PAYARA_HOME/bin/asadmin start-domain $DOMAIN_NAME
 ```
@@ -41,7 +41,7 @@ Java Development Kit (JDK) version 11 needs to be installed and domain must be r
 $ scripts/jdbc_resource_setup.sh
 ```
 
-This scripts supports following environment variable:
+It is possible to override following environment variable in the script:
 * **PAYARA_HOME:** Payara Server Installation path (Default `/opt/payara5`)
 * **POSTGRES_POOL_NAME:** JDBC Connection Pool name (Default `postgres-pool`)
 * **POSTGRES_RESOURCE_NAME:** JDBC Resource name. Changing it will require code change (Default `jdbc/teamcanvas`)
@@ -51,10 +51,15 @@ This scripts supports following environment variable:
 * **POSTGRES_JDBC_PASSWORD:** Database password (Default: `secret`) 
 * **POSTGRES_JDBC_PORT:** Database port (Default: `5432` which is default postgresql port)
 
+Run like below to override variables:
+```sh
+$ POSTGRES_POOL_NAME=demo-pool POSTGRES_JDBC_PASSWORD=supersecret scripts/jdbc_resource_setup.sh
+```
 
 ## Database Configuration
+
 This project was developed using `PostgreSQL 14.4` using docker container. You can install PostgreSQL natively but this
-guide install as docker container. Run following command for creating a postgres container with passport 'secret'
+guide installs as docker container. Run following command for creating a postgres container with password 'secret'
 and database name 'teamcanvas'.
 
 ```sh
@@ -66,6 +71,13 @@ You can access the database from terminal using following command:
 $ POSTGRES_SERVER_IP=$( docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' teamcanvas )
 $ docker run -it --rm postgres:14.4 psql -h $POSTGRES_SERVER_IP -U postgres
 ```
+
+JPA configuration is stored in following file `$PROJECT_ROOT/teamcanvas-ejb/src/main/resources/META-INF/persistence.xml`.
+It is configured to automatically execute following files from `$PROJECT_ROOT/teamcanvas-ejb/src/main/resources/META-INF/`:
+
+* **postgres-drop-ddl.sql** - Executes for cleaning up database
+* **postgres-create-ddl.sql** - Creates requires tables
+* **postgres-data.sql** - Populate initial data
 
 ## Build
 
@@ -82,17 +94,25 @@ $ JAVA_HOME=<Path to Java 11> ./mvnw clean package
 ```
 Final artifact will be generated as `$PROJECT_ROOT/teamcanvas-app/target/teamcanvas.ear`
 
-### Deploy
+## Deploy
 
+Use following commands for deploying the generated artifact.
 ```sh
 $ bin/asadmin deploy --name teamcanvas $PROJECT_ROOT/teamcanvas-app/target/teamcanvas.ear
 ```
 
-it is possible to undeploy and redeploy using following command:
+It is possible to undeploy and redeploy using following commands:
 ```sh
 $ bin/asadmin rndeploy --name teamcanvas
 $ bin/asadmin redeploy --name teamcanvas $PROJECT_ROOT/teamcanvas-app/target/teamcanvas.ear
 ```
 
+## Run
+Successful deployment will make this application available at `http;//localhost:8080`. By default an user is created with following credential:
+
+* **Email**: john@example.com
+* **Password**: 1
+
 ## Resource
-* **Deploy & Undeploy**:  https://www.youtube.com/watch?v=rdft-BpN_t4
+* [YouTube - Getting Started with Jakarta EE 9 Beginners Series](https://www.youtube.com/watch?v=dl30p1j-Wbw&list=PLFMhxiCgmMR9Yo4p20k4lAJniEYqPsjNA)
+* [YouTube - Payara Datasource Video](https://www.youtube.com/watch?v=dl30p1j-Wbw&list=PLFMhxiCgmMR9Yo4p20k4lAJniEYqPsjNA)

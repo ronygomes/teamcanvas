@@ -1,0 +1,13 @@
+add-library "$PAYARA_HOME/$POSTGRES_DRIVER_JAR_NAME"
+
+create-jdbc-connection-pool --datasourceClassname=org.postgresql.ds.PGSimpleDataSource --resType=javax.sql.DataSource "$POSTGRES_POOL_NAME"
+set resources.jdbc-connection-pool.$POSTGRES_POOL_NAME.property.password=$POSTGRES_JDBC_PASSWORD
+set resources.jdbc-connection-pool.$POSTGRES_POOL_NAME.property.databaseName=$POSTGRES_DB_NAME
+set resources.jdbc-connection-pool.$POSTGRES_POOL_NAME.property.serverName=$POSTGRES_SERVER
+set resources.jdbc-connection-pool.$POSTGRES_POOL_NAME.property.user=$POSTGRES_JDBC_USER
+set resources.jdbc-connection-pool.$POSTGRES_POOL_NAME.property.portNumber=$POSTGRES_JDBC_PORT
+
+ping-connection-pool $POSTGRES_POOL_NAME
+
+create-jdbc-resource --enabled=true --poolName=$POSTGRES_POOL_NAME --target=domain "$POSTGRES_RESOURCE_NAME"
+create-resource-ref --enabled=true --target=server "$POSTGRES_RESOURCE_NAME"

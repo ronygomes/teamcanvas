@@ -42,7 +42,7 @@
 
             <!-- Following dependency is not required for standalone Payara Server, but need to add library using below command
             $ bin/asadmin add-library postgresql-42.3.3.jar
-            See ./jdbc_resource_setup.sh for details
+            See ./scripts/jdbc_resource_setup.sh for details
 
             <dependency>
                 <groupId>org.postgresql</groupId>

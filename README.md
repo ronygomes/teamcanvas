@@ -103,15 +103,19 @@ $ bin/asadmin deploy --name teamcanvas $PROJECT_ROOT/teamcanvas-app/target/teamc
 
 It is possible to undeploy and redeploy using following commands:
 ```sh
-$ bin/asadmin rndeploy --name teamcanvas
+$ bin/asadmin undeploy --name teamcanvas
 $ bin/asadmin redeploy --name teamcanvas $PROJECT_ROOT/teamcanvas-app/target/teamcanvas.ear
 ```
 
 ## Run
 Successful deployment will make this application available at `http;//localhost:8080`. By default an user is created with following credential:
 
-* **Email**: john@example.com
-* **Password**: 1
+* **Email:** john@example.com
+* **Password:** 1
+
+## Log
+* **Server Log Path:** $PAYARA_HOME/glassfish/domains/$DOMAIN_NAME/logs/server.log
+* **Application Log:** Application logs in both console and `/tmp/teamcanvas.log` file
 
 ## Resource
 * [YouTube - Getting Started with Jakarta EE 9 Beginners Series](https://www.youtube.com/watch?v=dl30p1j-Wbw&list=PLFMhxiCgmMR9Yo4p20k4lAJniEYqPsjNA)

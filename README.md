@@ -24,7 +24,7 @@ $ $PAYARA_HOME/bin/asadmin start-domain $DOMAIN_NAME
 
 If multiple Java Development Kit (JDK) is installed, can run like below in Linux. Assuming Java 11 Path is `/usr/lib/jvm/jdk-11.0.15.1/`
 ```sh
-$ JAVA_HOME=JAVA_HOME=/usr/lib/jvm/jdk-11.0.15.1/ $PAYARA_HOME/bin/asadmin start-domain $DOMAIN_NAME
+$ JAVA_HOME=/usr/lib/jvm/jdk-11.0.15.1/ $PAYARA_HOME/bin/asadmin start-domain $DOMAIN_NAME
 
 ```
 or in macOS using `java_home`

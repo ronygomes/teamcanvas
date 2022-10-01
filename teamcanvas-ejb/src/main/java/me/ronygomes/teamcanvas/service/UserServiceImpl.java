@@ -17,6 +17,10 @@ public class UserServiceImpl implements UserService {
     @EJB
     private UserDao userDao;
 
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public boolean saveUser(User userToSave) {
         return userDao.saveUser(userToSave);
     }

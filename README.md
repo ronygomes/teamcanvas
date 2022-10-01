@@ -3,6 +3,18 @@
 A project management application build using Jakarta Server Faces (JSF), Jakarta Enterprise Beans (EJB). Initial project
 was built using Java 7 and Glassfish Server 3 in 2013. Later migrated to Java 11, Jakarta 9 and Payara Server 5. 
 
+# Docker Compose
+Assuming Java Development Kit (JDK) version 11 and Docker is installed, run the following command to deploy the application:
+```sh
+$ ./mvnw clean package
+$ docker-compose up
+```
+
+Run the following commands to stop the server, prune created volumes and remove downloaded docker images
+```sh
+$ docker-compose down --volumes --rmi all
+```
+# Standalone Server
 ## Payara Server Configuration
 
 Download 'Payara Server 5.x.x (Full)' from [here](https://www.payara.fish/downloads/payara-platform-community-edition/).
@@ -106,17 +118,16 @@ It is possible to undeploy and redeploy using following commands:
 $ bin/asadmin undeploy --name teamcanvas
 $ bin/asadmin redeploy --name teamcanvas $PROJECT_ROOT/teamcanvas-app/target/teamcanvas.ear
 ```
+## Log
+* **Server Log Path:** $PAYARA_HOME/glassfish/domains/$DOMAIN_NAME/logs/server.log
+* **Application Log:** Application logs in both console and `/tmp/teamcanvas.log` file
 
-## Run
+# Run
 Successful deployment will make this application available at `http;//localhost:8080`. By default an user is created with following credential:
 
 * **Email:** john@example.com
 * **Password:** 1
 
-## Log
-* **Server Log Path:** $PAYARA_HOME/glassfish/domains/$DOMAIN_NAME/logs/server.log
-* **Application Log:** Application logs in both console and `/tmp/teamcanvas.log` file
-
-## Resource
+# Resource
 * [YouTube - Getting Started with Jakarta EE 9 Beginners Series](https://www.youtube.com/watch?v=dl30p1j-Wbw&list=PLFMhxiCgmMR9Yo4p20k4lAJniEYqPsjNA)
 * [YouTube - Payara Datasource Video](https://www.youtube.com/watch?v=dl30p1j-Wbw&list=PLFMhxiCgmMR9Yo4p20k4lAJniEYqPsjNA)

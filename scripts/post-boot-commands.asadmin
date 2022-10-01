@@ -1,0 +1,13 @@
+add-library postgresql-42.3.3.jar
+
+create-jdbc-connection-pool --datasourceClassname=org.postgresql.ds.PGSimpleDataSource --resType=javax.sql.DataSource teamcanvas-pool
+set resources.jdbc-connection-pool.teamcanvas-pool.property.password=${ENV=TEAMCANVAS_DATABASE_PASSWORD}
+set resources.jdbc-connection-pool.teamcanvas-pool.property.databaseName=${ENV=TEAMCANVAS_DATABASE_NAME}
+set resources.jdbc-connection-pool.teamcanvas-pool.property.serverName=${ENV=TEAMCANVAS_DATABASE_SERVER_NAME}
+set resources.jdbc-connection-pool.teamcanvas-pool.property.user=${ENV=TEAMCANVAS_DATABASE_USER}
+set resources.jdbc-connection-pool.teamcanvas-pool.property.portNumber=${ENV=TEAMCANVAS_DATABASE_PORT}
+
+ping-connection-pool teamcanvas-pool
+
+create-jdbc-resource --enabled=true --poolName=teamcanvas-pool --target=domain jdbc/teamcanvas
+create-resource-ref --enabled=true --target=server jdbc/teamcanvas

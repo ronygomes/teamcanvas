@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  teamcanvas_db:
+    image: postgres:14.4
+    environment:
+      POSTGRES_USER: ${TEAMCANVAS_DATABASE_USER:-postgres}
+      POSTGRES_PASSWORD: ${TEAMCANVAS_DATABASE_PASSWORD:-secret}
+      POSTGRES_DB: ${TEAMCANVAS_DATABASE_NAME:-teamcanvas}
+      PGDATA: /data/postgres
+    volumes:
+      - db_data:/data/postgres
+    ports:
+      - '5432:5432'
+
+  teamcanvas_server:
+    build: .
+    depends_on:
+      - teamcanvas_db
+    environment:
+      TEAMCANVAS_DATABASE_PASSWORD: ${TEAMCANVAS_DATABASE_PASSWORD:-secret}
+      TEAMCANVAS_DATABASE_NAME: ${TEAMCANVAS_DATABASE_NAME:-teamcanvas}
+      TEAMCANVAS_DATABASE_SERVER_NAME: teamcanvas_db
+      TEAMCANVAS_DATABASE_USER: ${TEAMCANVAS_DATABASE_USER:-postgres}
+      TEAMCANVAS_DATABASE_PORT: ${TEAMCANVAS_DATABASE_PORT:-5432}
+    ports:
+      - '8080:8080'
+
+volumes:
+  db_data:

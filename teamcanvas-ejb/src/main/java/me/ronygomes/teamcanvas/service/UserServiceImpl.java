@@ -17,6 +17,9 @@ public class UserServiceImpl implements UserService {
     @EJB
     private UserDao userDao;
 
+    public UserServiceImpl() {
+    }
+
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }

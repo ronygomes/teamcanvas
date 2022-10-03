@@ -27,6 +27,14 @@ public class ProjectServiceImpl implements ProjectService {
     @EJB
     private PhaseDao phaseDao;
 
+    public ProjectServiceImpl() {
+    }
+
+    public ProjectServiceImpl(ProjectDao projectDao, PhaseDao phaseDao) {
+        this.projectDao = projectDao;
+        this.phaseDao = phaseDao;
+    }
+
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean saveProject(Project projectToSave) {
 

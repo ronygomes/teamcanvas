@@ -1,6 +1,7 @@
 package me.ronygomes.teamcanvas.service;
 
 import me.ronygomes.teamcanvas.dao.PhaseDao;
+import me.ronygomes.teamcanvas.dao.ProjectDao;
 import me.ronygomes.teamcanvas.domain.Phase;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
@@ -15,6 +16,13 @@ public class PhaseServiceImpl implements PhaseService {
 
     @EJB
     private PhaseDao phaseDao;
+
+    public PhaseServiceImpl() {
+    }
+
+    public PhaseServiceImpl(PhaseDao phaseDao) {
+        this.phaseDao = phaseDao;
+    }
 
     @Override
     public Phase findPhaseById(long id) {

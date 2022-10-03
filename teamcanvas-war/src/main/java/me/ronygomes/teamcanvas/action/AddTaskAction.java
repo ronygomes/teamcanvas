@@ -12,6 +12,8 @@ import jakarta.inject.Named;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Date;
+
 @Named
 @RequestScoped
 public class AddTaskAction extends AppUtilTemplate {
@@ -83,7 +85,7 @@ public class AddTaskAction extends AppUtilTemplate {
         task.setPhase(phase);
         task.setCreator(getLoggedInUser());
 
-        taskService.saveTask(task);
+        taskService.saveTask(task, new Date());
         return "project-details.xhtml?project_id=" + phase.getProject().getId() + "&faces-redirect=true";
 
     }

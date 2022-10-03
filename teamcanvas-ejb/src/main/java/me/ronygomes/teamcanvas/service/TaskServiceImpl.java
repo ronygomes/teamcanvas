@@ -24,11 +24,18 @@ public class TaskServiceImpl implements TaskService {
     @EJB
     private TaskDao taskDao;
 
+    public TaskServiceImpl() {
+    }
+
+    public TaskServiceImpl(TaskDao taskDao) {
+        this.taskDao = taskDao;
+    }
+
     @Override
-    public boolean saveTask(Task task) {
+    public boolean saveTask(Task task, Date created) {
 
         try {
-            task.setCreationDate(getCurrentTime());
+            task.setCreationDate(created);
             taskDao.saveTask(task);
             return true;
         } catch (PersistenceException e) {
@@ -69,9 +76,5 @@ public class TaskServiceImpl implements TaskService {
         modifiedTask.setCreator(oldTask.getCreator());
         modifiedTask.setCreationDate(oldTask.getCreationDate());
         modifiedTask.setPhase(oldTask.getPhase());
-    }
-
-    private Date getCurrentTime() {
-        return Calendar.getInstance().getTime();
     }
 }

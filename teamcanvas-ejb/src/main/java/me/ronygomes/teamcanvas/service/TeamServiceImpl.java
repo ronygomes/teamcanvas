@@ -24,6 +24,14 @@ public class TeamServiceImpl implements TeamService {
     @EJB
     private UserDao userDao;
 
+    public TeamServiceImpl() {
+    }
+
+    public TeamServiceImpl(UserDao userDao, TeamDao teamDao) {
+        this.userDao = userDao;
+        this.teamDao = teamDao;
+    }
+
     @Override
     public List<Team> findTeamByOwner(User creatorOfTeam) {
         List<Team> teams = teamDao.findTeamByUser(creatorOfTeam);

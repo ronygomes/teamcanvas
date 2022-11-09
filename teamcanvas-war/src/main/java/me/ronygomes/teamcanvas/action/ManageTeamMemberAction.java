@@ -1,15 +1,17 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Team;
-import me.ronygomes.teamcanvas.domain.User;
-import me.ronygomes.teamcanvas.service.TeamService;
-import me.ronygomes.teamcanvas.service.UserService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Team;
+import me.ronygomes.teamcanvas.domain.User;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.TeamService;
+import me.ronygomes.teamcanvas.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,9 +20,12 @@ import java.util.List;
 
 @Named
 @RequestScoped
-public class ManageTeamMemberAction extends AppUtilTemplate {
+public class ManageTeamMemberAction {
 
     private final Logger log = LogManager.getLogger(ManageTeamMemberAction.class);
+
+    private final String TEAM_ID_PARAM_KEY = "team_id";
+    private final String USER_ID_PARAM_KEY = "user_id";
 
     private Team team;
     private User member;
@@ -32,15 +37,17 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     @EJB
     private UserService userService;
 
-    private final String TEAM_ID_PARAM_KEY = "team_id";
-    private final String USER_ID_PARAM_KEY = "user_id";
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
 
     @PostConstruct
     private void setUp() {
-        initUtilParams();
-        if (paramExists(TEAM_ID_PARAM_KEY)) {
-            loadTeamFromDatabase(getLongParamValue(TEAM_ID_PARAM_KEY));
-            if (paramExists(USER_ID_PARAM_KEY)) {
+        if (applicationHelper.paramExists(facesContext, TEAM_ID_PARAM_KEY)) {
+            loadTeamFromDatabase(applicationHelper.getLongParamValue(facesContext, TEAM_ID_PARAM_KEY));
+            if (applicationHelper.paramExists(facesContext, USER_ID_PARAM_KEY)) {
                 deleteMember();
             }
         } else {
@@ -83,7 +90,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
             team.getMembers().add(member);
             teamService.updateTeam(team);
         } else {
-            addErrorMessage("User not Found", addMemberButton);
+            applicationHelper.addErrorMessage(facesContext, "User not Found", addMemberButton);
         }
     }
 
@@ -96,7 +103,7 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     }
 
     private void generateUserExistsErrorMessage() {
-        addErrorMessage("User already in team", addMemberButton);
+        applicationHelper.addErrorMessage(facesContext, "User already in team", addMemberButton);
     }
 
     private boolean isUserAlreadyInTeam(User member) {
@@ -117,8 +124,8 @@ public class ManageTeamMemberAction extends AppUtilTemplate {
     }
 
     public void deleteMember() {
-        long teamId = getLongParamValue(TEAM_ID_PARAM_KEY);
-        String memberId = getStringParamValue(USER_ID_PARAM_KEY);
+        long teamId = applicationHelper.getLongParamValue(facesContext, TEAM_ID_PARAM_KEY);
+        String memberId = applicationHelper.getStringParamValue(facesContext, USER_ID_PARAM_KEY);
 
         log.info("Team: " + teamId);
         log.info("User: " + memberId);

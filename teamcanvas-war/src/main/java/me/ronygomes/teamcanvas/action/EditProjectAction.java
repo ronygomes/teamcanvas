@@ -1,8 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Project;
-import me.ronygomes.teamcanvas.service.ProjectService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.Conversation;
@@ -11,17 +8,19 @@ import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Project;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.ProjectService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
 @Named
 @ConversationScoped
-public class EditProjectAction extends AppUtilTemplate implements Serializable {
+public class EditProjectAction {
 
     private final Logger log = LogManager.getLogger(EditProjectAction.class);
 
@@ -32,6 +31,12 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable {
 
     @Inject
     private Conversation conversation;
+
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
 
     @PostConstruct
     public void setUp() {
@@ -54,7 +59,6 @@ public class EditProjectAction extends AppUtilTemplate implements Serializable {
     }
 
     private long getProjectId() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
 
         Map<String, String> parameterMap = externalContext.getRequestParameterMap();

@@ -1,12 +1,14 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Team;
-import me.ronygomes.teamcanvas.service.TeamService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Team;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.TeamService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +16,7 @@ import java.util.List;
 
 @Named
 @RequestScoped
-public class TeamAction extends AppUtilTemplate {
+public class TeamAction {
 
     private final Logger log = LogManager.getLogger(TeamAction.class);
 
@@ -26,13 +28,18 @@ public class TeamAction extends AppUtilTemplate {
     @EJB
     private TeamService teamService;
 
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
+
     @PostConstruct
     public void setUp() {
-        initUtilParams();
-        teams = teamService.findTeamByOwner(getLoggedInUser());
+        teams = teamService.findTeamByOwner(applicationHelper.getLoggedInUser(facesContext));
 
         log.info(teamService);
-        log.info("setUp : " + getLoggedInUser());
+        log.info("setUp : " + applicationHelper.getLoggedInUser(facesContext));
     }
 
     public List<Team> getTeams() {
@@ -53,8 +60,8 @@ public class TeamAction extends AppUtilTemplate {
 
     public String deleteTeam() {
 
-        log.info("Team Id: " + getLongParamValue(TEAM_ID_URL_PARAM));
-        teamService.removeTeam(getLongParamValue(TEAM_ID_URL_PARAM));
+        log.info("Team Id: " + applicationHelper.getLongParamValue(facesContext, TEAM_ID_URL_PARAM));
+        teamService.removeTeam(applicationHelper.getLongParamValue(facesContext, TEAM_ID_URL_PARAM));
         return "team.xhtml?faces-redirect=true";
     }
 }

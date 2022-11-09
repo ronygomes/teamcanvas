@@ -1,17 +1,15 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.service.MailSender;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
-import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.service.MailSender;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Named
 @RequestScoped
-public class ContactUsAction extends AppUtilTemplate {
+public class ContactUsAction {
 
     private final Logger log = LogManager.getLogger(ContactUsAction.class);
 
@@ -20,11 +18,6 @@ public class ContactUsAction extends AppUtilTemplate {
 
     @Inject
     private MailSender mailSender;
-
-    @PostConstruct
-    public void setUp() {
-        loadUserFromSession();
-    }
 
     public void sendMail() {
         if (mailSender.sendMail(message)) {

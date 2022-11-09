@@ -1,21 +1,25 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Phase;
-import me.ronygomes.teamcanvas.domain.Project;
-import me.ronygomes.teamcanvas.service.ProjectService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Phase;
+import me.ronygomes.teamcanvas.domain.Project;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.ProjectService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Named
 @RequestScoped
-public class AddPhaseAction extends AppUtilTemplate {
+public class AddPhaseAction {
 
     private final Logger log = LogManager.getLogger(AddPhaseAction.class);
+
+    private static final String PROJECT_ID_PARAM_KEY = "project_id";
 
     private Project project;
     private Phase phase;
@@ -23,14 +27,17 @@ public class AddPhaseAction extends AppUtilTemplate {
     @EJB
     private ProjectService projectService;
 
-    private final String PROJECT_ID_PARAM_KEY = "project_id";
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
 
     @PostConstruct
     public void setUp() {
-        initUtilParams();
         initializePhase();
 
-        if (paramExists(PROJECT_ID_PARAM_KEY)) {
+        if (applicationHelper.paramExists(facesContext, PROJECT_ID_PARAM_KEY)) {
             loadProjectFromDatabase();
         } else {
             project = new Project();
@@ -42,7 +49,7 @@ public class AddPhaseAction extends AppUtilTemplate {
     }
 
     private void loadProjectFromDatabase() {
-        long projectId = getLongParamValue(PROJECT_ID_PARAM_KEY);
+        long projectId = applicationHelper.getLongParamValue(facesContext, PROJECT_ID_PARAM_KEY);
         project = projectService.findProjectById(projectId);
     }
 

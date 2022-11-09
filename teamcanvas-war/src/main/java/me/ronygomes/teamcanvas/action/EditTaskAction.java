@@ -1,38 +1,44 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Project;
-import me.ronygomes.teamcanvas.domain.Task;
-import me.ronygomes.teamcanvas.service.TaskService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Project;
+import me.ronygomes.teamcanvas.domain.Task;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.TaskService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.Serializable;
-
 @Named
 @RequestScoped
-public class EditTaskAction extends AppUtilTemplate implements Serializable {
+public class EditTaskAction {
 
     private final Logger log = LogManager.getLogger(EditTaskAction.class);
 
+    private static final String TEAM_ID_URL_PARAM = "task_id";
+
     private Task task;
-    private final String TEAM_ID_URL_PARAM = "task_id";
 
     @EJB
     private TaskService taskService;
 
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
+
     @PostConstruct
     public void setUp() {
-        initUtilParams();
         initializeTask();
     }
 
     private void initializeTask() {
-        if (paramExists(TEAM_ID_URL_PARAM)) {
+        if (applicationHelper.paramExists(facesContext, TEAM_ID_URL_PARAM)) {
             loadFromDatabase();
         } else {
             task = new Task();
@@ -40,7 +46,7 @@ public class EditTaskAction extends AppUtilTemplate implements Serializable {
     }
 
     private void loadFromDatabase() {
-        task = taskService.findTaskById(getLongParamValue(TEAM_ID_URL_PARAM));
+        task = taskService.findTaskById(applicationHelper.getLongParamValue(facesContext, TEAM_ID_URL_PARAM));
     }
 
     public Task getTask() {

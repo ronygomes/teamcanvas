@@ -1,12 +1,14 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Project;
-import me.ronygomes.teamcanvas.service.ProjectService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Project;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.ProjectService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +17,7 @@ import java.util.Date;
 
 @Named
 @RequestScoped
-public class CreateNewProjectAction extends AppUtilTemplate {
+public class CreateNewProjectAction {
 
     private final Logger log = LogManager.getLogger(CreateNewProjectAction.class);
 
@@ -24,11 +26,15 @@ public class CreateNewProjectAction extends AppUtilTemplate {
     @EJB
     private ProjectService projectService;
 
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
 
     @PostConstruct
     private void setUp() {
         initializeProject();
-        loadUserFromSession();
     }
 
     private void initializeProject() {
@@ -47,7 +53,7 @@ public class CreateNewProjectAction extends AppUtilTemplate {
 
     public String createProject() {
         String outcome = "create-new-project";
-        if (isLoggedInUserFound()) {
+        if (applicationHelper.isLoggedInUserFound(facesContext)) {
             configureProject();
             if (saveProject()) {
                 outcome = "project.xhtml?faces-redirect=true";
@@ -71,6 +77,6 @@ public class CreateNewProjectAction extends AppUtilTemplate {
     }
 
     private void setLoggedInUserAsProjectCreator() {
-        project.setCreator(getLoggedInUser());
+        project.setCreator(applicationHelper.getLoggedInUser(facesContext));
     }
 }

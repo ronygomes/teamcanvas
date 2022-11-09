@@ -1,14 +1,16 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Phase;
-import me.ronygomes.teamcanvas.domain.Task;
-import me.ronygomes.teamcanvas.service.PhaseService;
-import me.ronygomes.teamcanvas.service.TaskService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Phase;
+import me.ronygomes.teamcanvas.domain.Task;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.PhaseService;
+import me.ronygomes.teamcanvas.service.TaskService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +18,7 @@ import java.util.Date;
 
 @Named
 @RequestScoped
-public class AddTaskAction extends AppUtilTemplate {
+public class AddTaskAction {
 
     private final Logger log = LogManager.getLogger(AddTaskAction.class);
 
@@ -24,6 +26,12 @@ public class AddTaskAction extends AppUtilTemplate {
 
     private Phase phase;
     private Task task;
+
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
 
     @EJB
     private PhaseService phaseService;
@@ -34,13 +42,12 @@ public class AddTaskAction extends AppUtilTemplate {
     @PostConstruct
     public void setUp() {
         log.info("Initializing AddTaskAction");
-        initUtilParams();
         initializePhase();
         initializeNewTask();
     }
 
     private void initializePhase() {
-        if (paramExists(PHASE_ID_PARAM_KEY)) {
+        if (applicationHelper.paramExists(facesContext, PHASE_ID_PARAM_KEY)) {
             loadPhaseFromDatabase();
         } else {
             initializeNewPhase();
@@ -56,7 +63,7 @@ public class AddTaskAction extends AppUtilTemplate {
     }
 
     private void loadPhaseFromDatabase() {
-        long phaseId = getLongParamValue(PHASE_ID_PARAM_KEY);
+        long phaseId = applicationHelper.getLongParamValue(facesContext, PHASE_ID_PARAM_KEY);
         phase = phaseService.findPhaseById(phaseId);
         log.info("Phase : " + phase.getName());
     }
@@ -83,7 +90,7 @@ public class AddTaskAction extends AppUtilTemplate {
 
         phase = phaseService.findPhaseById(phase.getId());
         task.setPhase(phase);
-        task.setCreator(getLoggedInUser());
+        task.setCreator(applicationHelper.getLoggedInUser(facesContext));
 
         taskService.saveTask(task, new Date());
         return "project-details.xhtml?project_id=" + phase.getProject().getId() + "&faces-redirect=true";

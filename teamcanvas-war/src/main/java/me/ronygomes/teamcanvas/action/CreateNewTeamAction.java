@@ -1,12 +1,14 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.Team;
-import me.ronygomes.teamcanvas.service.TeamService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.Team;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.TeamService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +17,7 @@ import java.util.Date;
 
 @Named
 @RequestScoped
-public class CreateNewTeamAction extends AppUtilTemplate {
+public class CreateNewTeamAction {
 
     private final Logger log = LogManager.getLogger(CreateNewTeamAction.class);
 
@@ -24,10 +26,15 @@ public class CreateNewTeamAction extends AppUtilTemplate {
     @EJB
     private TeamService teamService;
 
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
+
     @PostConstruct
     private void setUp() {
         initializeTeam();
-        loadUserFromSession();
     }
 
     private void initializeTeam() {
@@ -46,7 +53,7 @@ public class CreateNewTeamAction extends AppUtilTemplate {
 
     public String createTeam() {
         String outcome = "create-new-team";
-        if (isLoggedInUserFound()) {
+        if (applicationHelper.isLoggedInUserFound(facesContext)) {
             configureTeam();
             if (saveTeam()) {
                 outcome = "team.xhtml?faces-redirect=true";
@@ -70,6 +77,6 @@ public class CreateNewTeamAction extends AppUtilTemplate {
     }
 
     private void setTeamCreator() {
-        team.setCreator(getLoggedInUser());
+        team.setCreator(applicationHelper.getLoggedInUser(facesContext));
     }
 }

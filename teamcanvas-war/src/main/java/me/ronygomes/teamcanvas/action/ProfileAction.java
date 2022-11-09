@@ -1,16 +1,18 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.User;
-import me.ronygomes.teamcanvas.service.UserService;
-import me.ronygomes.teamcanvas.template.AppUtilTemplate;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIInput;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ComponentSystemEvent;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import me.ronygomes.teamcanvas.domain.User;
+import me.ronygomes.teamcanvas.helper.ApplicationHelper;
+import me.ronygomes.teamcanvas.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.primefaces.model.DefaultStreamedContent;
@@ -22,7 +24,7 @@ import java.io.InputStream;
 
 @Named
 @RequestScoped
-public class ProfileAction extends AppUtilTemplate {
+public class ProfileAction {
 
     private final Logger log = LogManager.getLogger(ProfileAction.class);
 
@@ -37,10 +39,15 @@ public class ProfileAction extends AppUtilTemplate {
     @EJB
     private UserService userService;
 
+    @Inject
+    private FacesContext facesContext;
+
+    @Inject
+    private ApplicationHelper applicationHelper;
+
     @PostConstruct
     public void setUp() {
-        initUtilParams();
-        user = getLoggedInUser();
+        user = applicationHelper.getLoggedInUser(facesContext);
     }
 
     public User getUser() {
@@ -115,7 +122,7 @@ public class ProfileAction extends AppUtilTemplate {
             return "project";
         }
 
-        addErrorMessage("Only jpeg, jpg, png, gif are allowed", fileUploadComponent);
+        applicationHelper.addErrorMessage(facesContext, "Only jpeg, jpg, png, gif are allowed", fileUploadComponent);
         return "profile";
 
     }

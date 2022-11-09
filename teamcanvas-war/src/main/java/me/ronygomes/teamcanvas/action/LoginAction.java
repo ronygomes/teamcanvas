@@ -1,7 +1,5 @@
 package me.ronygomes.teamcanvas.action;
 
-import me.ronygomes.teamcanvas.domain.User;
-import me.ronygomes.teamcanvas.service.UserService;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.RequestScoped;
@@ -10,6 +8,8 @@ import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
+import me.ronygomes.teamcanvas.domain.User;
+import me.ronygomes.teamcanvas.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,6 +18,8 @@ import org.apache.logging.log4j.Logger;
 public class LoginAction {
 
     private final Logger log = LogManager.getLogger(LoginAction.class);
+
+    private static final String LOGIN_USER_SESSION_KEY = "loggedInUser";
 
     private String userEmail;
     private String userPassword;
@@ -28,8 +30,6 @@ public class LoginAction {
 
     @EJB
     private UserService userService;
-
-    private static final String LOGIN_USER_SESSION_KEY = "loggedInUser";
 
     @PostConstruct
     public void setUp() {

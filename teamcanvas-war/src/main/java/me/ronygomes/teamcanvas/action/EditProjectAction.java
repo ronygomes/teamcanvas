@@ -14,13 +14,14 @@ import me.ronygomes.teamcanvas.service.ProjectService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
 @Named
 @ConversationScoped
-public class EditProjectAction {
+public class EditProjectAction implements Serializable {
 
     private final Logger log = LogManager.getLogger(EditProjectAction.class);
 
@@ -31,9 +32,6 @@ public class EditProjectAction {
 
     @Inject
     private Conversation conversation;
-
-    @Inject
-    private FacesContext facesContext;
 
     @Inject
     private ApplicationHelper applicationHelper;
@@ -59,7 +57,7 @@ public class EditProjectAction {
     }
 
     private long getProjectId() {
-        ExternalContext externalContext = facesContext.getExternalContext();
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 
         Map<String, String> parameterMap = externalContext.getRequestParameterMap();
         String project_id = parameterMap.get("project_id");

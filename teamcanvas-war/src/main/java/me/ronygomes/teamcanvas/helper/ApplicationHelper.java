@@ -1,5 +1,6 @@
 package me.ronygomes.teamcanvas.helper;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.context.FacesContext;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Named
+@ApplicationScoped
 public class ApplicationHelper {
 
     private final Logger log = LogManager.getLogger(ApplicationHelper.class);

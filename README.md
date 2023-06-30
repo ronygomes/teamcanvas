@@ -10,6 +10,11 @@ $ ./mvnw clean package
 $ docker-compose up
 ```
 
+If SDKMan is installed, executing following commands will install java-11.0.19-zulu
+```sh
+$ sdk env install
+```
+
 Run the following commands to stop the server, prune created volumes and remove downloaded docker images
 ```sh
 $ docker-compose down --volumes --rmi all

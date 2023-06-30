@@ -1,0 +1,4 @@
+# Docker image `payara/server-full:5.2022.2-jdk11` uses following JDK version
+# OpenJDK Runtime Environment Zulu11.54+25-CA (build 11.0.14.1+1-LTS)
+# For consistency following JDK is used with SDKMan
+java=11.0.19-zulu
